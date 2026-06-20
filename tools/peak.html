@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PEAK — Qiymətləndirmə | AN Psixoloji</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="meter" id="meter"></div>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="../index.html" class="brand">
+      <span class="logo"><svg viewBox="0 0 40 40" width="40" height="40"><path d="M20 7l11 6v14l-11 6-11-6V13z" fill="none" stroke="#D2A55D" stroke-width="2"/><path d="M14 25l5-12 5 12M16 21h6" fill="none" stroke="#D2A55D" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span>AN Psixoloji<small>ABA Terapiya Platforması</small></span>
+    </a>
+    <button class="burger" onclick="toggleNav()" aria-label="Menyu">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../index.html">Ana səhifə</a>
+      <a href="../qiymetlendirmeler.html" class="active">Qiymətləndirmələr</a>
+      <a href="../proqram.html" class="cta">Fərdi proqram</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="../index.html">Ana səhifə</a> / <a href="../qiymetlendirmeler.html">Qiymətləndirmələr</a> / <span>PEAK</span></div>
+    <span class="eyebrow">PEAK · İdraki və əlaqəli öyrənmə</span>
+    <h1>PEAK</h1>
+    <p>Dil və idrakın daha yüksək, əlaqəli (relational) bacarıqlarını qiymətləndirir.</p>
+  </div>
+</section>
+
+<section style="padding:0">
+  <div class="wrap">
+    <div class="instr reveal in">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-2)" stroke-width="2" width="22" height="22"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h9"/></svg> Təlimat</h3>
+      <ol>
+        <li>PEAK irəli səviyyə alətidir — təməl dil bacarıqları olan uşaqlar üçün uyğundur.</li>
+        <li><b>Bəli</b> — müstəqil nümayiş etdirir; <b>Qismən</b> — dəstəklə; <b>Xeyr</b> — etmir.</li>
+        <li>Modullı yanaşma: birbaşa təlimdən transformasiyaya doğru irəliləyin.</li>
+        <li>Nəticə idrakın hansı mərhələsində işləməyin lazimdığını göstərir.</li>
+      </ol>
+      <div class="scale-key">
+  <span><span class="dot" style="background:var(--teal)"></span>Bəli — müstəqil edir (2 bal)</span>
+  <span><span class="dot" style="background:var(--gold)"></span>Qismən — köməklə edir (1 bal)</span>
+  <span><span class="dot" style="background:var(--low)"></span>Xeyr — hələ etmir (0 bal)</span>
+</div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:8px 0 40px">
+  <div class="wrap">
+    <div class="profile-bar" id="profileBar"></div>
+    <div id="domains"></div>
+    <div class="assess-actions">
+      <button class="btn btn-gold" onclick="ASSESS.calculate()">Nəticəni hesabla</button>
+      <button class="btn btn-ghost" onclick="ASSESS.reset()">Sıfırla</button>
+      <a class="btn btn-ghost" href="../qiymetlendirmeler.html">← Kataloqa qayıt</a>
+    </div>
+    <div class="results" id="results"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap"><div class="footer-bot" style="border:none;padding-top:0">
+    <span class="by">By <b>s_akhundoff</b> · © 2026 AN Psixoloji Mərkəzi</span>
+    <a class="ig" href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      @s_akhundoff</a>
+  </div></div>
+</footer>
+<script src="../assets/core.js"></script>
+<script>
+ASSESS.init({
+  toolId:"peak",
+  toolName:"PEAK",
+  mode:'scale',
+  domains:[{"name": "Birbaşa təlim", "hint": "təməl əlaqələr", "q": ["Sadə tələb-cavab əlaqəsini öyrənir", "Yeni sözləri təlimlə mənimsəyir"]}, {"name": "Ümumiləşdirmə", "hint": "köçürmə", "q": ["Bacarığı yeni mühitə köçürür", "Fərqli insanlarla istifadə edir"]}, {"name": "Ekvivalentlik", "hint": "simvolik əlaqə", "q": ["Söz–şəkil–obyekt əlaqəsini qurur", "Simvolları mənalandırır"]}, {"name": "Transformasiya", "hint": "məntiqi təfəkkür", "q": ["Müqayisə edir (böyük/kiçik, çox/az)", "Məntiqi əlaqələr qurur"]}],
+  interpret:function(overall,scores){
+    if(overall>=75) return {level:3,name:'Səviyyə 3 — İrəli',color:'var(--teal)',desc:"Yüksək idrak bacarığı var — məntiqi və transformasiya hedəfləri əlavə edin."};
+    if(overall>=45) return {level:2,name:'Səviyyə 2 — Orta',color:'var(--gold-2)',desc:"Ümumiləşdirmə və ekvivalentlik formalaşır — simvolik təfəkkürə keçid."};
+    return {level:1,name:'Səviyyə 1 — Erkən',color:'var(--bordo)',desc:"Birbaşa təlim mərhələsindədir — əsas əlaqələri qurmaq prioritetdir."};
+  },
+  recommend:function(level,weak,scores){
+    var tips={"Birbaşa təlim": "sadə tələb-cavab əlaqələrini DTT ilə öyrədin", "Ümumiləşdirmə": "bacarığı yeni mühit və insanlara köçürün", "Ekvivalentlik": "söz–şəkil–obyekt əlaqəsini məşq edin", "Transformasiya": "müqayisə və məntiqi əlaqələr üzərində işləyin"};
+    var base=weak.map(function(w){return '<b>'+w.name+'</b> — '+(tips[w.name]||'bu sahəyə üstünlük verin')+'.';});
+    var byLevel={"1": ["Birbaşa təlim modulları ilə təməl əlaqələri qurun.", "Hər yeni bacarığı güclü gücləndirici ilə möhkəmləndirin."], "2": ["Ümumiləşdirmə modullarına keçid edin.", "Stimul ekvivalentliyi tapşırıqları əlavə edin."], "3": ["Transformasiya və məntiqi təfəkkür hedəfləri qoyun.", "Akademik tətbiqlərə inteqrasiya edin."]};
+    return base.concat(byLevel[level]).concat(['İrəliləyişi izləmək üçün hər sessiyada data toplayın və 2–3 həftədən bir yenidən qiymətləndirin.']);
+  }
+});</script>
+</body>
+</html>
