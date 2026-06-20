@@ -5,9 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ABLLS-R — Qiymətləndirmə | AN Psixoloji</title>
 <link rel="stylesheet" href="../assets/style.css">
+<style>:root{--accent:#1F8A7A;--accent-2:#176d61;--accent-soft:#dcefe9}</style>
 </head>
 <body>
 <div class="meter" id="meter"></div>
+<button class="focus-exit" onclick="toggleFocus()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 9V5a1 1 0 011-1h4M20 9V5a1 1 0 00-1-1h-4M4 15v4a1 1 0 001 1h4M20 15v4a1 1 0 01-1 1h-4"/></svg> Rejimdən çıx</button>
 <header class="nav">
   <div class="wrap nav-in">
     <a href="../index.html" class="brand">
@@ -32,15 +34,17 @@
   </div>
 </section>
 
+<main>
 <section style="padding:0">
   <div class="wrap">
-    <div class="instr reveal in">
-      <h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-2)" stroke-width="2" width="22" height="22"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h9"/></svg> Təlimat</h3>
+    <div class="focus-bar"><button class="focus-toggle" onclick="toggleFocus()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 9V5a1 1 0 011-1h4M20 9V5a1 1 0 00-1-1h-4M4 15v4a1 1 0 001 1h4M20 15v4a1 1 0 01-1 1h-4"/></svg> Tam ekran / diqqət rejimi</button></div>
+    <div class="instr">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" width="22" height="22"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h9"/></svg> Təlimat</h3>
       <ol>
-        <li>Uşağı fərqli fəaliyyətlərdə müşahidə edin; hər sahə üzrə mövcud səviyyəni qıymetləndirin.</li>
-        <li><b>Bəli</b> — bacarığı ardıcıl və müstəqil nümayiş etdirir; <b>Qismən</b> — dəstəklə; <b>Xeyr</b> — etmir.</li>
-        <li>Təməl (əməkdaşlıq) sahəsindən başlayın — bu, digər bacarıqların öyrənilməsinin şərtidir.</li>
-        <li>Nəticə zəif domenləri üzə çıxarır və proqram üçün prioritetləri müəyyən edir.</li>
+        <li>Uşağı təbii oyun və strukturlu şəraitdə müşahidə edin; lazım olduqda valideyn məlumatı ilə tamamlayın.</li>
+        <li>Hər bacarıq üçün: <b>Bəli</b> — müstəqil və ardıcıl edir; <b>Qismən</b> — yalnız kömək/işarə ilə; <b>Xeyr</b> — hal-hazırda etmir.</li>
+        <li>Bal verməzdən əvvəl bacarığı ən azı <b>2–3 dəfə</b> yoxlayın ki, təsadüfi olmasın.</li>
+        <li>Bütün sahələri tamamlayın; sistem domenlər üzrə profil və inkişaf səviyyəsini hesablayacaq.</li>
       </ol>
       <div class="scale-key">
   <span><span class="dot" style="background:var(--teal)"></span>Bəli — müstəqil edir (2 bal)</span>
@@ -56,40 +60,36 @@
     <div class="profile-bar" id="profileBar"></div>
     <div id="domains"></div>
     <div class="assess-actions">
-      <button class="btn btn-gold" onclick="ASSESS.calculate()">Nəticəni hesabla</button>
+      <button class="btn btn-accent" onclick="ASSESS.calculate()">Nəticəni hesabla</button>
       <button class="btn btn-ghost" onclick="ASSESS.reset()">Sıfırla</button>
       <a class="btn btn-ghost" href="../qiymetlendirmeler.html">← Kataloqa qayıt</a>
     </div>
     <div class="results" id="results"></div>
   </div>
 </section>
+</main>
 
 <footer class="footer">
-  <div class="wrap"><div class="footer-bot" style="border:none;padding-top:0">
-    <span class="by">By <b>s_akhundoff</b> · © 2026 AN Psixoloji Mərkəzi</span>
-    <a class="ig" href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-      @s_akhundoff</a>
-  </div></div>
+  <div class="wrap">
+    <div class="contact-row" style="justify-content:center;margin-bottom:14px">
+      <a href="tel:+994554157215"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.5-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg> +994 55 415 72 15</a>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Bakı, Nizami r., Rizvan Teymurov 59</span>
+      <a href="https://instagram.com/an_psixologiyamerkezi" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> @an_psixologiyamerkezi</a>
+    </div>
+    <div class="footer-bot" style="justify-content:center;border-top:1px solid rgba(210,165,93,.25);padding-top:18px">
+      <span class="by">© 2026 AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span>
+      <a class="ig" href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> @s_akhundoff</a>
+    </div>
+  </div>
 </footer>
+<script src="../assets/program-data.js"></script>
 <script src="../assets/core.js"></script>
 <script>
 ASSESS.init({
-  toolId:"ablls-r",
-  toolName:"ABLLS-R",
-  mode:'scale',
-  domains:[{"name": "Əməkdaşlıq və diqqət", "hint": "öyrənmə hazırlığı", "q": ["Oturub tapşırığa diqqət ayırır", "Mütəxəssislə əməkdaşlıq edir", "Gücləndirici onu motivasiya edir"]}, {"name": "Vizual performans", "hint": "matching və çeşidləmə", "q": ["Eyni əşyaları uyğunlaşdırır", "Forma/rəngə görə çeşidləyir", "Sadə puzzle yığır"]}, {"name": "Reseptiv dil", "hint": "anlama", "q": ["Əşyaları göstərişlə tapır", "Bədən hissələrini göstərir", "Kateqoriyaya görə seçir"]}, {"name": "İmitasiya", "hint": "təqlid", "q": ["Motor hərəkəti təqlid edir", "Obyektlə imitasiya edir"]}, {"name": "Vokal dil və tələb", "hint": "ekspressiv dil", "q": ["Tələbləri sözlə bildirir", "Əşyaları adlandırır", "Sual-cavaba girir (intraverbal)"]}, {"name": "Akademik və özünə xidmət", "hint": "hazırlıq", "q": ["Rəqəm/hərf tanıyır", "Sadə özünə xidmət bacarıqları göstərir"]}],
-  interpret:function(overall,scores){
-    if(overall>=75) return {level:3,name:'Səviyyə 3 — İrəli',color:'var(--teal)',desc:"Geniş bacarıq bazası var — akademik hazırlıq və müstəqillik hedəflənə bilər."};
-    if(overall>=45) return {level:2,name:'Səviyyə 2 — Orta',color:'var(--gold-2)',desc:"Əsas dil və vizual bacarıqlar formalaşıb — akademik və intraverbal sahələrə keçmək olar."};
-    return {level:1,name:'Səviyyə 1 — Erkən',color:'var(--bordo)',desc:"Təməl bacarıqlar (əməkdaşlıq, imitasiya, reseptiv dil) qurulmalıdır."};
-  },
-  recommend:function(level,weak,scores){
-    var tips={"Əməkdaşlıq və diqqət": "oturub tapşırığa diqqət ayırma bacarığını gücləndirin", "Vizual performans": "matching və çeşidləmə tapşırıqları ilə işləyin", "Reseptiv dil": "əşya və bədən hissələrini göstərmə təlimləri verin", "İmitasiya": "motor və obyektlə imitasiyanı məşq edin", "Vokal dil və tələb": "tələb və adlandırmanı motivasiya ilə öyrədin", "Akademik və özünə xidmət": "rəqəm/hərf və gündəlik bacarıqları tədricən artırın"};
-    var base=weak.map(function(w){return '<b>'+w.name+'</b> — '+(tips[w.name]||'bu sahəyə üstünlük verin')+'.';});
-    var byLevel={"1": ["Əməkdaşlıq və göz kontaktı ilə öyrənmə hazırlığını qurun.", "DTT formatında qısa, uğurlu cəhdlər təşkil edin."], "2": ["Prompting və fading ilə müstəqilliyi artırın.", "Sosial və intraverbal dilə üstünlük verin."], "3": ["Akademik hazırlıq və ümumiləşdirmə hedəfləri qoyun.", "Qrup şəraitinə keçidi planlaşdırın."]};
-    return base.concat(byLevel[level]).concat(['İrəliləyişi izləmək üçün hər sessiyada data toplayın və 2–3 həftədən bir yenidən qiymətləndirin.']);
-  }
-});</script>
+  toolId:"ablls-r", toolName:"ABLLS-R", mode:'scale',
+  
+  domains:[{"key": "cooperation", "name": "Əməkdaşlıq və gücləndirici", "hint": "təlimə hazırlıq", "q": ["Mütəxəssislə oturub işləməyə razı olur", "Tapşırıq müddətində diqqətini saxlayır", "Gücləndiricilərə (mükafat) marağı var", "Sadə tələbə müqavimətsiz əməl edir"]}, {"key": "visual", "name": "Vizual performans", "hint": "uyğunlaşdırma, çeşidləmə", "q": ["Eyni əşyaları uyğunlaşdırır", "Əşyanı şəkillə uyğunlaşdırır", "Rəng/forma üzrə çeşidləyir", "Sadə pazl yığır"]}, {"key": "listener", "name": "Reseptiv dil", "hint": "anlama", "q": ["Tanış əşyanı göstərir", "Bir addımlı təlimata əməl edir", "Bədən üzvlərini göstərir", "Kateqoriyaya görə seçir (“yemək göstər”)"]}, {"key": "echoic", "name": "Vokal imitasiya", "hint": "səs/söz təkrarı", "q": ["Səs və hecaları təkrarlayır", "Tək sözləri təkrarlayır", "Qısa ifadəni təkrarlayır"]}, {"key": "mand", "name": "Tələb və adlandırma", "hint": "mand + takt", "q": ["İstədiyini sözlə/işarə ilə tələb edir", "Tanış əşyaları adlandırır", "Şəkildə obyektləri adlandırır"]}, {"key": "academic", "name": "Akademik öncəsi", "hint": "rəng, forma, rəqəm", "q": ["Rəngləri tanıyır/adlandırır", "Formaları tanıyır", "1–5 sayır", "Bəzi hərf/rəqəmləri tanıyır"]}, {"key": "selfcare", "name": "Özünə xidmət", "hint": "müstəqillik", "q": ["Köməklə geyinir/soyunur", "Qaşıq/çəngəllə yeyir", "Əlini yuyur"]}]
+});
+</script>
 </body>
 </html>
