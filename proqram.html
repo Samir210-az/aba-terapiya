@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fərdi İnkişaf Proqramı — ABA Platforması | AN Psixoloji</title>
+<meta name="description" content="Test və qiymətləndirmə nəticələrinə əsasən hər uşaq üçün avtomatik fərdi ABA proqramı.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="index.html" class="brand">
+      <span class="logo"><svg viewBox="0 0 40 40" width="40" height="40"><path d="M20 7l11 6v14l-11 6-11-6V13z" fill="none" stroke="#D2A55D" stroke-width="2"/><path d="M14 25l5-12 5 12M16 21h6" fill="none" stroke="#D2A55D" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span>AN Psixoloji<small>ABA Terapiya Platforması</small></span>
+    </a>
+    <button class="burger" onclick="toggleNav()" aria-label="Menyu">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Ana səhifə</a>
+      <a href="index.html#proses">Proses</a>
+      <a href="qiymetlendirmeler.html">Qiymətləndirmələr</a>
+      <a href="proqram.html" class="active cta">Fərdi proqram</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">Ana səhifə</a> / <span>Fərdi proqram</span></div>
+    <span class="eyebrow">Avtomatik fərdi inkişaf proqramı</span>
+    <h1>Fərdi İnkişaf Proqramı</h1>
+    <p>Tamamladığınız qiymətləndirmələrin balları əsasında hər uşaq üçün prioritetləşdirilmiş məqsədlər, metod tövsiyələri və davranış planı avtomatik formalaşır.</p>
+  </div>
+</section>
+
+<section style="padding:40px 0 70px">
+  <div class="wrap">
+    <div id="programRoot"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap"><div class="footer-bot" style="border:none;padding-top:0">
+    <span class="by">By <b>s_akhundoff</b> · © 2026 AN Psixoloji Mərkəzi</span>
+    <a class="ig" href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      @s_akhundoff</a>
+  </div></div>
+</footer>
+
+<script src="assets/core.js"></script>
+<script>
+function pri(pct){ return pct<45?{k:'pri',t:'Yüksək prioritet',c:'tag-pri'}:pct<75?{k:'mid',t:'İnkişafda',c:'tag-mid'}:{k:'ok',t:'Güclü sahə',c:'tag-ok'}; }
+
+function goalText(name, pct){
+  var who='Uşaq';
+  if(pct<45) return who+' '+name.toLowerCase()+' sahəsində təməl bacarıqları 8 həftə ərzində struktur təlimlə (DTT) ən azı 80% dəqiqliklə nümayiş etdirəcək.';
+  if(pct<75) return who+' '+name.toLowerCase()+' sahəsində bacarıqları təbii mühitdə (NET) müstəqil şəkildə 3 ardıcıl sessiyada istifadə edəcək.';
+  return who+' '+name.toLowerCase()+' bacarıqlarını fərqli mühit və insanlarla ümumiləşdirəcək və zamanla qoruyacaq.';
+}
+
+function buildProgram(){
+  const p = ABA.getProfile();
+  const res = ABA.getResults();
+  const keys = Object.keys(res);
+  const root = document.getElementById('programRoot');
+
+  if(keys.length===0){
+    root.innerHTML = `<div class="prog-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>
+      <h2 style="font-size:1.5rem">Hələ nəticə yoxdur</h2>
+      <p class="muted" style="margin:10px 0 20px">Fərdi proqram qurmaq üçün əvvəlcə ən azı bir qiymətləndirmə tamamlayın. Daha çox alət — daha dəqiq proqram.</p>
+      <a href="qiymetlendirmeler.html" class="btn btn-primary">Qiymətləndirməyə başla</a>
+    </div>`;
+    return;
+  }
+
+  // Bütün domenləri topla (skala alətlərindən)
+  let allDomains=[]; let levels=[]; let fba=null;
+  keys.forEach(k=>{
+    const r=res[k];
+    if(r.scores){ r.scores.forEach(s=>allDomains.push({tool:r.tool, name:s.name, pct:s.pct})); levels.push(r.level); }
+    if(r.func){ fba=r; }
+  });
+  allDomains.sort((a,b)=>a.pct-b.pct);
+  const priCount=allDomains.filter(d=>d.pct<45).length;
+  const avgLevel=levels.length?Math.round(levels.reduce((a,b)=>a+b,0)/levels.length):'—';
+  const avgName={1:'Erkən',2:'Orta',3:'İrəli'}[avgLevel]||'—';
+
+  // Header + summary
+  let html = `<div class="prog-card" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;border-left:5px solid var(--gold)">
+    <div><h2 style="font-size:1.6rem;margin-bottom:4px">${p.name||'Uşaq'} üçün proqram</h2>
+      <p class="muted">${p.age?('Yaş: '+p.age+' · '):''}${p.spec?('Mütəxəssis: '+p.spec+' · '):''}Tarix: ${new Date().toLocaleDateString('az-AZ')}</p></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-gold" onclick="downloadProgram()">${svgIcon('download')} Proqramı yüklə (HTML)</button>
+      <button class="btn btn-ghost" onclick="if(confirm('Bütün nəticələr silinsin?')){ABA.clearAll();location.reload();}">Sıfırla</button>
+    </div></div>`;
+
+  html += `<div class="summary-grid">
+    <div class="stat"><b>${keys.length}</b><span>Tamamlanmış alət</span></div>
+    <div class="stat"><b>${avgLevel}</b><span>Orta səviyyə · ${avgName}</span></div>
+    <div class="stat"><b>${priCount}</b><span>Prioritet sahə</span></div>
+    <div class="stat"><b>${fba?fba.func:'—'}</b><span>Davranış funksiyası</span></div>
+  </div>`;
+
+  // Tamamlanmış alətlər xülasəsi
+  html += `<div class="prog-card"><h3 style="margin-bottom:12px">Qiymətləndirmə xülasəsi</h3>`;
+  keys.forEach(k=>{
+    const r=res[k];
+    if(r.scores){
+      html += `<div class="bar"><div class="bl"><span>${r.tool}</span><span>${r.overall}% · ${r.levelName||''}</span></div>
+        <div class="track"><div class="fill" style="width:${r.overall}%;background:${r.overall>=75?'var(--teal)':r.overall>=45?'var(--gold)':'var(--low)'}"></div></div></div>`;
+    } else if(r.func){
+      html += `<div class="note" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9l-8 14A2 2 0 004 21h16a2 2 0 001.7-3l-8-14a2 2 0 00-3.4 0z"/></svg>
+        <div><b>FBA:</b> Ehtimal olunan funksiya — <b>${r.func}</b>. ${r.behavior?('Hədəf davranış: “'+r.behavior+'”.'):''}</div></div>`;
+    }
+  });
+  html += `</div>`;
+
+  // Prioritet məqsədlər
+  const topGoals = allDomains.slice(0, Math.min(6, allDomains.length));
+  html += `<h2 style="margin:30px 0 14px;font-size:1.5rem">Fərdi məqsədlər (prioritet üzrə)</h2>`;
+  topGoals.forEach((d,i)=>{
+    const pr=pri(d.pct);
+    html += `<div class="prog-card goal"><div class="goal-head">
+        <h3 style="font-size:1.15rem">${i+1}. ${d.name}</h3>
+        <span class="goal-tag ${pr.c}">${pr.t} · ${d.pct}%</span></div>
+      <p style="margin:8px 0 6px"><b>Mənbə:</b> ${d.tool}</p>
+      <p class="muted"><b>SMART məqsəd:</b> ${goalText(d.name, d.pct)}</p></div>`;
+  });
+
+  // Davranış planı (FBA varsa)
+  if(fba){
+    html += `<h2 style="margin:30px 0 14px;font-size:1.5rem">Davranış müdaxilə planı (BIP)</h2>
+      <div class="prog-card" style="border-left:5px solid var(--bordo)">
+        <p style="margin-bottom:10px"><b>Funksiya:</b> ${fba.func} — ${fba.desc||''}</p>
+        <div class="reco" style="margin:0"><h4>${svgIcon('target')} Strategiyalar</h4>
+          <ul>${(fba.recos||[]).map(x=>'<li>'+x+'</li>').join('')}</ul></div></div>`;
+  }
+
+  // Ümumi tövsiyələr
+  html += `<h2 style="margin:30px 0 14px;font-size:1.5rem">Ümumi tövsiyələr</h2>
+    <div class="prog-card"><div class="reco" style="margin:0;background:#fff;border:none;padding:0">
+      <ul>
+        <li>Həftədə <b>2–5 sessiya</b> planlaşdırın; hər sessiyada yuxarıdakı 2–3 məqsəd üzərində işləyin.</li>
+        <li>Hər sessiyada <b>data toplayın</b> (düz/yanlış faiz, tezlik) və qrafiklə izləyin.</li>
+        <li>Hər <b>2–3 həftədən bir</b> yenidən qiymətləndirin və məqsədləri yeniləyin.</li>
+        <li>Bacarıqları <b>təbii mühitdə</b> möhkəmləndirin və valideyni prosesə qoşun (parent training).</li>
+        <li>Müsbət gücləndirməni davamlı tətbiq edin; problemli davranışlar üçün FBA-ya uyğun yanaşın.</li>
+      </ul></div></div>`;
+
+  html += `<div class="note" style="margin-top:24px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <div>Bu proqram skrininq nəticələrinə əsaslanan ilkin layihədir. Yekun fərdi proqram <b>sertifikatlaşdırılmış ABA mütəxəssisi (BCBA)</b> tərəfindən təsdiqlənməli və fərdiləşdirilməlidir.</div></div>`;
+
+  root.innerHTML = html;
+  setTimeout(()=>root.querySelectorAll('.fill').forEach(f=>{const w=f.style.width;f.style.width='0';requestAnimationFrame(()=>f.style.width=w);}),60);
+}
+
+function downloadProgram(){
+  const p=ABA.getProfile(); const res=ABA.getResults(); const keys=Object.keys(res);
+  if(keys.length===0){ alert('Nəticə yoxdur.'); return; }
+  let allDomains=[]; let fba=null;
+  keys.forEach(k=>{const r=res[k]; if(r.scores)r.scores.forEach(s=>allDomains.push({tool:r.tool,name:s.name,pct:s.pct})); if(r.func)fba=r;});
+  allDomains.sort((a,b)=>a.pct-b.pct);
+  const top=allDomains.slice(0,6);
+  const date=new Date().toLocaleDateString('az-AZ');
+  const summary=keys.map(k=>{const r=res[k];
+    return r.scores?`<tr><td>${r.tool}</td><td>${r.overall}% — ${r.levelName||''}</td></tr>`
+      :`<tr><td>${r.tool}</td><td>Funksiya: ${r.func}</td></tr>`;}).join('');
+  const goals=top.map((d,i)=>`<div class="goal"><b>${i+1}. ${d.name}</b> <span class="pct">${d.pct}%</span><br><span class="src">Mənbə: ${d.tool}</span><p>${goalText(d.name,d.pct)}</p></div>`).join('');
+  const bip=fba?`<h2>Davranış müdaxilə planı</h2><p><b>Funksiya:</b> ${fba.func} — ${fba.desc||''}</p><ul>${(fba.recos||[]).map(x=>'<li>'+x.replace(/<[^>]+>/g,'')+'</li>').join('')}</ul>`:'';
+  const html=`<!DOCTYPE html><html lang="az"><head><meta charset="UTF-8"><title>Fərdi Proqram — ${p.name||'Uşaq'}</title><style>
+body{font-family:'Segoe UI',Arial,sans-serif;max-width:780px;margin:30px auto;padding:0 22px;color:#2a1c1c;line-height:1.6}
+.hd{background:linear-gradient(135deg,#4a0000,#6A0000);color:#fff;padding:28px;border-radius:14px}
+.hd h1{margin:0;color:#D2A55D;font-size:1.6rem}.hd p{margin:6px 0 0;color:#e7d6c2}
+.meta{background:#F3ECE0;border-radius:12px;padding:16px;margin:18px 0;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:.92rem}.meta b{color:#6A0000}
+h2{color:#6A0000;border-bottom:2px solid #D2A55D;padding-bottom:6px;margin-top:26px;font-size:1.2rem}
+table{width:100%;border-collapse:collapse;margin:10px 0}td{padding:9px;border-bottom:1px solid #e3d8c8;font-size:.92rem}td:first-child{color:#6A0000;font-weight:600}
+.goal{background:#fff;border:1px solid #e3d8c8;border-left:4px solid #2A9D8F;border-radius:10px;padding:14px 16px;margin:10px 0}
+.goal .pct{color:#b9863a;font-weight:700;float:right}.goal .src{font-size:.82rem;color:#8a7a72}.goal p{margin:6px 0 0;font-size:.93rem}
+ul li{margin:5px 0;font-size:.92rem}
+.ft{margin-top:28px;padding-top:16px;border-top:1px solid #e3d8c8;font-size:.82rem;color:#8a7a72;text-align:center}.ft a{color:#b9863a;font-weight:700;text-decoration:none}
+</style></head><body>
+<div class="hd"><h1>Fərdi İnkişaf Proqramı</h1><p>AN Psixoloji Dəstək və Reabilitasiya Mərkəzi · ABA</p></div>
+<div class="meta"><span><b>Uşaq:</b> ${p.name||'—'}</span><span><b>Yaş:</b> ${p.age||'—'}</span><span><b>Mütəxəssis:</b> ${p.spec||'—'}</span><span><b>Tarix:</b> ${date}</span></div>
+<h2>Qiymətləndirmə xülasəsi</h2><table>${summary}</table>
+<h2>Fərdi məqsədlər (prioritet üzrə)</h2>${goals}
+${bip}
+<h2>Ümumi tövsiyələr</h2><ul>
+<li>Həftədə 2–5 sessiya; hər sessiyada 2–3 məqsəd.</li><li>Hər sessiyada data toplayın və qrafiklə izləyin.</li>
+<li>Hər 2–3 həftədən bir yenidən qiymətləndirin.</li><li>Bacarıqları təbii mühitdə möhkəmləndirin, valideyni qoşun.</li></ul>
+<div class="ft">Hazırladı: <b>By s_akhundoff</b> · <a href="https://instagram.com/s_akhundoff">@s_akhundoff</a><br>
+Qeyd: İlkin layihə; yekun proqram sertifikatlı ABA mütəxəssisi (BCBA) tərəfindən təsdiqlənməlidir.</div>
+</body></html>`;
+  const blob=new Blob([html],{type:'text/html'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download=`Ferdi_Proqram_${(p.name||'usaq').replace(/\s+/g,'_')}.html`; a.click(); URL.revokeObjectURL(a.href);
+}
+
+buildProgram();
+</script>
+</body>
+</html>
