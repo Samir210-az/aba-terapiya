@@ -68,8 +68,13 @@
 
 <footer class="footer">
   <div class="wrap">
-    <div class="footer-bot" style="border:none;padding-top:0">
-      <span class="by">By <b>s_akhundoff</b> · © 2026 AN Psixoloji Mərkəzi</span>
+    <div class="contact-row" style="justify-content:center;margin-bottom:14px">
+      <a href="tel:+994554157215"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.5-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg> +994 55 415 72 15</a>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Bakı, Nizami r., Rizvan Teymurov 59</span>
+      <a href="https://instagram.com/an_psixologiyamerkezi" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> @an_psixologiyamerkezi</a>
+    </div>
+    <div class="footer-bot" style="justify-content:center;border-top:1px solid rgba(210,165,93,.25);padding-top:18px">
+      <span class="by">© 2026 AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span>
       <a class="ig" href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
         @s_akhundoff</a>
@@ -85,35 +90,36 @@ const tools=[
   meta:["0–48 ay","16 sahə","Mərhələli"],color:"#6A0000",ill:"M20 6l4 8 4-8M14 16l5 12 5-12 5 12 5-12"},
  {id:"ablls-r",href:"tools/ablls-r.html",abbr:"ABLLS-R",name:"Əsas dil və öyrənmə bacarıqları",
   d:"Dil, akademik, özünə xidmət və motor sahələrini əhatə edən geniş bacarıq protokolu.",
-  meta:["2–6 yaş","Geniş protokol","Bacarıq"],color:"#2A9D8F",ill:""},
+  meta:["2–6 yaş","Geniş protokol","Bacarıq"],color:"#1F8A7A",ill:""},
  {id:"afls",href:"tools/afls.html",abbr:"AFLS",name:"Funksional həyat bacarıqları",
   d:"Müstəqil yaşam üçün praktik bacarıqlar: özünə qulluq, ev, icma və məktəb mühitləri.",
-  meta:["Bütün yaşlar","Funksional","Müstəqillik"],color:"#b9863a",ill:""},
+  meta:["Bütün yaşlar","Funksional","Müstəqillik"],color:"#B47514",ill:""},
  {id:"fba",href:"tools/fba.html",abbr:"FBA",name:"Funksional Davranış Qiymətləndirməsi",
   d:"Problemli davranışın funksiyasını müəyyən edir: diqqət, qaçma, əşya əldə etmə və ya sensor.",
-  meta:["Davranışa fokus","ABC təhlili","Funksiya"],color:"#8a2020",ill:""},
+  meta:["Davranışa fokus","ABC təhlili","Funksiya"],color:"#C0392B",ill:""},
  {id:"vineland",href:"tools/vineland.html",abbr:"Vineland-3",name:"Adaptiv Davranış Şkalası",
   d:"Ünsiyyət, gündəlik bacarıq, sosiallaşma və motor sahələrində adaptiv funksiyanı qiymətləndirir.",
-  meta:["0–90 yaş","Adaptiv","Standart"],color:"#1f7268",ill:""},
+  meta:["0–90 yaş","Adaptiv","Standart"],color:"#2F6E8F",ill:""},
  {id:"peak",href:"tools/peak.html",abbr:"PEAK",name:"İdrak və əlaqəli öyrənmə",
   d:"Dil və idrakın daha yüksək, əlaqəli (relational) bacarıqlarını qiymətləndirir.",
-  meta:["İrəli səviyyə","İdrak","Relational"],color:"#6A0000",ill:""}
+  meta:["İrəli səviyyə","İdrak","Relational"],color:"#6D4C7D",ill:""}
 ];
 const cat=document.getElementById('catalog');
 tools.forEach((t,i)=>{
   const a=document.createElement('a');
   a.className='tool-card reveal d'+(i%3); a.href=t.href; a.setAttribute('data-tool',t.id);
+  a.style.setProperty('--tc', t.color);
   a.innerHTML=`
     <div class="done-flag">✓ Tamamlandı</div>
-    <div class="tool-top"><span class="tool-badge">${t.abbr}</span>
+    <div class="tool-top" style="border-top:4px solid ${t.color}"><span class="tool-badge" style="background:${t.color};color:#fff">${t.abbr}</span>
       <svg class="tool-ill" viewBox="0 0 64 64" fill="none" stroke="${t.color}" stroke-width="3" stroke-linecap="round">
         <rect x="10" y="8" width="44" height="48" rx="6"/><path d="M20 22h24M20 32h24M20 42h14"/>
         <circle cx="32" cy="4" r="0"/></svg>
-      <h3>${t.name}</h3><span class="tool-abbr">${t.abbr}</span></div>
+      <h3>${t.name}</h3><span class="tool-abbr" style="color:${t.color}">${t.abbr}</span></div>
     <div class="tool-body"><p>${t.d}</p>
       <div class="tool-meta">${t.meta.map(m=>`<span class="meta-pill">${m}</span>`).join('')}</div>
-      <div class="tool-go">Təlimat + qiymətləndirməni aç
-        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="16" height="16"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></span></div></div>`;
+      <div class="tool-go" style="color:${t.color}">Təlimat + qiymətləndirməni aç
+        <span class="arrow" style="background:${t.color}"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" width="16" height="16"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></span></div></div>`;
   cat.appendChild(a);
 });
 markCompletedTools();
