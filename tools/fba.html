@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FBA — Funksional Davranış Qiymətləndirməsi | AN Psixoloji</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="meter" id="meter"></div>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="../index.html" class="brand">
+      <span class="logo"><svg viewBox="0 0 40 40" width="40" height="40"><path d="M20 7l11 6v14l-11 6-11-6V13z" fill="none" stroke="#D2A55D" stroke-width="2"/><path d="M14 25l5-12 5 12M16 21h6" fill="none" stroke="#D2A55D" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span>AN Psixoloji<small>ABA Terapiya Platforması</small></span>
+    </a>
+    <button class="burger" onclick="toggleNav()" aria-label="Menyu">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../index.html">Ana səhifə</a>
+      <a href="../qiymetlendirmeler.html" class="active">Qiymətləndirmələr</a>
+      <a href="../proqram.html" class="cta">Fərdi proqram</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="../index.html">Ana səhifə</a> / <a href="../qiymetlendirmeler.html">Qiymətləndirmələr</a> / <span>FBA</span></div>
+    <span class="eyebrow">FBA · Funksional davranış qiymətləndirməsi</span>
+    <h1>Funksional Davranış Qiymətləndirməsi</h1>
+    <p>Problemli davranışın “niyə” baş verdiyini — funksiyasını — müəyyən edir. Hər sualda uşağınıza ƏN UYĞUN variantı seçin; sistem dominant funksiyanı təyin edir.</p>
+  </div>
+</section>
+
+<section style="padding:0">
+  <div class="wrap">
+    <div class="instr reveal in">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-2)" stroke-width="2" width="22" height="22"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h9"/></svg> Təlimat</h3>
+      <ol>
+        <li>Əvvəlcə <b>bir hədəf davranışı</b> seçin (məs. qışqırma, vurma, yerə uzanma) və onu dəqiq təsvir edin.</li>
+        <li>Hər ssenari üçün uşağınızda <b>ən tez-tez baş verən</b> variantı seçin. Düz/yanlış cavab yoxdur.</li>
+        <li>Mümkünsə bir neçə gün <b>ABC qeydi</b> (Antesedent–Davranış–Nəticə) aparın, sonra dolduruh.</li>
+        <li>Sistem 4 funksiyadan birini — <b>Diqqət, Qaçma, Əşya/Fəaliyyət, Sensor</b> — dominant kimi göstərəcək.</li>
+      </ol>
+      <div class="scale-key">
+        <span><span class="dot" style="background:var(--bordo)"></span>Diqqət — başqasının diqqətini cəlb etmək</span>
+        <span><span class="dot" style="background:var(--gold)"></span>Qaçma — tələbdən/işdən yayınmaq</span>
+        <span><span class="dot" style="background:var(--teal)"></span>Əşya — istədiyini əldə etmək</span>
+        <span><span class="dot" style="background:#8a7a72"></span>Sensor — daxili hiss/rahatlıq</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:8px 0 40px">
+  <div class="wrap">
+    <div class="profile-bar" id="profileBar"></div>
+    <div class="domain" style="margin-bottom:18px">
+      <div class="domain-head"><h3><span class="num">★</span>Hədəf davranış</h3></div>
+      <div class="qrow"><span class="qt">Qiymətləndirdiyiniz problemli davranışı yazın:</span>
+        <input id="targetBehavior" placeholder="məs. tapşırıq veriləndə qışqırır" style="flex:1;min-width:200px;font-family:inherit;padding:10px 14px;border:1px solid var(--line);border-radius:9px"></div>
+    </div>
+    <div id="domains"></div>
+    <div class="assess-actions">
+      <button class="btn btn-gold" onclick="ASSESS.calculate()">Funksiyanı təyin et</button>
+      <button class="btn btn-ghost" onclick="ASSESS.reset()">Sıfırla</button>
+      <a class="btn btn-ghost" href="../qiymetlendirmeler.html">← Kataloqa qayıt</a>
+    </div>
+    <div class="results" id="results"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap"><div class="footer-bot" style="border:none;padding-top:0">
+    <span class="by">By <b>s_akhundoff</b> · © 2026 AN Psixoloji Mərkəzi</span>
+    <a class="ig" href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      @s_akhundoff</a>
+  </div></div>
+</footer>
+
+<script src="../assets/core.js"></script>
+<script>
+const FUNCS=["Diqqət","Qaçma","Əşya/Fəaliyyət","Sensor"];
+const RECOS={
+ "Diqqət":[
+   "Davranışa <b>minimal reaksiya</b> verin (planlı laqeydlik) — davranış diqqət gətirməsin.",
+   "Uşaq <b>uyğun şəkildə</b> diqqət istəyəndə (əl qaldırmaq, ad çəkmək) dərhal müsbət diqqət verin (DRA).",
+   "Tez-tez, <b>davranışdan asılı olmayan diqqət</b> (noncontingent attention) planlaşdırın.",
+   "Funksional ünsiyyəti öyrədin: “mənə bax / mənimlə oyna” ifadəsini gücləndirin (FCT)."],
+ "Qaçma":[
+   "Tələbi <b>kiçik addımlara</b> bölün və çətinliyi tədricən artırın.",
+   "Uşağa “<b>fasilə istəyirəm</b>” kimi uyğun qaçma ifadəsini öyrədin (FCT).",
+   "Tapşırığı tamamlayanda <b>fasilə + mükafat</b> verin; davranışla qaçmağa imkan verməyin.",
+   "Seçim imkanı (hansı tapşırıq əvvəl) verərək əməkdaşlığı artırın."],
+ "Əşya/Fəaliyyət":[
+   "İstədiyi əşyaya <b>davranışla deyil</b>, uyğun tələblə çatmasını öyrədin (FCT: “istəyirəm”).",
+   "Keçidləri əvvəlcədən xəbər verin və <b>vizual cədvəl</b> istifadə edin.",
+   "Gözləməyi tədricən öyrədin (token sistemi, “bir az sonra”).",
+   "Əşyanı verməzdən əvvəl <b>sakit davranış</b> tələb edin (differensial gücləndirmə)."],
+ "Sensor":[
+   "Təhlükəsiz, <b>uyğun sensor alternativ</b> təklif edin (fidget, hərəkət fasiləsi).",
+   "Sensor ehtiyacı planlı şəkildə ödəyin (<b>sensor diet</b>) ki, davranışa ehtiyac qalmasın.",
+   "Mühit tənzimləməsi: səs/işıq/izdihamı azaldın.",
+   "Erqoterapevtlə (OT) əməkdaşlıq edərək sensor profili qiymətləndirin."]
+};
+
+ASSESS.init({
+  toolId:'fba', toolName:'FBA — Funksional Davranış Qiymətləndirməsi', mode:'single',
+  domains:[{
+    name:"Funksiya skrininqi", hint:"hər ssenaridə ən uyğun variantı seçin",
+    options:FUNCS,
+    q:[
+      "Davranış ƏN ÇOX nə vaxt başlayır?", // 0
+      "Davranışdan dərhal sonra adətən nə baş verir?",
+      "Davranış ən az hansı halda baş verir?",
+      "Uşaq davranışı edəndə nəyi “qazanmış” olur?",
+      "Davranış tək qalanda da (heç kim olmadan) baş verirmi?",
+      "Çətin və ya darıxdırıcı tapşırıq veriləndə davranış artırmı?",
+      "Sevdiyi əşya/oyuncaq əlindən alınanda davranış olurmu?",
+      "Davranış zamanı uşaq özünə yönəlik hərəkət edir (yellənmə, səs, əllə)?"
+    ]
+  }],
+  interpret:function(tally){
+    // dominant funksiya
+    var best=FUNCS[0], bestV=-1;
+    FUNCS.forEach(function(f){ if((tally[f]||0)>bestV){bestV=tally[f]||0; best=f;} });
+    var descMap={
+      "Diqqət":"Davranış əsasən başqasının diqqətini (baxış, danışıq, reaksiya) cəlb etmək üçün baş verir.",
+      "Qaçma":"Davranış əsasən tələbdən, tapşırıqdan və ya narahat vəziyyətdən yayınmaq üçün baş verir.",
+      "Əşya/Fəaliyyət":"Davranış əsasən istədiyi əşya və ya fəaliyyəti əldə etmək üçün baş verir.",
+      "Sensor":"Davranış əsasən daxili sensor hiss/rahatlıq üçün baş verir (avtomatik gücləndirmə)."
+    };
+    var tb=(document.getElementById('targetBehavior')||{}).value||'';
+    return {func:best, behavior:tb,
+      desc:descMap[best]+(tb?' Hədəf davranış: “'+tb+'”.':''),
+      recos:RECOS[best],
+      levelName:best, overall:null};
+  }
+});
+</script>
+</body>
+</html>
