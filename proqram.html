@@ -1,258 +1,90 @@
-<!DOCTYPE html>
-<html lang="az">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fərdi İnkişaf Proqramı — ABA Platforması | AN Psixoloji</title>
-<meta name="description" content="Test və qiymətləndirmə nəticələrinə əsasən hər uşaq üçün konkret addımlı, valideyn tapşırıqlı avtomatik fərdi ABA proqramı.">
-<link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
-
-<header class="nav">
-  <div class="wrap nav-in">
-    <a href="index.html" class="brand">
-      <span class="logo"><svg viewBox="0 0 40 40" width="40" height="40"><path d="M20 7l11 6v14l-11 6-11-6V13z" fill="none" stroke="#D2A55D" stroke-width="2"/><path d="M14 25l5-12 5 12M16 21h6" fill="none" stroke="#D2A55D" stroke-width="2" stroke-linecap="round"/></svg></span>
-      <span>AN Psixoloji<small>ABA Terapiya Platforması</small></span>
-    </a>
-    <button class="burger" onclick="toggleNav()" aria-label="Menyu">☰</button>
-    <nav class="nav-links" id="navLinks">
-      <a href="index.html">Ana səhifə</a>
-      <a href="index.html#proses">Proses</a>
-      <a href="qiymetlendirmeler.html">Qiymətləndirmələr</a>
-      <a href="proqram.html" class="active cta">Fərdi proqram</a>
-    </nav>
-  </div>
-</header>
-
-<section class="page-hero" style="--accent:#6A0000;--accent-2:#8a2020">
-  <div class="wrap">
-    <div class="crumb"><a href="index.html">Ana səhifə</a> / <span>Fərdi proqram</span></div>
-    <span class="eyebrow">Avtomatik fərdi inkişaf proqramı</span>
-    <h1>Fərdi İnkişaf Proqramı</h1>
-    <p>Tamamladığınız qiymətləndirmələrin balları əsasında hər uşaq üçün prioritetləşdirilmiş məqsədlər, <b style="color:#fff">konkret iş addımları</b>, davranış planı və <b style="color:#fff">valideyn tapşırıqları</b> avtomatik formalaşır.</p>
-  </div>
-</section>
-
-<section style="padding:40px 0 70px">
-  <div class="wrap">
-    <div id="programRoot"></div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <div class="fbrand">AN Psixoloji</div>
-        <p>Dəstək və Reabilitasiya Mərkəzi. Uşaqların inkişafı üçün sübuta əsaslanan, fərdi ABA yanaşması.</p>
-        <div class="contact-row" style="margin-top:14px"><a href="tel:+994554157215"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.5-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg> +994 55 415 72 15</a></div>
-        <div class="contact-row"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Bakı, Nizami r., Rizvan Teymurov 59</span></div>
-        <div class="contact-row"><a href="https://instagram.com/an_psixologiyamerkezi" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> @an_psixologiyamerkezi</a></div>
-      </div>
-      <div><h4>Platforma</h4><ul>
-        <li><a href="index.html#proses">Terapiya prosesi</a></li>
-        <li><a href="index.html#metodlar">Metodlar</a></li>
-        <li><a href="qiymetlendirmeler.html">Qiymətləndirmələr</a></li>
-        <li><a href="proqram.html">Fərdi proqram</a></li></ul></div>
-      <div><h4>Alətlər</h4><ul>
-        <li><a href="tools/vb-mapp.html">VB-MAPP</a></li>
-        <li><a href="tools/ablls-r.html">ABLLS-R</a></li>
-        <li><a href="tools/fba.html">FBA</a></li>
-        <li><a href="tools/vineland.html">Vineland-3</a></li></ul></div>
-    </div>
-    <div class="footer-bot">
-      <span class="by">© 2026 AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span>
-      <a class="ig" href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> @s_akhundoff</a>
-    </div>
-  </div>
-</footer>
-
-<script src="assets/program-data.js"></script>
-<script src="assets/core.js"></script>
+<!DOCTYPE html><html lang="az"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fərdi Proqram — AN Psixoloji</title><link rel="stylesheet" href="assets/style.css"></head><body>
+<header class="nav"><div class="wrap nav-in"><a href="index.html" class="brand"><span class="logo"><svg viewBox="0 0 40 40" width="40" height="40"><path d="M20 7l11 6v14l-11 6-11-6V13z" fill="none" stroke="#D2A55D" stroke-width="2"/><path d="M14 25l5-12 5 12M16 21h6" fill="none" stroke="#D2A55D" stroke-width="2" stroke-linecap="round"/></svg></span><span>AN Psixoloji<small>ABA Terapiya Platforması</small></span></a><button class="burger" onclick="toggleNav()" aria-label="Menyu">☰</button><nav class="nav-links" id="navLinks"><a href="index.html" data-i18n="nav_home">Ana səhifə</a><a href="qiymetlendirmeler.html" data-i18n="nav_assess">Qiymətləndirmələr</a><a href="proqram.html" class="active cta" data-i18n="nav_program">Fərdi proqram</a><div class="lang-switch"></div></nav></div></header>
+<section class="page-hero" style="--accent:#6A0000;--accent-2:#8a2020"><div class="wrap">
+<div class="crumb"><a href="index.html" data-i18n="nav_home">Ana səhifə</a> / <span data-i18n="nav_program">Fərdi proqram</span></div>
+<span class="eyebrow" data-i18n="prog_eyebrow">Avtomatik fərdi proqram</span>
+<h1 data-i18n="prog_h1">Fərdi İnkişaf Proqramı</h1>
+<p data-i18n="prog_lead"></p></div></section>
+<section style="padding:40px 0 70px"><div class="wrap"><div id="programRoot"></div></div></section>
+<footer class="footer"><div class="wrap"><div class="footer-grid"><div><div class="fbrand">AN Psixoloji</div><p data-i18n="foot_about">Dəstək və Reabilitasiya Mərkəzi.</p><div class="contact-row" style="margin-top:14px"><a href="tel:+994554157215"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.5-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg> +994 55 415 72 15</a></div><div class="contact-row"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Bakı, Nizami r., Rizvan Teymurov 59</span></div><div class="contact-row"><a href="https://instagram.com/an_psixologiyamerkezi" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> @an_psixologiyamerkezi</a></div></div><div><h4 data-i18n="foot_platform">Platforma</h4><ul><li><a href="index.html#proses" data-i18n="nav_process">Proses</a></li><li><a href="index.html#metodlar" data-i18n="nav_methods">Metodlar</a></li><li><a href="qiymetlendirmeler.html" data-i18n="nav_assess">Qiymətləndirmələr</a></li><li><a href="proqram.html" data-i18n="nav_program">Fərdi proqram</a></li></ul></div><div><h4 data-i18n="foot_tools">Alətlər</h4><ul><li><a href="tools/vb-mapp.html">VB-MAPP</a></li><li><a href="tools/ablls-r.html">ABLLS-R</a></li><li><a href="tools/fba.html">FBA</a></li><li><a href="tools/vineland.html">Vineland-3</a></li></ul></div></div><div class="footer-bot"><span class="by">© 2026 AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span><a class="ig" href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> @s_akhundoff</a></div></div></footer><script src="assets/i18n.js"></script><script src="assets/tools-data.js"></script><script src="assets/program-data.js"></script><script src="assets/core.js"></script>
 <script>
-function levelOf(pct){ return pct<45?1:pct<75?2:3; }
-function priTag(pct){ return pct<45?{t:'Yüksək prioritet',c:'tag-pri'}:pct<75?{t:'İnkişafda',c:'tag-mid'}:{t:'Güclü sahə',c:'tag-ok'}; }
-function methodFor(pct){ return pct<45?'DTT — strukturlu fərdi təlim':pct<75?'NET — təbii mühitdə təlim':'Ümumiləşdirmə və saxlama'; }
-function smartGoal(name, pct){
-  var n=name.toLowerCase();
-  if(pct<45) return 'Uşaq '+n+' sahəsində təməl bacarıqları 8 həftə ərzində struktur təlimlə (DTT) ardıcıl 3 sessiyada ən azı 80% dəqiqliklə nümayiş etdirəcək.';
-  if(pct<75) return 'Uşaq '+n+' bacarıqlarını təbii mühitdə (NET) müstəqil şəkildə ardıcıl 3 sessiyada minimal köməklə istifadə edəcək.';
-  return 'Uşaq '+n+' bacarıqlarını fərqli mühit və insanlarla ümumiləşdirəcək və 4 həftə ərzində qoruyacaq.';
+function levelOf(p){return p<45?1:p<75?2:3;}
+function priTag(p){return p<45?{t:t('pri_high'),c:'tag-pri'}:p<75?{t:t('pri_mid'),c:'tag-mid'}:{t:t('pri_ok'),c:'tag-ok'};}
+function methodFor(p){return p<45?t('m_dtt'):p<75?t('m_net'):t('m_gen');}
+function smartGoal(n,p){var k=p<45?'sg_l1':p<75?'sg_l2':'sg_l3';return t(k).replace('{n}',n);}
+function libOf(k){return (window.DOMAIN_LIB&&window.DOMAIN_LIB[k])||null;}
+var FB={method:'',steps:[],parent:[]};
+function build(){
+ var p=ABA.getProfile(),res=ABA.getResults(),keys=Object.keys(res),root=document.getElementById('programRoot');
+ if(!keys.length){root.innerHTML='<div class="prog-empty"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>'
+  +'<h2 style="font-size:1.5rem" data-i18n2>'+t('prog_empty_h')+'</h2><p class="muted" style="margin:10px 0 20px">'+t('prog_empty_p')+'</p>'
+  +'<a href="qiymetlendirmeler.html" class="btn btn-primary">'+t('prog_empty_btn')+'</a></div>';return;}
+ var all=[],levels=[],fba=null;
+ keys.forEach(function(k){var r=res[k];
+  if(r.type==='scale'){var td=window.TOOLS_DATA[r.toolId];r._name=tr(td.name);r.scores.forEach(function(s){all.push({tool:tr(td.name),name:tr(s.nameT),key:s.key,pct:s.pct});});levels.push(r.level);}
+  if(r.type==='fba'){fba=r;}});
+ all.sort(function(a,b){return a.pct-b.pct;});
+ var pri=all.filter(function(d){return d.pct<45;}).length;
+ var avg=levels.length?Math.round(levels.reduce(function(a,b){return a+b;},0)/levels.length):'—';
+ var avgN={1:t('lvl1'),2:t('lvl2'),3:t('lvl3')}[avg]||'—';
+ var fF=fba?tr(window.FBA_DATA.funcs[fba.funcKey]):'—';
+ var h='<div class="prog-card" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;border-left:5px solid var(--gold)">'
+  +'<div><h2 style="font-size:1.6rem;margin-bottom:4px">'+(p.name||t('pf_child'))+' — '+t('prog_for')+'</h2>'
+  +'<p class="muted">'+(p.age?t('pf_age')+': '+p.age+' · ':'')+(p.spec?t('pf_spec')+': '+p.spec+' · ':'')+t('date')+': '+new Date().toLocaleDateString()+'</p></div>'
+  +'<div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-gold" onclick="dl()">'+svgIcon('download')+' '+t('dl_program')+'</button>'
+  +'<button class="btn btn-ghost" onclick="if(confirm(t(\'confirm_clear\'))){ABA.clearAll();location.reload();}">'+t('reset')+'</button></div></div>';
+ h+='<div class="summary-grid"><div class="stat"><b>'+keys.length+'</b><span>'+t('sum_tools')+'</span></div>'
+  +'<div class="stat"><b>'+avg+'</b><span>'+t('sum_level')+' · '+avgN.split('—').pop().trim()+'</span></div>'
+  +'<div class="stat"><b>'+pri+'</b><span>'+t('sum_pri')+'</span></div>'
+  +'<div class="stat"><b>'+fF+'</b><span>'+t('sum_func')+'</span></div></div>';
+ h+='<div class="prog-card"><h3 style="margin-bottom:12px">'+t('assess_sum')+'</h3>';
+ keys.forEach(function(k){var r=res[k];
+  if(r.type==='scale'){var c=r.overall>=75?'var(--teal)':r.overall>=45?'var(--gold)':'var(--low)';
+   h+='<div class="bar"><div class="bl"><span>'+r._name+'</span><span>'+r.overall+'% · '+t('lvl'+r.level)+'</span></div><div class="track"><div class="fill" style="width:'+r.overall+'%;background:'+c+'"></div></div></div>';}
+  else if(r.type==='fba'){h+='<div class="note" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9l-8 14A2 2 0 004 21h16a2 2 0 001.7-3l-8-14a2 2 0 00-3.4 0z"/></svg><div><b>FBA:</b> '+t('likely_func')+' — <b>'+tr(window.FBA_DATA.funcs[r.funcKey])+'</b>.'+(r.behavior?' “'+r.behavior+'”':'')+'</div></div>';}});
+ h+='</div>';
+ var top=all.slice(0,Math.min(6,all.length));
+ h+='<div class="sec-divider">'+t('goals_div')+'</div>';
+ top.forEach(function(d,i){var tag=priTag(d.pct);var lib=libOf(d.key)||FB;var steps=(lib.steps||[]).map(function(s){return '<li>'+tr(s)+'</li>';}).join('');
+  h+='<div class="plan"><div class="plan-head"><h5>'+(i+1)+'. '+d.name+'</h5><span class="pct">'+d.pct+'% · <span class="goal-tag '+tag.c+'">'+tag.t+'</span></span></div>'
+   +'<p class="method"><b>'+t('src')+':</b> '+d.tool+' · <b>'+t('method')+':</b> '+methodFor(d.pct)+(lib.method?' ('+tr(lib.method)+')':'')+'</p>'
+   +'<p class="muted" style="margin-bottom:10px"><b>'+t('smart_goal')+':</b> '+smartGoal(d.name,d.pct)+'</p>'
+   +'<span class="steps-label">'+t('concrete_steps')+'</span><ol>'+steps+'</ol>'
+   +'<div class="parent-task">'+svgIcon('parent')+'<div><b>'+t('parent_task')+':</b> '+(lib.parent&&lib.parent[0]?tr(lib.parent[0]):'')+'</div></div></div>';});
+ if(fba){var az=window.FBA_DATA.funcs[fba.funcKey].az;var recos=(window.FBA_DATA.recos[az]||[]).map(function(x){return '<li>'+tr(x)+'</li>';}).join('');
+  var dk=['att','esc','tan','sen'][fba.funcKey];
+  h+='<div class="sec-divider">'+t('bip_div')+'</div><div class="prog-card" style="border-left:5px solid #C0392B">'
+   +'<p style="margin-bottom:10px"><b>'+t('func')+':</b> '+tr(window.FBA_DATA.funcs[fba.funcKey])+' — '+tr(window.FBA_DATA.descMap[dk])+'</p>'
+   +'<span class="steps-label">'+t('ther_strat2')+'</span><div class="reco" style="margin:8px 0 0"><ul>'+recos+'</ul></div></div>';}
+ var pt=[];top.forEach(function(d){var lib=libOf(d.key);if(lib&&lib.parent)lib.parent.forEach(function(x){pt.push(tr(x));});});
+ if(fba){var az2=window.FBA_DATA.funcs[fba.funcKey].az;(window.FBA_DATA.parent[az2]||[]).forEach(function(x){pt.push(tr(x));});}
+ pt=pt.filter(function(v,i,s){return s.indexOf(v)===i;}).slice(0,8);
+ if(pt.length){h+='<div class="sec-divider">'+t('parent_div')+'</div><p class="muted" style="margin:-4px 0 14px">'+t('parent_intro')+'</p>';
+  pt.forEach(function(x,i){h+='<div class="ptask"><span class="n">'+(i+1)+'</span><p>'+x+'</p></div>';});}
+ h+='<div class="sec-divider">'+t('gen_div')+'</div><div class="prog-card"><div class="reco" style="margin:0;background:#fff;border:none;padding:0"><ul>'
+  +'<li>'+t('gen1')+'</li><li>'+t('gen2')+'</li><li>'+t('gen3')+'</li><li>'+t('gen4')+'</li><li>'+t('gen5')+'</li></ul></div></div>';
+ h+='<div class="note" style="margin-top:24px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><div>'+t('bcba_note')+'</div></div>';
+ root.innerHTML=h;
+ setTimeout(function(){root.querySelectorAll('.fill').forEach(function(f){var w=f.style.width;f.style.width='0';requestAnimationFrame(function(){f.style.width=w;});});},60);
 }
-function libOf(key){ return (window.DOMAIN_LIB && window.DOMAIN_LIB[key]) || null; }
-var FALLBACK={method:'Fərdi təlim', steps:['Bacarığı kiçik addımlara bölün və model+kömək ilə öyrədin.','Doğru cavabı dərhal gücləndirin, köməyi tədricən azaldın.','Fərqli material və mühitlərlə ümumiləşdirin.'], parent:['Bu bacarığı gündəlik fəaliyyətlərə daxil edin və uğuru tərifləyin.']};
-
-function buildProgram(){
-  const p = ABA.getProfile();
-  const res = ABA.getResults();
-  const keys = Object.keys(res);
-  const root = document.getElementById('programRoot');
-
-  if(keys.length===0){
-    root.innerHTML = `<div class="prog-empty">
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>
-      <h2 style="font-size:1.5rem">Hələ nəticə yoxdur</h2>
-      <p class="muted" style="margin:10px 0 20px">Fərdi proqram qurmaq üçün əvvəlcə ən azı bir qiymətləndirmə tamamlayın. Daha çox alət — daha dəqiq proqram.</p>
-      <a href="qiymetlendirmeler.html" class="btn btn-primary">Qiymətləndirməyə başla</a>
-    </div>`;
-    return;
-  }
-
-  let allDomains=[]; let levels=[]; let fba=null;
-  keys.forEach(k=>{
-    const r=res[k];
-    if(r.scores){ r.scores.forEach(s=>allDomains.push({tool:r.tool, name:s.name, key:s.key, pct:s.pct})); levels.push(r.level); }
-    if(r.func){ fba=r; }
-  });
-  allDomains.sort((a,b)=>a.pct-b.pct);
-  const priCount=allDomains.filter(d=>d.pct<45).length;
-  const avgLevel=levels.length?Math.round(levels.reduce((a,b)=>a+b,0)/levels.length):'—';
-  const avgName={1:'Erkən',2:'Orta',3:'İrəli'}[avgLevel]||'—';
-
-  let html = `<div class="prog-card" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;border-left:5px solid var(--gold)">
-    <div><h2 style="font-size:1.6rem;margin-bottom:4px">${p.name||'Uşaq'} üçün proqram</h2>
-      <p class="muted">${p.age?('Yaş: '+p.age+' · '):''}${p.spec?('Mütəxəssis: '+p.spec+' · '):''}Tarix: ${new Date().toLocaleDateString('az-AZ')}</p></div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn btn-gold" onclick="downloadProgram()">${svgIcon('download')} Proqramı yüklə (HTML)</button>
-      <button class="btn btn-ghost" onclick="if(confirm('Bütün nəticələr silinsin?')){ABA.clearAll();location.reload();}">Sıfırla</button>
-    </div></div>`;
-
-  html += `<div class="summary-grid">
-    <div class="stat"><b>${keys.length}</b><span>Tamamlanmış alət</span></div>
-    <div class="stat"><b>${avgLevel}</b><span>Orta səviyyə · ${avgName}</span></div>
-    <div class="stat"><b>${priCount}</b><span>Prioritet sahə</span></div>
-    <div class="stat"><b>${fba?fba.func:'—'}</b><span>Davranış funksiyası</span></div>
-  </div>`;
-
-  // Qiymətləndirmə xülasəsi
-  html += `<div class="prog-card"><h3 style="margin-bottom:12px">Qiymətləndirmə xülasəsi</h3>`;
-  keys.forEach(k=>{
-    const r=res[k];
-    if(r.scores){
-      html += `<div class="bar"><div class="bl"><span>${r.tool}</span><span>${r.overall}% · ${r.levelName||''}</span></div>
-        <div class="track"><div class="fill" style="width:${r.overall}%;background:${r.overall>=75?'var(--teal)':r.overall>=45?'var(--gold)':'var(--low)'}"></div></div></div>`;
-    } else if(r.func){
-      html += `<div class="note" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9l-8 14A2 2 0 004 21h16a2 2 0 001.7-3l-8-14a2 2 0 00-3.4 0z"/></svg>
-        <div><b>FBA:</b> Ehtimal olunan funksiya — <b>${r.func}</b>. ${r.behavior?('Hədəf davranış: “'+r.behavior+'”.'):''}</div></div>`;
-    }
-  });
-  html += `</div>`;
-
-  // Prioritet məqsədlər — KONKRET ADDIMLAR
-  const topGoals = allDomains.slice(0, Math.min(6, allDomains.length));
-  html += `<div class="sec-divider">Fərdi məqsədlər və konkret addımlar</div>`;
-  topGoals.forEach((d,i)=>{
-    const tag=priTag(d.pct);
-    const lib=libOf(d.key)||FALLBACK;
-    const steps=(lib.steps||FALLBACK.steps).map(s=>'<li>'+s+'</li>').join('');
-    html += `<div class="plan">
-      <div class="plan-head"><h5>${i+1}. ${d.name}</h5><span class="pct">${d.pct}% · <span class="goal-tag ${tag.c}">${tag.t}</span></span></div>
-      <p class="method"><b>Mənbə:</b> ${d.tool} &nbsp;·&nbsp; <b>Metod:</b> ${methodFor(d.pct)} (${lib.method})</p>
-      <p class="muted" style="margin-bottom:10px"><b>SMART məqsəd:</b> ${smartGoal(d.name, d.pct)}</p>
-      <span class="steps-label">Konkret iş addımları</span>
-      <ol>${steps}</ol>
-      <div class="parent-task">${svgIcon('parent')}<div><b>Valideyn tapşırığı:</b> ${(lib.parent&&lib.parent[0])||FALLBACK.parent[0]}</div></div>
-    </div>`;
-  });
-
-  // Davranış müdaxilə planı (FBA)
-  if(fba){
-    html += `<div class="sec-divider">Davranış müdaxilə planı (BIP)</div>
-      <div class="prog-card" style="border-left:5px solid var(--accent,#C0392B)">
-        <p style="margin-bottom:10px"><b>Funksiya:</b> ${fba.func} — ${fba.desc||''}</p>
-        <span class="steps-label">Terapevt strategiyaları</span>
-        <div class="reco" style="margin:8px 0 0"><ul>${(fba.recos||[]).map(x=>'<li>'+x+'</li>').join('')}</ul></div></div>`;
-  }
-
-  // VALİDEYN ÜÇÜN TAPŞIRIQLAR — toplanmış
-  let ptasks=[];
-  topGoals.forEach(d=>{ const lib=libOf(d.key); if(lib&&lib.parent) lib.parent.forEach(x=>ptasks.push(x)); });
-  if(fba && fba.parent) fba.parent.forEach(x=>ptasks.push(x));
-  ptasks=[...new Set(ptasks)].slice(0,8);
-  if(ptasks.length){
-    html += `<div class="sec-divider">Valideyn üçün konkret tapşırıqlar</div>
-      <p class="muted" style="margin:-4px 0 14px">Bu tapşırıqları evdə gündəlik tətbiq etmək uşağın irəliləyişini sürətləndirir:</p>`;
-    ptasks.forEach((t,i)=>{ html += `<div class="ptask"><span class="n">${i+1}</span><p>${t}</p></div>`; });
-  }
-
-  // Ümumi tövsiyələr
-  html += `<div class="sec-divider">Ümumi tövsiyələr</div>
-    <div class="prog-card"><div class="reco" style="margin:0;background:#fff;border:none;padding:0">
-      <ul>
-        <li>Həftədə <b>2–5 sessiya</b> planlaşdırın; hər sessiyada yuxarıdakı 2–3 məqsəd üzərində işləyin.</li>
-        <li>Hər sessiyada <b>data toplayın</b> (düz/yanlış faiz, tezlik) və qrafiklə izləyin.</li>
-        <li>Hər <b>2–3 həftədən bir</b> yenidən qiymətləndirin və məqsədləri yeniləyin.</li>
-        <li>Bacarıqları <b>təbii mühitdə</b> möhkəmləndirin və valideyni prosesə qoşun (parent training).</li>
-        <li>Müsbət gücləndirməni davamlı tətbiq edin; problemli davranışlar üçün FBA-ya uyğun yanaşın.</li>
-      </ul></div></div>`;
-
-  html += `<div class="note" style="margin-top:24px">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
-      <div>Bu proqram skrininq nəticələrinə əsaslanan ilkin layihədir. Yekun fərdi proqram <b>sertifikatlaşdırılmış ABA mütəxəssisi (BCBA)</b> tərəfindən təsdiqlənməli və fərdiləşdirilməlidir.</div></div>`;
-
-  root.innerHTML = html;
-  setTimeout(()=>root.querySelectorAll('.fill').forEach(f=>{const w=f.style.width;f.style.width='0';requestAnimationFrame(()=>f.style.width=w);}),60);
-}
-
-function downloadProgram(){
-  const p=ABA.getProfile(); const res=ABA.getResults(); const keys=Object.keys(res);
-  if(keys.length===0){ alert('Nəticə yoxdur.'); return; }
-  let allDomains=[]; let fba=null;
-  keys.forEach(k=>{const r=res[k]; if(r.scores)r.scores.forEach(s=>allDomains.push({tool:r.tool,name:s.name,key:s.key,pct:s.pct})); if(r.func)fba=r;});
-  allDomains.sort((a,b)=>a.pct-b.pct);
-  const top=allDomains.slice(0,6);
-  const date=new Date().toLocaleDateString('az-AZ');
-  const summary=keys.map(k=>{const r=res[k];
-    return r.scores?`<tr><td>${r.tool}</td><td>${r.overall}% — ${r.levelName||''}</td></tr>`
-      :`<tr><td>${r.tool}</td><td>Funksiya: ${r.func}</td></tr>`;}).join('');
-  const goals=top.map((d,i)=>{
-    const lib=libOf(d.key)||FALLBACK;
-    const steps=(lib.steps||FALLBACK.steps).map(s=>'<li>'+s+'</li>').join('');
-    return `<div class="goal"><b>${i+1}. ${d.name}</b> <span class="pct">${d.pct}%</span>
-      <div class="src">Mənbə: ${d.tool} · Metod: ${methodFor(d.pct)} (${lib.method})</div>
-      <p><b>Məqsəd:</b> ${smartGoal(d.name,d.pct)}</p>
-      <div class="sl">Konkret addımlar:</div><ol>${steps}</ol></div>`;}).join('');
-  let ptasks=[];
-  top.forEach(d=>{const lib=libOf(d.key); if(lib&&lib.parent) lib.parent.forEach(x=>ptasks.push(x));});
-  if(fba&&fba.parent) fba.parent.forEach(x=>ptasks.push(x));
-  ptasks=[...new Set(ptasks)].slice(0,8);
-  const parentHtml=ptasks.length?`<h2>Valideyn üçün konkret tapşırıqlar</h2><ol class="pt">${ptasks.map(x=>'<li>'+x+'</li>').join('')}</ol>`:'';
-  const bip=fba?`<h2>Davranış müdaxilə planı</h2><p><b>Funksiya:</b> ${fba.func} — ${fba.desc||''}</p>
-    <b>Terapevt strategiyaları:</b><ul>${(fba.recos||[]).map(x=>'<li>'+x.replace(/<[^>]+>/g,'')+'</li>').join('')}</ul>`:'';
-  const html=`<!DOCTYPE html><html lang="az"><head><meta charset="UTF-8"><title>Fərdi Proqram — ${p.name||'Uşaq'}</title><style>
-body{font-family:'Segoe UI',Arial,sans-serif;max-width:800px;margin:30px auto;padding:0 22px;color:#2a1c1c;line-height:1.6}
-.hd{background:linear-gradient(135deg,#4a0000,#6A0000);color:#fff;padding:28px;border-radius:14px}
-.hd h1{margin:0;color:#D2A55D;font-size:1.6rem}.hd p{margin:6px 0 0;color:#e7d6c2}
-.meta{background:#F3ECE0;border-radius:12px;padding:16px;margin:18px 0;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:.92rem}.meta b{color:#6A0000}
-h2{color:#6A0000;border-bottom:2px solid #D2A55D;padding-bottom:6px;margin-top:28px;font-size:1.2rem}
-table{width:100%;border-collapse:collapse;margin:10px 0}td{padding:9px;border-bottom:1px solid #e3d8c8;font-size:.92rem}td:first-child{color:#6A0000;font-weight:600}
-.goal{background:#fff;border:1px solid #e3d8c8;border-left:4px solid #2A9D8F;border-radius:10px;padding:14px 16px;margin:12px 0}
-.goal .pct{color:#b9863a;font-weight:700;float:right}.goal .src{font-size:.82rem;color:#8a7a72;margin:4px 0}.goal p{margin:7px 0}
-.goal .sl{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#1f7268;margin-top:8px}
-.goal ol{margin:6px 0 0 20px}.goal ol li{font-size:.9rem;margin:4px 0}
-ul li,ol.pt li{margin:5px 0;font-size:.92rem}
-ol.pt{background:#fff;border:1px dashed #D2A55D;border-radius:10px;padding:14px 14px 14px 34px}
-.ft{margin-top:30px;padding-top:16px;border-top:1px solid #e3d8c8;font-size:.82rem;color:#8a7a72;text-align:center}.ft a{color:#b9863a;font-weight:700;text-decoration:none}
-</style></head><body>
-<div class="hd"><h1>Fərdi İnkişaf Proqramı</h1><p>AN Psixoloji Dəstək və Reabilitasiya Mərkəzi · ABA</p></div>
-<div class="meta"><span><b>Uşaq:</b> ${p.name||'—'}</span><span><b>Yaş:</b> ${p.age||'—'}</span><span><b>Mütəxəssis:</b> ${p.spec||'—'}</span><span><b>Tarix:</b> ${date}</span></div>
-<h2>Qiymətləndirmə xülasəsi</h2><table>${summary}</table>
-<h2>Fərdi məqsədlər və konkret addımlar</h2>${goals}
-${bip}
-${parentHtml}
-<h2>Ümumi tövsiyələr</h2><ul>
-<li>Həftədə 2–5 sessiya; hər sessiyada 2–3 məqsəd.</li><li>Hər sessiyada data toplayın və qrafiklə izləyin.</li>
-<li>Hər 2–3 həftədən bir yenidən qiymətləndirin.</li><li>Bacarıqları təbii mühitdə möhkəmləndirin, valideyni qoşun.</li></ul>
-<div class="ft">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi · Bakı, Nizami r., Rizvan Teymurov 59 · +994 55 415 72 15<br>
-<a href="https://instagram.com/s_akhundoff">@s_akhundoff</a> · Qeyd: İlkin layihə; yekun proqram sertifikatlı ABA mütəxəssisi (BCBA) tərəfindən təsdiqlənməlidir.</div>
-</body></html>`;
-  const blob=new Blob([html],{type:'text/html'});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-  a.download=`Ferdi_Proqram_${(p.name||'usaq').replace(/\s+/g,'_')}.html`; a.click(); URL.revokeObjectURL(a.href);
-}
-
-buildProgram();
-</script>
-</body>
-</html>
+function dl(){var p=ABA.getProfile(),res=ABA.getResults(),keys=Object.keys(res);if(!keys.length){alert(t('calc_first'));return;}
+ var all=[],fba=null;keys.forEach(function(k){var r=res[k];if(r.type==='scale'){var td=window.TOOLS_DATA[r.toolId];r.scores.forEach(function(s){all.push({tool:tr(td.name),name:tr(s.nameT),key:s.key,pct:s.pct});});}if(r.type==='fba')fba=r;});
+ all.sort(function(a,b){return a.pct-b.pct;});var top=all.slice(0,6);var date=new Date().toLocaleDateString();
+ var summary=keys.map(function(k){var r=res[k];return r.type==='scale'?'<tr><td>'+tr(window.TOOLS_DATA[r.toolId].name)+'</td><td>'+r.overall+'% — '+t('lvl'+r.level)+'</td></tr>':'<tr><td>FBA</td><td>'+t('func')+': '+tr(window.FBA_DATA.funcs[r.funcKey])+'</td></tr>';}).join('');
+ var goals=top.map(function(d,i){var lib=libOf(d.key)||FB;var steps=(lib.steps||[]).map(function(s){return '<li>'+tr(s)+'</li>';}).join('');
+  return '<div class="goal"><b>'+(i+1)+'. '+d.name+'</b> <span class="pct">'+d.pct+'%</span><div class="src">'+t('src')+': '+d.tool+' · '+t('method')+': '+methodFor(d.pct)+(lib.method?' ('+tr(lib.method)+')':'')+'</div><p><b>'+t('smart_goal')+':</b> '+smartGoal(d.name,d.pct)+'</p><div class="sl">'+t('concrete_steps')+':</div><ol>'+steps+'</ol></div>';}).join('');
+ var pt=[];top.forEach(function(d){var lib=libOf(d.key);if(lib&&lib.parent)lib.parent.forEach(function(x){pt.push(tr(x));});});
+ if(fba){var az=window.FBA_DATA.funcs[fba.funcKey].az;(window.FBA_DATA.parent[az]||[]).forEach(function(x){pt.push(tr(x));});}
+ pt=pt.filter(function(v,i,s){return s.indexOf(v)===i;}).slice(0,8);
+ var ph=pt.length?'<h2>'+t('parent_div')+'</h2><ol class="pt">'+pt.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol>':'';
+ var bip=fba?'<h2>'+t('bip_div')+'</h2><p><b>'+t('func')+':</b> '+tr(window.FBA_DATA.funcs[fba.funcKey])+'</p><b>'+t('ther_strat2')+':</b><ul>'+(window.FBA_DATA.recos[window.FBA_DATA.funcs[fba.funcKey].az]||[]).map(function(x){return '<li>'+tr(x)+'</li>';}).join('')+'</ul>':'';
+ var html='<!DOCTYPE html><html lang="'+getLang()+'"><head><meta charset="UTF-8"><title>'+t('prog_h1')+' — '+(p.name||'')+'</title><style>body{font-family:Segoe UI,Arial,sans-serif;max-width:800px;margin:30px auto;padding:0 22px;color:#2a1c1c;line-height:1.6}.hd{background:linear-gradient(135deg,#4a0000,#6A0000);color:#fff;padding:28px;border-radius:14px}.hd h1{margin:0;color:#D2A55D;font-size:1.6rem}.hd p{margin:6px 0 0;color:#e7d6c2}.meta{background:#F3ECE0;border-radius:12px;padding:16px;margin:18px 0;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:.92rem}.meta b{color:#6A0000}h2{color:#6A0000;border-bottom:2px solid #D2A55D;padding-bottom:6px;margin-top:28px;font-size:1.2rem}table{width:100%;border-collapse:collapse}td{padding:9px;border-bottom:1px solid #e3d8c8;font-size:.92rem}td:first-child{color:#6A0000;font-weight:600}.goal{background:#fff;border:1px solid #e3d8c8;border-left:4px solid #2A9D8F;border-radius:10px;padding:14px 16px;margin:12px 0}.goal .pct{color:#b9863a;font-weight:700;float:right}.goal .src{font-size:.82rem;color:#8a7a72;margin:4px 0}.goal .sl{font-size:.78rem;font-weight:700;text-transform:uppercase;color:#1f7268;margin-top:8px}.goal ol{margin:6px 0 0 20px}.goal li{font-size:.9rem;margin:4px 0}ul li,ol.pt li{font-size:.92rem;margin:5px 0}ol.pt{background:#fff;border:1px dashed #D2A55D;border-radius:10px;padding:14px 14px 14px 34px}.ft{margin-top:30px;padding-top:16px;border-top:1px solid #e3d8c8;font-size:.82rem;color:#8a7a72;text-align:center}.ft a{color:#b9863a;font-weight:700;text-decoration:none}</style></head><body>'
+  +'<div class="hd"><h1>'+t('prog_h1')+'</h1><p>AN Psixoloji · ABA</p></div>'
+  +'<div class="meta"><span><b>'+t('pf_child')+':</b> '+(p.name||'—')+'</span><span><b>'+t('pf_age')+':</b> '+(p.age||'—')+'</span><span><b>'+t('pf_spec')+':</b> '+(p.spec||'—')+'</span><span><b>'+t('date')+':</b> '+date+'</span></div>'
+  +'<h2>'+t('assess_sum')+'</h2><table>'+summary+'</table><h2>'+t('goals_div')+'</h2>'+goals+bip+ph
+  +'<h2>'+t('gen_div')+'</h2><ul><li>'+t('gen1').replace(/<[^>]+>/g,'')+'</li><li>'+t('gen3').replace(/<[^>]+>/g,'')+'</li><li>'+t('gen4').replace(/<[^>]+>/g,'')+'</li></ul>'
+  +'<div class="ft">AN Psixoloji · Bakı, Nizami r., Rizvan Teymurov 59 · +994 55 415 72 15<br><a href="https://instagram.com/s_akhundoff">@s_akhundoff</a> · '+t('bcba_note').replace(/<[^>]+>/g,'')+'</div></body></html>';
+ var b=new Blob([html],{type:'text/html'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='Ferdi_Proqram_'+(p.name||'usaq').replace(/\s+/g,'_')+'.html';a.click();URL.revokeObjectURL(a.href);}
+build();
+</script></body></html>
