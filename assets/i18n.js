@@ -293,3 +293,8 @@ Object.assign(window.T.ru,{
   sg_l2:"Ребёнок будет самостоятельно использовать навыки «{n}» в естественной среде (NET) с минимальной помощью в 3 сессиях подряд.",
   sg_l3:"Ребёнок генерализует навыки «{n}» на разные среды и людей и сохранит их в течение 4 недель."
 });
+
+/* PWA install açarı */
+Object.assign(window.T.az,{ install:"Telefona yüklə" });
+Object.assign(window.T.en,{ install:"Install app" });
+Object.assign(window.T.ru,{ install:"Установить" });
