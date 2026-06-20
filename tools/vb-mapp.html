@@ -5,9 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VB-MAPP — Qiymətləndirmə | AN Psixoloji</title>
 <link rel="stylesheet" href="../assets/style.css">
+<style>:root{--accent:#6A0000;--accent-2:#8a2020;--accent-soft:#f1e2e2}</style>
 </head>
 <body>
 <div class="meter" id="meter"></div>
+<button class="focus-exit" onclick="toggleFocus()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 9V5a1 1 0 011-1h4M20 9V5a1 1 0 00-1-1h-4M4 15v4a1 1 0 001 1h4M20 15v4a1 1 0 01-1 1h-4"/></svg> Rejimdən çıx</button>
 <header class="nav">
   <div class="wrap nav-in">
     <a href="../index.html" class="brand">
@@ -32,15 +34,17 @@
   </div>
 </section>
 
+<main>
 <section style="padding:0">
   <div class="wrap">
-    <div class="instr reveal in">
-      <h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-2)" stroke-width="2" width="22" height="22"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h9"/></svg> Təlimat</h3>
+    <div class="focus-bar"><button class="focus-toggle" onclick="toggleFocus()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 9V5a1 1 0 011-1h4M20 9V5a1 1 0 00-1-1h-4M4 15v4a1 1 0 001 1h4M20 15v4a1 1 0 01-1 1h-4"/></svg> Tam ekran / diqqət rejimi</button></div>
+    <div class="instr">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" width="22" height="22"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h9"/></svg> Təlimat</h3>
       <ol>
         <li>Uşağı təbii oyun və strukturlu şəraitdə müşahidə edin; lazım olduqda valideyn məlumatı ilə tamamlayın.</li>
         <li>Hər bacarıq üçün: <b>Bəli</b> — müstəqil və ardıcıl edir; <b>Qismən</b> — yalnız kömək/işarə ilə; <b>Xeyr</b> — hal-hazırda etmir.</li>
         <li>Bal verməzdən əvvəl bacarığı ən azı <b>2–3 dəfə</b> yoxlayın ki, təsadüfi olmasın.</li>
-        <li>Bütün 6 sahəni tamamlayın; sistem domenlər üzrə profil və inkişaf səviyyəsini hesablayacaq.</li>
+        <li>Bütün sahələri tamamlayın; sistem domenlər üzrə profil və inkişaf səviyyəsini hesablayacaq.</li>
       </ol>
       <div class="scale-key">
   <span><span class="dot" style="background:var(--teal)"></span>Bəli — müstəqil edir (2 bal)</span>
@@ -56,40 +60,36 @@
     <div class="profile-bar" id="profileBar"></div>
     <div id="domains"></div>
     <div class="assess-actions">
-      <button class="btn btn-gold" onclick="ASSESS.calculate()">Nəticəni hesabla</button>
+      <button class="btn btn-accent" onclick="ASSESS.calculate()">Nəticəni hesabla</button>
       <button class="btn btn-ghost" onclick="ASSESS.reset()">Sıfırla</button>
       <a class="btn btn-ghost" href="../qiymetlendirmeler.html">← Kataloqa qayıt</a>
     </div>
     <div class="results" id="results"></div>
   </div>
 </section>
+</main>
 
 <footer class="footer">
-  <div class="wrap"><div class="footer-bot" style="border:none;padding-top:0">
-    <span class="by">By <b>s_akhundoff</b> · © 2026 AN Psixoloji Mərkəzi</span>
-    <a class="ig" href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-      @s_akhundoff</a>
-  </div></div>
+  <div class="wrap">
+    <div class="contact-row" style="justify-content:center;margin-bottom:14px">
+      <a href="tel:+994554157215"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.5-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg> +994 55 415 72 15</a>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Bakı, Nizami r., Rizvan Teymurov 59</span>
+      <a href="https://instagram.com/an_psixologiyamerkezi" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> @an_psixologiyamerkezi</a>
+    </div>
+    <div class="footer-bot" style="justify-content:center;border-top:1px solid rgba(210,165,93,.25);padding-top:18px">
+      <span class="by">© 2026 AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span>
+      <a class="ig" href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> @s_akhundoff</a>
+    </div>
+  </div>
 </footer>
+<script src="../assets/program-data.js"></script>
 <script src="../assets/core.js"></script>
 <script>
 ASSESS.init({
-  toolId:"vb-mapp",
-  toolName:"VB-MAPP",
-  mode:'scale',
-  domains:[{"name": "Mand — Tələb etmə", "hint": "İstək və ehtiyacları bildirmək", "q": ["İstədiyi əşyanı göstərərək və ya sözlə tələb edir", "“İstəyirəm / ver” kimi tələbləri ifadə edir", "Köməyə ehtiyac olanda yardım istəyir", "Sualı olanda soruşur (“nədir?”)"]}, {"name": "Takt — Adlandırma", "hint": "ətraf aləmi adlandırmaq", "q": ["Tanış əşyaları adı ilə deyir", "Şəkildə obyektləri adlandırır", "Hərəkətləri təsvir edir (yeyir, qaçır)"]}, {"name": "Dinləyici cavabı", "hint": "təlimatları anlamaq", "q": ["Öz adına çağırışa cavab verir", "Sadə bir addımlı təlimatı icra edir (“otur”)", "İki addımlı təlimatı yerinə yetirir"]}, {"name": "İmitasiya", "hint": "model davranışı təkrarlamaq", "q": ["Sadə motor hərəkəti təqlid edir (əl çalmaq)", "Səs və sözləri təqlid edir", "Oyun ardıcıllığını təqlid edir"]}, {"name": "Echoic — Səs təkrarı", "hint": "vokal təqlid", "q": ["Səsləri təkrarlayır", "Sözləri aydın təkrarlayır"]}, {"name": "Oyun və sosial", "hint": "qarşılıqlı əlaqə", "q": ["Göz kontaktı qurur və saxlayır", "Növbə ilə oyun oynayır", "Digər uşaqlarla qarşılıqlı oyuna girir"]}],
-  interpret:function(overall,scores){
-    if(overall>=75) return {level:3,name:'Səviyyə 3 — İrəli',color:'var(--teal)',desc:"Uşaq irəli mərhələdədir — ümumiləşdirmə və mürəkkəb dil bacarıqlarına keçmək olar."};
-    if(overall>=45) return {level:2,name:'Səviyyə 2 — Orta',color:'var(--gold-2)',desc:"Uşaq orta mərhələdədir — dil və sosial bacarıqlar formalaşır, genişləndirmə vaxtıdır."};
-    return {level:1,name:'Səviyyə 1 — Erkən',color:'var(--bordo)',desc:"Uşaq erkən mərhələdədir — təməl bacarıqlar (mand, imitasiya, göz kontaktı) prioritetdir."};
-  },
-  recommend:function(level,weak,scores){
-    var tips={"Mand — Tələb etmə": "motivasiyanı qurub uşağın istəyini ifadə etməsini öyrədin", "Takt — Adlandırma": "ətraf aləmi adlandırmaq üçün şəkil və obyektlərlə işləyin", "Dinləyici cavabı": "sadə biradımlı təlimatlardan başlayın", "İmitasiya": "motor təqlidi güzgu/model təlimi ilə gücləndirin", "Echoic — Səs təkrarı": "səs və hecaları oyunla təkrarlatdırın", "Oyun və sosial": "növbə ilə oyun və göz kontaktına fokus verin"};
-    var base=weak.map(function(w){return '<b>'+w.name+'</b> — '+(tips[w.name]||'bu sahəyə üstünlük verin')+'.';});
-    var byLevel={"1": ["DTT ilə qısa, strukturlu cəhdlərdən başlayın.", "Hər doğru cavabı dərhal güclü mükafatla möhkəmləndirin."], "2": ["NET — təbii oyun mühitində bacarıqları genişləndirin.", "Prompting iyerarxiyası ilə köməyi tədricən azaldın."], "3": ["Ümumiləşdirmə və saxlamaya keçin; bacarığı fərqli adəm və mühitlərə köçürün.", "Mürəkkəb intraverbal və sosial dil hedəfləri əlavə edin."]};
-    return base.concat(byLevel[level]).concat(['İrəliləyişi izləmək üçün hər sessiyada data toplayın və 2–3 həftədən bir yenidən qiymətləndirin.']);
-  }
-});</script>
+  toolId:"vb-mapp", toolName:"VB-MAPP", mode:'scale',
+  descByLevel:{"3": "Uşaq irəli mərhələdədir — ümumiləşdirmə və mürəkkəb dil bacarıqlarına keçmək olar.", "2": "Uşaq orta mərhələdədir — dil və sosial bacarıqlar formalaşır, genişləndirmə vaxtıdır.", "1": "Uşaq erkən mərhələdədir — təməl bacarıqlar (mand, imitasiya, göz kontaktı) prioritetdir."},
+  domains:[{"key": "mand", "name": "Mand — Tələb etmə", "hint": "istək və ehtiyacları bildirmək", "q": ["İstədiyi əşyanı göstərərək və ya sözlə tələb edir", "“Ver / istəyirəm / kömək et” kimi tələbləri ifadə edir", "Görmədiyi, lakin istədiyi şeyi tələb edir (“bayır”)", "Sualı olanda soruşur (“bu nədir?”)"]}, {"key": "takt", "name": "Takt — Adlandırma", "hint": "ətraf aləmi adlandırmaq", "q": ["Tanış əşyaları adı ilə deyir", "Şəkildə obyektləri adlandırır", "Hərəkətləri təsvir edir (yeyir, qaçır)", "Əşyanın xüsusiyyətini deyir (böyük, qırmızı)"]}, {"key": "listener", "name": "Dinləyici cavabı", "hint": "təlimatları anlamaq", "q": ["Öz adına çağırışa cavab verir", "Sadə bir addımlı təlimatı icra edir (“otur”)", "Tanış əşyanı “göstər” deyəndə göstərir", "İki addımlı təlimatı yerinə yetirir"]}, {"key": "imitation", "name": "İmitasiya", "hint": "model davranışı təkrarlamaq", "q": ["Sadə motor hərəkəti təqlid edir (əl çalmaq)", "Obyektlə hərəkəti təqlid edir (topu vurmaq)", "Səs və sözləri təqlid edir", "Ardıcıl iki hərəkəti təqlid edir"]}, {"key": "echoic", "name": "Echoic — Səs təkrarı", "hint": "vokal təqlid", "q": ["Səsləri təkrarlayır", "Heca və sözləri aydın təkrarlayır", "İki sözlü ifadəni təkrarlayır"]}, {"key": "intraverbal", "name": "İntraverbal", "hint": "sual-cavab, tamamlama", "q": ["Tanış mahnının boş yerini tamamlayır", "“Adın nədir?” kimi sosial suala cavab verir", "Kateqoriya sualına cavab verir (“heyvan de”)"]}, {"key": "play", "name": "Oyun və müstəqil fəaliyyət", "hint": "məqsədəuyğun oyun", "q": ["Oyuncaqla məqsədəuyğun oynayır", "Təxəyyül oyunu qurur (gəlinciyi yedizdirir)", "Qısa müddət müstəqil məşğul olur"]}, {"key": "social", "name": "Sosial qarşılıqlı əlaqə", "hint": "qarşılıqlı əlaqə", "q": ["Göz kontaktı qurur və saxlayır", "Növbə ilə oyun oynayır", "Digər uşaqlarla qarşılıqlı oyuna girir"]}]
+});
+</script>
 </body>
 </html>
