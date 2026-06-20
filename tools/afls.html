@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFLS — Qiymətləndirmə | AN Psixoloji</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="meter" id="meter"></div>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="../index.html" class="brand">
+      <span class="logo"><svg viewBox="0 0 40 40" width="40" height="40"><path d="M20 7l11 6v14l-11 6-11-6V13z" fill="none" stroke="#D2A55D" stroke-width="2"/><path d="M14 25l5-12 5 12M16 21h6" fill="none" stroke="#D2A55D" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span>AN Psixoloji<small>ABA Terapiya Platforması</small></span>
+    </a>
+    <button class="burger" onclick="toggleNav()" aria-label="Menyu">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../index.html">Ana səhifə</a>
+      <a href="../qiymetlendirmeler.html" class="active">Qiymətləndirmələr</a>
+      <a href="../proqram.html" class="cta">Fərdi proqram</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="../index.html">Ana səhifə</a> / <a href="../qiymetlendirmeler.html">Qiymətləndirmələr</a> / <span>AFLS</span></div>
+    <span class="eyebrow">AFLS · Funksional həyat bacarıqları</span>
+    <h1>AFLS</h1>
+    <p>Müstəqil yaşam üçün praktik bacarıqlar: özünə qulluq, ev, icma və məktəb mühitləri.</p>
+  </div>
+</section>
+
+<section style="padding:0">
+  <div class="wrap">
+    <div class="instr reveal in">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-2)" stroke-width="2" width="22" height="22"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h9"/></svg> Təlimat</h3>
+      <ol>
+        <li>Bacarıqları mümkün qədər təbii mühitdə (ev, icma) müşahidə edin.</li>
+        <li><b>Bəli</b> — müstəqil edir; <b>Qismən</b> — qısmən/köməklə; <b>Xeyr</b> — etmir.</li>
+        <li>Yaşa uyğun gözləntini nəzərə alın — bacarıq uşağın yaşı üçün realdırmı?</li>
+        <li>Nəticə müstəqilliyi artırmaq üçün prioritet sahələri göstərir.</li>
+      </ol>
+      <div class="scale-key">
+  <span><span class="dot" style="background:var(--teal)"></span>Bəli — müstəqil edir (2 bal)</span>
+  <span><span class="dot" style="background:var(--gold)"></span>Qismən — köməklə edir (1 bal)</span>
+  <span><span class="dot" style="background:var(--low)"></span>Xeyr — hələ etmir (0 bal)</span>
+</div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:8px 0 40px">
+  <div class="wrap">
+    <div class="profile-bar" id="profileBar"></div>
+    <div id="domains"></div>
+    <div class="assess-actions">
+      <button class="btn btn-gold" onclick="ASSESS.calculate()">Nəticəni hesabla</button>
+      <button class="btn btn-ghost" onclick="ASSESS.reset()">Sıfırla</button>
+      <a class="btn btn-ghost" href="../qiymetlendirmeler.html">← Kataloqa qayıt</a>
+    </div>
+    <div class="results" id="results"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap"><div class="footer-bot" style="border:none;padding-top:0">
+    <span class="by">By <b>s_akhundoff</b> · © 2026 AN Psixoloji Mərkəzi</span>
+    <a class="ig" href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      @s_akhundoff</a>
+  </div></div>
+</footer>
+<script src="../assets/core.js"></script>
+<script>
+ASSESS.init({
+  toolId:"afls",
+  toolName:"AFLS",
+  mode:'scale',
+  domains:[{"name": "Əsas özünə xidmət", "hint": "gündəlik müstəqillik", "q": ["Müstəqil yemək yeyir", "Geyinir / soyunur", "Tualet bacarıqlarını göstərir", "Diş təmizləyir / əl yuyur"]}, {"name": "Ev bacarıqları", "hint": "ev mühiti", "q": ["Sadə ev işlərində kömək edir", "Əşyaları yerinə qoyur", "Təhlükəsizlik qaydalarına riayət edir"]}, {"name": "İcma bacarıqları", "hint": "ictimai mühit", "q": ["Küçədə təhlükəsizliyi gözətir (yol keçmək)", "Mağazada uyğun davranır", "Tanış marşrutu izləyir"]}, {"name": "Məktəb/iş hazırlığı", "hint": "qrup bacarıqları", "q": ["Növbəni gözləyir", "Qrup təlimatına tabe olur", "Tapşırığı sona qədər edir"]}],
+  interpret:function(overall,scores){
+    if(overall>=75) return {level:3,name:'Səviyyə 3 — İrəli',color:'var(--teal)',desc:"Yüksək müstəqillik var — icma və məktəb/iş hazırlığına fokuslanın."};
+    if(overall>=45) return {level:2,name:'Səviyyə 2 — Orta',color:'var(--gold-2)',desc:"Gündəlik müstəqillik formalaşır — ev və icma bacarıqlarını genişləndirin."};
+    return {level:1,name:'Səviyyə 1 — Erkən',color:'var(--bordo)',desc:"Əsas özünə xidmət bacarıqları üzərində işləmək prioritetdir."};
+  },
+  recommend:function(level,weak,scores){
+    var tips={"Əsas özünə xidmət": "yemək, geyim, tualet bacarıqlarını task analysis ilə öyrədin", "Ev bacarıqları": "sadə ev işləri və təhlükəsizlik qaydaları əlavə edin", "İcma bacarıqları": "yol keçmək və mağazada davranışı məşq edin", "Məktəb/iş hazırlığı": "növbə gözləmə və qrup təlimatına tabe olma üz; işləyin"};
+    var base=weak.map(function(w){return '<b>'+w.name+'</b> — '+(tips[w.name]||'bu sahəyə üstünlük verin')+'.';});
+    var byLevel={"1": ["Chaining və task analysis ilə gündəlik bacarıqları addım-addım öyrədin.", "Vizual cədvəl və model təlimindən istifadə edin."], "2": ["Köməyi tədricən azaldıb müstəqilliyi artırın.", "Ev və icma mühitində təlimi genişləndirin."], "3": ["İcma və iş hazırlığı bacarıqlarına keçin.", "Öz-özünə idarəetmə (self-management) öyrədin."]};
+    return base.concat(byLevel[level]).concat(['İrəliləyişi izləmək üçün hər sessiyada data toplayın və 2–3 həftədən bir yenidən qiymətləndirin.']);
+  }
+});</script>
+</body>
+</html>
