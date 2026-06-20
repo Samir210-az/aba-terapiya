@@ -1,95 +1,28 @@
-<!DOCTYPE html>
-<html lang="az">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AFLS — Qiymətləndirmə | AN Psixoloji</title>
-<link rel="stylesheet" href="../assets/style.css">
-<style>:root{--accent:#B47514;--accent-2:#8f5d0f;--accent-soft:#f7ead2}</style>
-</head>
-<body>
+<!DOCTYPE html><html lang="az"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFLS — AN Psixoloji</title><link rel="stylesheet" href="../assets/style.css">
+<style>:root{--accent:#B47514;--accent-2:#8f5d0f;--accent-soft:#f7ead2}</style></head><body>
 <div class="meter" id="meter"></div>
-<button class="focus-exit" onclick="toggleFocus()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 9V5a1 1 0 011-1h4M20 9V5a1 1 0 00-1-1h-4M4 15v4a1 1 0 001 1h4M20 15v4a1 1 0 01-1 1h-4"/></svg> Rejimdən çıx</button>
-<header class="nav">
-  <div class="wrap nav-in">
-    <a href="../index.html" class="brand">
-      <span class="logo"><svg viewBox="0 0 40 40" width="40" height="40"><path d="M20 7l11 6v14l-11 6-11-6V13z" fill="none" stroke="#D2A55D" stroke-width="2"/><path d="M14 25l5-12 5 12M16 21h6" fill="none" stroke="#D2A55D" stroke-width="2" stroke-linecap="round"/></svg></span>
-      <span>AN Psixoloji<small>ABA Terapiya Platforması</small></span>
-    </a>
-    <button class="burger" onclick="toggleNav()" aria-label="Menyu">☰</button>
-    <nav class="nav-links" id="navLinks">
-      <a href="../index.html">Ana səhifə</a>
-      <a href="../qiymetlendirmeler.html" class="active">Qiymətləndirmələr</a>
-      <a href="../proqram.html" class="cta">Fərdi proqram</a>
-    </nav>
-  </div>
-</header>
-
-<section class="page-hero">
-  <div class="wrap">
-    <div class="crumb"><a href="../index.html">Ana səhifə</a> / <a href="../qiymetlendirmeler.html">Qiymətləndirmələr</a> / <span>AFLS</span></div>
-    <span class="eyebrow">AFLS · Funksional həyat bacarıqları</span>
-    <h1>AFLS</h1>
-    <p>Müstəqil yaşam üçün praktik bacarıqlar: özünə qulluq, ev, icma və məktəb mühitləri.</p>
-  </div>
-</section>
-
-<main>
-<section style="padding:0">
-  <div class="wrap">
-    <div class="focus-bar"><button class="focus-toggle" onclick="toggleFocus()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 9V5a1 1 0 011-1h4M20 9V5a1 1 0 00-1-1h-4M4 15v4a1 1 0 001 1h4M20 15v4a1 1 0 01-1 1h-4"/></svg> Tam ekran / diqqət rejimi</button></div>
-    <div class="instr">
-      <h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" width="22" height="22"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h9"/></svg> Təlimat</h3>
-      <ol>
-        <li>Uşağı təbii oyun və strukturlu şəraitdə müşahidə edin; lazım olduqda valideyn məlumatı ilə tamamlayın.</li>
-        <li>Hər bacarıq üçün: <b>Bəli</b> — müstəqil və ardıcıl edir; <b>Qismən</b> — yalnız kömək/işarə ilə; <b>Xeyr</b> — hal-hazırda etmir.</li>
-        <li>Bal verməzdən əvvəl bacarığı ən azı <b>2–3 dəfə</b> yoxlayın ki, təsadüfi olmasın.</li>
-        <li>Bütün sahələri tamamlayın; sistem domenlər üzrə profil və inkişaf səviyyəsini hesablayacaq.</li>
-      </ol>
-      <div class="scale-key">
-  <span><span class="dot" style="background:var(--teal)"></span>Bəli — müstəqil edir (2 bal)</span>
-  <span><span class="dot" style="background:var(--gold)"></span>Qismən — köməklə edir (1 bal)</span>
-  <span><span class="dot" style="background:var(--low)"></span>Xeyr — hələ etmir (0 bal)</span>
-</div>
-    </div>
-  </div>
-</section>
-
-<section style="padding:8px 0 40px">
-  <div class="wrap">
-    <div class="profile-bar" id="profileBar"></div>
-    <div id="domains"></div>
-    <div class="assess-actions">
-      <button class="btn btn-accent" onclick="ASSESS.calculate()">Nəticəni hesabla</button>
-      <button class="btn btn-ghost" onclick="ASSESS.reset()">Sıfırla</button>
-      <a class="btn btn-ghost" href="../qiymetlendirmeler.html">← Kataloqa qayıt</a>
-    </div>
-    <div class="results" id="results"></div>
-  </div>
-</section>
-</main>
-
-<footer class="footer">
-  <div class="wrap">
-    <div class="contact-row" style="justify-content:center;margin-bottom:14px">
-      <a href="tel:+994554157215"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.5-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg> +994 55 415 72 15</a>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Bakı, Nizami r., Rizvan Teymurov 59</span>
-      <a href="https://instagram.com/an_psixologiyamerkezi" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> @an_psixologiyamerkezi</a>
-    </div>
-    <div class="footer-bot" style="justify-content:center;border-top:1px solid rgba(210,165,93,.25);padding-top:18px">
-      <span class="by">© 2026 AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span>
-      <a class="ig" href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> @s_akhundoff</a>
-    </div>
-  </div>
-</footer>
-<script src="../assets/program-data.js"></script>
-<script src="../assets/core.js"></script>
-<script>
-ASSESS.init({
-  toolId:"afls", toolName:"AFLS", mode:'scale',
-  
-  domains:[{"key": "selfcare", "name": "Özünə qulluq", "hint": "gigiyena, geyinmə", "q": ["Müstəqil geyinir/soyunur", "Diş fırçalama, əl yuma kimi gigiyenanı edir", "Tualet bacarıqlarında müstəqildir", "Müstəqil yeyir/içir"]}, {"key": "home", "name": "Ev bacarıqları", "hint": "məişət", "q": ["Oyuncaq/əşyaları yerinə yığır", "Süfrə düzməyə kömək edir", "Sadə tapşırığı təlimatla edir"]}, {"key": "community", "name": "İcma və ictimai mühit", "hint": "bayır mühiti", "q": ["İctimai yerdə uyğun davranır", "Növbə gözləyir", "Yolda təhlükəsizlik qaydasına əməl edir"]}, {"key": "academic", "name": "Məktəb hazırlığı", "hint": "öyrənmə bacarıqları", "q": ["Qrup təlimatına əməl edir", "Yerində oturur və diqqət saxlayır", "Sadə tapşırığı tamamlayır"]}, {"key": "safety", "name": "Təhlükəsizlik", "hint": "müstəqillik", "q": ["Təhlükəli əşyalardan çəkinir", "Adını/yaşını deyir", "Lazım olanda kömək istəyir"]}, {"key": "social", "name": "Sosial bacarıqlar", "hint": "ünsiyyət", "q": ["Salamlaşır/sağollaşır", "Növbə ilə danışır", "Sadə sosial qaydalara əməl edir"]}]
-});
-</script>
-</body>
-</html>
+<button class="focus-exit" onclick="toggleFocus()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 9V5a1 1 0 011-1h4M20 9V5a1 1 0 00-1-1h-4M4 15v4a1 1 0 001 1h4M20 15v4a1 1 0 01-1 1h-4"/></svg> <span data-i18n="focus_exit">Rejimdən çıx</span></button>
+<header class="nav"><div class="wrap nav-in"><a href="../index.html" class="brand"><span class="logo"><svg viewBox="0 0 40 40" width="40" height="40"><path d="M20 7l11 6v14l-11 6-11-6V13z" fill="none" stroke="#D2A55D" stroke-width="2"/><path d="M14 25l5-12 5 12M16 21h6" fill="none" stroke="#D2A55D" stroke-width="2" stroke-linecap="round"/></svg></span><span>AN Psixoloji<small>ABA Terapiya Platforması</small></span></a><button class="burger" onclick="toggleNav()" aria-label="Menyu">☰</button><nav class="nav-links" id="navLinks"><a href="../index.html" data-i18n="nav_home">Ana səhifə</a><a href="../qiymetlendirmeler.html" class="active" data-i18n="nav_assess">Qiymətləndirmələr</a><a href="../proqram.html" class="cta" data-i18n="nav_program">Fərdi proqram</a><div class="lang-switch"></div></nav></div></header>
+<section class="page-hero"><div class="wrap">
+<div class="crumb"><a href="../index.html" data-i18n="nav_home">Ana səhifə</a> / <a href="../qiymetlendirmeler.html" data-i18n="nav_assess">Qiymətləndirmələr</a> / <span>AFLS</span></div>
+<span class="eyebrow" id="tEyebrow"></span><h1>AFLS</h1><p id="tIntro"></p></div></section>
+<main><section style="padding:0"><div class="wrap">
+<div class="focus-bar"><button class="focus-toggle" onclick="toggleFocus()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 9V5a1 1 0 011-1h4M20 9V5a1 1 0 00-1-1h-4M4 15v4a1 1 0 001 1h4M20 15v4a1 1 0 01-1 1h-4"/></svg> <span data-i18n="focus_mode">Tam ekran / diqqət rejimi</span></button></div>
+<div class="instr"><h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" width="22" height="22"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h9"/></svg> <span data-i18n="instr">Təlimat</span></h3>
+<ol><li data-i18n="instr1"></li><li data-i18n="instr2"></li><li data-i18n="instr3"></li><li data-i18n="instr4"></li></ol>
+<div class="scale-key"><span><span class="dot" style="background:var(--teal)"></span><span data-i18n="scale_yes"></span></span>
+<span><span class="dot" style="background:var(--gold)"></span><span data-i18n="scale_part"></span></span>
+<span><span class="dot" style="background:var(--low)"></span><span data-i18n="scale_no"></span></span></div></div>
+</div></section>
+<section style="padding:8px 0 40px"><div class="wrap">
+<div class="profile-bar" id="profileBar"></div><div id="domains"></div>
+<div class="assess-actions"><button class="btn btn-accent" onclick="ASSESS.calculate()" data-i18n="calc">Nəticəni hesabla</button>
+<button class="btn btn-ghost" onclick="ASSESS.reset()" data-i18n="reset">Sıfırla</button>
+<a class="btn btn-ghost" href="../qiymetlendirmeler.html" data-i18n="back_cat">← Kataloqa qayıt</a></div>
+<div class="results" id="results"></div></div></section></main>
+<footer class="footer"><div class="wrap"><div class="contact-row" style="justify-content:center;margin-bottom:14px"><a href="tel:+994554157215"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.5-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg> +994 55 415 72 15</a><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Bakı, Nizami r., Rizvan Teymurov 59</span><a href="https://instagram.com/an_psixologiyamerkezi" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> @an_psixologiyamerkezi</a></div><div class="footer-bot" style="justify-content:center;border-top:1px solid rgba(210,165,93,.25);padding-top:18px"><span class="by">© 2026 AN Psixoloji Dəstək və Reabilitasiya Mərkəzi</span><a class="ig" href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> @s_akhundoff</a></div></div></footer><script src="../assets/i18n.js"></script><script src="../assets/tools-data.js"></script><script src="../assets/program-data.js"></script><script src="../assets/core.js"></script>
+<script>(function(){var td=window.TOOLS_DATA["afls"];
+document.getElementById('tEyebrow').textContent=tr(td.eyebrow);
+document.getElementById('tIntro').textContent=tr(td.intro);
+ASSESS.initScale("afls");})();</script></body></html>
