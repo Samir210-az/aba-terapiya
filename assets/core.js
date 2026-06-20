@@ -190,3 +190,22 @@ function svgIcon(n){const i={
  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="16" height="16"><path d="M5 12l4 4L19 6"/></svg>',
  parent:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15.5 20c0-2 1-3.5 2.5-3.5S20.5 18 20.5 20"/></svg>'
 };return i[n]||'';}
+
+/* ===================== PWA ===================== */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    var m=document.querySelector('link[rel="manifest"]');
+    var base=m?m.getAttribute('href').replace('manifest.json',''):'';
+    navigator.serviceWorker.register(base+'sw.js').catch(function(){});
+  });
+}
+var deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',function(e){ e.preventDefault(); deferredPrompt=e; showInstall(); });
+function showInstall(){
+  if(document.getElementById('pwaInstall')) return;
+  var b=document.createElement('button'); b.id='pwaInstall'; b.className='pwa-install';
+  b.innerHTML='⬇️ <span>'+(typeof t==='function'?t('install'):'Yüklə')+'</span>';
+  b.onclick=function(){ if(!deferredPrompt) return; deferredPrompt.prompt(); deferredPrompt.userChoice.finally(function(){ deferredPrompt=null; b.remove(); }); };
+  document.body.appendChild(b);
+}
+window.addEventListener('appinstalled',function(){ var b=document.getElementById('pwaInstall'); if(b) b.remove(); });
