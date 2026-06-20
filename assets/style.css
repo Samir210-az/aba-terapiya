@@ -405,3 +405,11 @@ html,body{max-width:100%;overflow-x:hidden}
 img{max-width:100%;height:auto}
 .hart,.hero-art svg{max-width:100%;height:auto}
 .wrap{box-sizing:border-box}
+
+/* PWA install düyməsi */
+.pwa-install{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:60;
+  display:inline-flex;align-items:center;gap:8px;background:var(--bordo);color:#fff;border:none;
+  font:inherit;font-weight:700;font-size:.9rem;padding:12px 20px;border-radius:999px;cursor:pointer;
+  box-shadow:0 10px 30px rgba(106,0,0,.35);animation:pwaUp .4s var(--ease,ease) both}
+.pwa-install:hover{background:var(--bordo-2,#8a2020)}
+@keyframes pwaUp{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
