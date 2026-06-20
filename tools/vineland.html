@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vineland-3 — Qiymətləndirmə | AN Psixoloji</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="meter" id="meter"></div>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="../index.html" class="brand">
+      <span class="logo"><svg viewBox="0 0 40 40" width="40" height="40"><path d="M20 7l11 6v14l-11 6-11-6V13z" fill="none" stroke="#D2A55D" stroke-width="2"/><path d="M14 25l5-12 5 12M16 21h6" fill="none" stroke="#D2A55D" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span>AN Psixoloji<small>ABA Terapiya Platforması</small></span>
+    </a>
+    <button class="burger" onclick="toggleNav()" aria-label="Menyu">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="../index.html">Ana səhifə</a>
+      <a href="../qiymetlendirmeler.html" class="active">Qiymətləndirmələr</a>
+      <a href="../proqram.html" class="cta">Fərdi proqram</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="../index.html">Ana səhifə</a> / <a href="../qiymetlendirmeler.html">Qiymətləndirmələr</a> / <span>Vineland-3</span></div>
+    <span class="eyebrow">Vineland-3 · Adaptiv davranış şkalası</span>
+    <h1>Vineland-3</h1>
+    <p>Ünsiyyət, gündəlik bacarıq, sosiallaşma və motor sahələrində adaptiv funksiyanı qiymətləndirir.</p>
+  </div>
+</section>
+
+<section style="padding:0">
+  <div class="wrap">
+    <div class="instr reveal in">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold-2)" stroke-width="2" width="22" height="22"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h9"/></svg> Təlimat</h3>
+      <ol>
+        <li>Məlumat əsasən valideyn/qllıqçı müsahibəsi və müşahidə ilə toplanır.</li>
+        <li>Uşağın <b>adətən</b> nə etdiyini qeyd edin (bir dəfə bacardığını yox).</li>
+        <li><b>Bəli</b> — müntəzəm edir; <b>Qismən</b> — bəzən; <b>Xeyr</b> — h. etmir.</li>
+        <li>Nəticə adaptiv funksiyanın güclü və zəif sahələrini göstərir.</li>
+      </ol>
+      <div class="scale-key">
+  <span><span class="dot" style="background:var(--teal)"></span>Bəli — müstəqil edir (2 bal)</span>
+  <span><span class="dot" style="background:var(--gold)"></span>Qismən — köməklə edir (1 bal)</span>
+  <span><span class="dot" style="background:var(--low)"></span>Xeyr — hələ etmir (0 bal)</span>
+</div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:8px 0 40px">
+  <div class="wrap">
+    <div class="profile-bar" id="profileBar"></div>
+    <div id="domains"></div>
+    <div class="assess-actions">
+      <button class="btn btn-gold" onclick="ASSESS.calculate()">Nəticəni hesabla</button>
+      <button class="btn btn-ghost" onclick="ASSESS.reset()">Sıfırla</button>
+      <a class="btn btn-ghost" href="../qiymetlendirmeler.html">← Kataloqa qayıt</a>
+    </div>
+    <div class="results" id="results"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap"><div class="footer-bot" style="border:none;padding-top:0">
+    <span class="by">By <b>s_akhundoff</b> · © 2026 AN Psixoloji Mərkəzi</span>
+    <a class="ig" href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      @s_akhundoff</a>
+  </div></div>
+</footer>
+<script src="../assets/core.js"></script>
+<script>
+ASSESS.init({
+  toolId:"vineland",
+  toolName:"Vineland-3",
+  mode:'scale',
+  domains:[{"name": "Ünsiyyət", "hint": "reseptiv və ekspressiv", "q": ["Təlimatları anlayır (reseptiv)", "Ehtiyaclarını bildirir (ekspressiv)", "Sadə söhbətə girir / suala cavab verir"]}, {"name": "Gündəlik bacarıqlar", "hint": "şəxsi və ev", "q": ["Şəxsi qulluq (yemək, geyim, hijyena)", "Sadə ev işlərində iştirak edir", "Təhlükəsizlik/vaxt anlayışı göstərir"]}, {"name": "Sosiallaşma", "hint": "münasibət və emosiya", "q": ["Şəxslərarası münasibət qurur", "Oyun və asudə vaxt bacarığı", "Emosiyalarını idarə edə bilir"]}, {"name": "Motor bacarıqlar", "hint": "iri və inəc motor", "q": ["İri motor (qaçmaq, tullanmaq)", "İnəc motor (qələm, düymə)"]}],
+  interpret:function(overall,scores){
+    if(overall>=75) return {level:3,name:'Səviyyə 3 — İrəli',color:'var(--teal)',desc:"Adaptiv funksiya yaşa uyğundur — mürəkkəb sosial və icma bacarıqlarına keçin."};
+    if(overall>=45) return {level:2,name:'Səviyyə 2 — Orta',color:'var(--gold-2)',desc:"Adaptiv bacarıqlar formalaşır — sosiallaşma və gündəlik müstəqilliyi genişləndirin."};
+    return {level:1,name:'Səviyyə 1 — Erkən',color:'var(--bordo)',desc:"Adaptiv funksiya erkən səviyyədədir — təməl ünsiyyət və özünə xidmətə fokuslanın."};
+  },
+  recommend:function(level,weak,scores){
+    var tips={"Ünsiyyət": "reseptiv və ekspressiv dil hedəflərini gücləndirin", "Gündəlik bacarıqlar": "şəxsi və ev bacarıqlarını task analysis ilə öyrədin", "Sosiallaşma": "oyun, emosiya idarəsi və münasibət bacarıqlarına fokus verin", "Motor bacarıqlar": "iri və inəc motor fəaliyyətləri planlaşdırın"};
+    var base=weak.map(function(w){return '<b>'+w.name+'</b> — '+(tips[w.name]||'bu sahəyə üstünlük verin')+'.';});
+    var byLevel={"1": ["Təməl ünsiyyət və özünə xidmət bacarıqlarına üstünlük verin.", "Strukturlu, təkrarlanan gündəlik rutinlər qurun."], "2": ["Sosial bacarıqları təbii oyun içində öyrədin.", "Emosiya tənzimləmə strategiyaları əlavə edin."], "3": ["İcma və müstəqillik bacarıqlarını gücləndirin.", "Həmyaşudlarla qarşılıqlı əlaqəni artırın."]};
+    return base.concat(byLevel[level]).concat(['İrəliləyişi izləmək üçün hər sessiyada data toplayın və 2–3 həftədən bir yenidən qiymətləndirin.']);
+  }
+});</script>
+</body>
+</html>
