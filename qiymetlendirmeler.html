@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qiymətləndirmə Alətləri — ABA Platforması | AN Psixoloji</title>
+<meta name="description" content="VB-MAPP, ABLLS-R, AFLS, FBA, Vineland-3 və PEAK — ABA terapiyasında istifadə olunan test və qiymətləndirmə alətləri.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="index.html" class="brand">
+      <span class="logo"><svg viewBox="0 0 40 40" width="40" height="40"><path d="M20 7l11 6v14l-11 6-11-6V13z" fill="none" stroke="#D2A55D" stroke-width="2"/><path d="M14 25l5-12 5 12M16 21h6" fill="none" stroke="#D2A55D" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span>AN Psixoloji<small>ABA Terapiya Platforması</small></span>
+    </a>
+    <button class="burger" onclick="toggleNav()" aria-label="Menyu">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Ana səhifə</a>
+      <a href="index.html#proses">Proses</a>
+      <a href="qiymetlendirmeler.html" class="active">Qiymətləndirmələr</a>
+      <a href="proqram.html" class="cta">Fərdi proqram</a>
+    </nav>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">Ana səhifə</a> / <span>Qiymətləndirmələr</span></div>
+    <span class="eyebrow">Test və qiymətləndirmə alətləri</span>
+    <h1>Qiymətləndirmə kitabxanası</h1>
+    <p>ABA terapiyasında istifadə olunan beynəlxalq alətlər. Hər kartın üzərinə tıklayaraq təlimatı oxuya və qiymətləndirməni birbaşa keçirə bilərsiniz. Nəticələr toplanır və fərdi proqramda istifadə olunur.</p>
+  </div>
+</section>
+
+<!-- NÖVBƏ / İŞ AXINI -->
+<section style="padding:48px 0 12px">
+  <div class="narrow">
+    <div class="note reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <div><b>Necə işləyir?</b> Əvvəlcə uşağın profilini hər alət səhifəsində doldurun. Bacarıq alətlərini (VB-MAPP, ABLLS-R, AFLS, Vineland) tamamlayın, sonra davranış problemi varsa FBA aparın. Bütün nəticələr <b>Fərdi proqram</b> səhifəsində birləşərək avtomatik plan yaradır.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ALƏTLƏR -->
+<section style="padding:32px 0 64px">
+  <div class="wrap">
+    <div class="grid g3" id="catalog"></div>
+  </div>
+</section>
+
+<!-- KÖMƏK -->
+<section class="alt">
+  <div class="narrow" style="text-align:center">
+    <div class="sec-head reveal" style="margin-bottom:20px"><span class="eyebrow">Qiymətləndirmə qaydaları</span>
+      <h2>Etibarlı nəticə üçün 5 qayda</h2></div>
+    <div class="grid g2" style="text-align:left">
+      <div class="card reveal"><h3 style="font-size:1.05rem">1. Operasional tərif</h3><p>Davranışı dəqiq, müşahidə oluna bilən sözlərlə təsvir edin.</p></div>
+      <div class="card reveal d1"><h3 style="font-size:1.05rem">2. Obyektiv ölçü</h3><p>Tezlik, müddət, latensiya və intensivliyi qeyd edin.</p></div>
+      <div class="card reveal d2"><h3 style="font-size:1.05rem">3. Baseline</h3><p>Müdaxilədən əvvəl mövcud səviyyəni ölçün.</p></div>
+      <div class="card reveal d3"><h3 style="font-size:1.05rem">4. Çoxmənbəli</h3><p>Müşahidəni valideyn məlumatı ilə tamamlayın.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-bot" style="border:none;padding-top:0">
+      <span class="by">By <b>s_akhundoff</b> · © 2026 AN Psixoloji Mərkəzi</span>
+      <a class="ig" href="https://instagram.com/s_akhundoff" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        @s_akhundoff</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/core.js"></script>
+<script>
+const tools=[
+ {id:"vb-mapp",href:"tools/vb-mapp.html",abbr:"VB-MAPP",name:"Verbal davranış mərhələləri",
+  d:"Dil və sosial bacarıqların inkişaf mərhələlərini ölçür — mand, takt, dinləyici cavabı, imitasiya və s.",
+  meta:["0–48 ay","16 sahə","Mərhələli"],color:"#6A0000",ill:"M20 6l4 8 4-8M14 16l5 12 5-12 5 12 5-12"},
+ {id:"ablls-r",href:"tools/ablls-r.html",abbr:"ABLLS-R",name:"Əsas dil və öyrənmə bacarıqları",
+  d:"Dil, akademik, özünə xidmət və motor sahələrini əhatə edən geniş bacarıq protokolu.",
+  meta:["2–6 yaş","Geniş protokol","Bacarıq"],color:"#2A9D8F",ill:""},
+ {id:"afls",href:"tools/afls.html",abbr:"AFLS",name:"Funksional həyat bacarıqları",
+  d:"Müstəqil yaşam üçün praktik bacarıqlar: özünə qulluq, ev, icma və məktəb mühitləri.",
+  meta:["Bütün yaşlar","Funksional","Müstəqillik"],color:"#b9863a",ill:""},
+ {id:"fba",href:"tools/fba.html",abbr:"FBA",name:"Funksional Davranış Qiymətləndirməsi",
+  d:"Problemli davranışın funksiyasını müəyyən edir: diqqət, qaçma, əşya əldə etmə və ya sensor.",
+  meta:["Davranışa fokus","ABC təhlili","Funksiya"],color:"#8a2020",ill:""},
+ {id:"vineland",href:"tools/vineland.html",abbr:"Vineland-3",name:"Adaptiv Davranış Şkalası",
+  d:"Ünsiyyət, gündəlik bacarıq, sosiallaşma və motor sahələrində adaptiv funksiyanı qiymətləndirir.",
+  meta:["0–90 yaş","Adaptiv","Standart"],color:"#1f7268",ill:""},
+ {id:"peak",href:"tools/peak.html",abbr:"PEAK",name:"İdrak və əlaqəli öyrənmə",
+  d:"Dil və idrakın daha yüksək, əlaqəli (relational) bacarıqlarını qiymətləndirir.",
+  meta:["İrəli səviyyə","İdrak","Relational"],color:"#6A0000",ill:""}
+];
+const cat=document.getElementById('catalog');
+tools.forEach((t,i)=>{
+  const a=document.createElement('a');
+  a.className='tool-card reveal d'+(i%3); a.href=t.href; a.setAttribute('data-tool',t.id);
+  a.innerHTML=`
+    <div class="done-flag">✓ Tamamlandı</div>
+    <div class="tool-top"><span class="tool-badge">${t.abbr}</span>
+      <svg class="tool-ill" viewBox="0 0 64 64" fill="none" stroke="${t.color}" stroke-width="3" stroke-linecap="round">
+        <rect x="10" y="8" width="44" height="48" rx="6"/><path d="M20 22h24M20 32h24M20 42h14"/>
+        <circle cx="32" cy="4" r="0"/></svg>
+      <h3>${t.name}</h3><span class="tool-abbr">${t.abbr}</span></div>
+    <div class="tool-body"><p>${t.d}</p>
+      <div class="tool-meta">${t.meta.map(m=>`<span class="meta-pill">${m}</span>`).join('')}</div>
+      <div class="tool-go">Təlimat + qiymətləndirməni aç
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="16" height="16"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></span></div></div>`;
+  cat.appendChild(a);
+});
+markCompletedTools();
+document.querySelectorAll('.reveal').forEach(el=>new IntersectionObserver((e,o)=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');o.unobserve(x.target)}})},{threshold:.1}).observe(el));
+</script>
+</body>
+</html>
