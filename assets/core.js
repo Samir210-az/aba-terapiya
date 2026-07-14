@@ -8,6 +8,8 @@ let _logoTapCount=0, _logoTapTimer=null;
 window.handleLogoTap = function(e){
   e.preventDefault();
   const link=e.currentTarget.getAttribute('href');
+  const img=e.currentTarget.querySelector('.logo-img');
+  if(img){ img.style.transition='transform .12s'; img.style.transform='scale(.85)'; setTimeout(()=>{img.style.transform='scale(1)';},120); }
   _logoTapCount++;
   clearTimeout(_logoTapTimer);
   if(_logoTapCount>=5){
@@ -16,7 +18,7 @@ window.handleLogoTap = function(e){
     location.href=base;
     return;
   }
-  _logoTapTimer=setTimeout(()=>{ _logoTapCount=0; location.href=link; },380);
+  _logoTapTimer=setTimeout(()=>{ _logoTapCount=0; location.href=link; },900);
 };
 (function(){
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
