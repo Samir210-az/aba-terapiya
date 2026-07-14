@@ -239,7 +239,7 @@ table{width:100%;border-collapse:collapse;margin:16px 0}th,td{text-align:left;pa
 .b{height:10px;background:#F3ECE0;border-radius:6px;overflow:hidden;margin-bottom:4px}.f{height:100%;background:#2A9D8F}.lv{font-weight:700;color:#6A0000;font-size:1.05rem;margin-top:14px}
 .reco{background:#F3ECE0;border-left:4px solid #2A9D8F;padding:14px 18px;border-radius:10px;margin-top:14px}.reco h3{color:#6A0000;margin:0 0 8px}.reco li{margin:5px 0;font-size:.92rem}
 .ft{margin-top:26px;padding-top:16px;border-top:1px solid #e3d8c8;font-size:.82rem;color:#8a7a72;text-align:center}.ft a{color:#b9863a;font-weight:700;text-decoration:none}</style></head><body>
-<div class="hd"><h1>${r.toolName}</h1><p>AN Psixoloji · ${t('report')}</p></div>
+<div class="hd"><h1>${r.toolName}</h1><p>AN Psixoloji Dəstək və Reabilitasiya Mərkəzi · ${t('report')}</p></div>
 <div class="meta"><span><b>${t('pf_child')}:</b> ${p.name||'—'}</span><span><b>${t('pf_age')}:</b> ${p.age||'—'}</span><span><b>${t('pf_spec')}:</b> ${p.spec||'—'}</span><span><b>${t('date')}:</b> ${date}</span></div>
 ${body}<div class="reco"><h3>${t('recommend')}</h3><ul>${recos}</ul></div>${parentBlock}
 <div class="ft">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi · Bakı, Nizami r., Rizvan Teymurov 59 · +994 55 415 72 15<br>
