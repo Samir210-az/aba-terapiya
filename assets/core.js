@@ -21,16 +21,22 @@ function initBackTop(){
   b.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 }
 
-/* hero-art üçün yüngül parallax — həm scroll, həm siçan hərəkəti ilə */
+/* hero-art, hero-box və blob-lar üçün çoxqatlı parallax — scroll + siçan */
 function initHeroParallax(){
-  const art=document.querySelector('.hero-art'); if(!art) return;
+  const art=document.querySelector('.hero-art'); const box=document.querySelector('.hero-box');
+  const blobs=document.querySelectorAll('.hero-blob');
+  if(!art && !box) return;
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   let mx=0,my=0,sy=0;
-  function paint(){ art.style.transform=`translate3d(${mx}px,${my+sy}px,0) rotate(${mx*.02}deg)`; }
+  function paint(){
+    if(art) art.style.transform=`translate3d(${mx}px,${my+sy}px,0) rotate(${mx*.02}deg)`;
+    if(box) box.style.transform=`translate3d(${mx*-.25}px,${(my+sy)*-.18}px,0)`;
+    blobs.forEach(function(b,i){ const sp=(i+1)*.06; b.style.transform=`translate3d(${mx*(i+1)*.3}px,${sy*sp*3}px,0)`; });
+  }
   window.addEventListener('scroll',()=>{ sy=Math.min(window.scrollY*0.08,40); paint(); },{passive:true});
   if(window.innerWidth>900){
     document.querySelector('.hero')?.addEventListener('mousemove',(e)=>{
-      const r=art.getBoundingClientRect();
+      const r=(art||box).getBoundingClientRect();
       mx=((e.clientX-r.left-r.width/2)/r.width)*14;
       my=((e.clientY-r.top-r.height/2)/r.height)*10;
       paint();
