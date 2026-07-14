@@ -5,7 +5,7 @@ window.T = {
 az:{
   nav_home:"Ana səhifə", nav_process:"Proses", nav_methods:"Metodlar", nav_services:"Xidmətlər", nav_assess:"Qiymətləndirmələr", nav_program:"Fərdi proqram",
   // index
-  hero_eyebrow:"Tətbiqi Davranış Analizi · Klinik Platforma",
+  hero_eyebrow:"ABA — Tətbiqi Davranış Analizi · Klinik Platforma",
   hero_h1:"Hər uşaq üçün", hero_h1em:"fərdi inkişaf yolu",
   hero_lead:"İlkin müraciətdən bacarığın ümumiləşdirilməsinə qədər — ABA prosesini idarə edin, beynəlxalq qiymətləndirmə alətlərini tətbiq edin və alınan ballara əsasən avtomatik fərdi proqram qurun.",
   hero_cta1:"Qiymətləndirməyə başla", hero_cta2:"Prosesi öyrən",
@@ -88,7 +88,7 @@ az:{
 },
 en:{
   nav_home:"Home", nav_process:"Process", nav_methods:"Methods", nav_services:"Services", nav_assess:"Assessments", nav_program:"Individual program",
-  hero_eyebrow:"Applied Behavior Analysis · Clinical Platform",
+  hero_eyebrow:"ABA — Applied Behavior Analysis · Clinical Platform",
   hero_h1:"An individual path", hero_h1em:"for every child",
   hero_lead:"From intake to skill generalization — manage the ABA process, apply international assessment tools and automatically build an individual program based on the scores.",
   hero_cta1:"Start assessment", hero_cta2:"Learn the process",
@@ -165,7 +165,7 @@ en:{
 },
 ru:{
   nav_home:"Главная", nav_process:"Процесс", nav_methods:"Методы", nav_services:"Услуги", nav_assess:"Оценки", nav_program:"Индивидуальная программа",
-  hero_eyebrow:"Прикладной анализ поведения · Клиническая платформа",
+  hero_eyebrow:"ABA — Прикладной анализ поведения · Клиническая платформа",
   hero_h1:"Индивидуальный путь", hero_h1em:"для каждого ребёнка",
   hero_lead:"От первичного приёма до генерализации навыка — управляйте процессом ABA, применяйте международные инструменты оценки и автоматически постройте индивидуальную программу на основе баллов.",
   hero_cta1:"Начать оценку", hero_cta2:"Изучить процесс",
