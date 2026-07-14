@@ -7,8 +7,37 @@ window.toggleNav = function(){ document.getElementById('navLinks')?.classList.to
   document.addEventListener('DOMContentLoaded',()=>{
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     markCompletedTools();
+    initBackTop();
+    initHeroParallax();
   });
 })();
+
+/* yuxarı qayıt düyməsi — bütün səhifələrdə işləyir */
+function initBackTop(){
+  const b=document.createElement('button'); b.className='back-top'; b.setAttribute('aria-label','Yuxarı qayıt'); b.type='button';
+  b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+  document.body.appendChild(b);
+  window.addEventListener('scroll',()=>{ b.classList.toggle('show', window.scrollY>300); },{passive:true});
+  b.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+}
+
+/* hero-art üçün yüngül parallax — həm scroll, həm siçan hərəkəti ilə */
+function initHeroParallax(){
+  const art=document.querySelector('.hero-art'); if(!art) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let mx=0,my=0,sy=0;
+  function paint(){ art.style.transform=`translate3d(${mx}px,${my+sy}px,0) rotate(${mx*.02}deg)`; }
+  window.addEventListener('scroll',()=>{ sy=Math.min(window.scrollY*0.08,40); paint(); },{passive:true});
+  if(window.innerWidth>900){
+    document.querySelector('.hero')?.addEventListener('mousemove',(e)=>{
+      const r=art.getBoundingClientRect();
+      mx=((e.clientX-r.left-r.width/2)/r.width)*14;
+      my=((e.clientY-r.top-r.height/2)/r.height)*10;
+      paint();
+    });
+    document.querySelector('.hero')?.addEventListener('mouseleave',()=>{ mx=0;my=0; paint(); });
+  }
+}
 
 /* fokus / tam ekran */
 function toggleFocus(){
