@@ -22,7 +22,7 @@
 .empty-note{text-align:center;padding:40px;color:var(--ink-2)}
 </style>
 </head><body>
-<header class="nav"><div class="wrap nav-in"><a href="index.html" class="brand"><img src="logo.png" alt="AN Psixoloji Dəstək və Reabilitasiya Mərkəzi" class="logo-img"><span>AN Psixoloji<small>ABA Terapiya Platforması</small></span></a><div class="lang-switch"></div><button class="burger" onclick="toggleNav()" aria-label="Menyu">☰</button><nav class="nav-links" id="navLinks"><a href="index.html" data-i18n="nav_home">Ana səhifə</a><a href="qiymetlendirmeler.html" data-i18n="nav_assess">Qiymətləndirmələr</a><a href="proqram.html" class="cta" data-i18n="nav_program">Fərdi proqram</a></nav></div></header>
+<header class="nav"><div class="wrap nav-in"><a href="index.html" class="brand" onclick="handleLogoTap(event)"><img src="logo.png" alt="AN Psixoloji Dəstək və Reabilitasiya Mərkəzi" class="logo-img"><span>AN Psixoloji<small>ABA Terapiya Platforması</small></span></a><div class="lang-switch"></div><button class="burger" onclick="toggleNav()" aria-label="Menyu">☰</button><nav class="nav-links" id="navLinks"><a href="index.html" data-i18n="nav_home">Ana səhifə</a><a href="qiymetlendirmeler.html" data-i18n="nav_assess">Qiymətləndirmələr</a><a href="proqram.html" class="cta" data-i18n="nav_program">Fərdi proqram</a></nav></div></header>
 
 <div id="pinScreen" class="pin-box">
   <h3 style="margin-bottom:4px">Admin girişi</h3>
@@ -34,11 +34,16 @@
 
 <main id="adminMain" class="admin-wrap" style="display:none">
   <div class="admin-top">
-    <div><h2 style="margin:0">Qeydiyyatdan keçənlər</h2><span class="admin-count" id="regCount">0</span></div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <h2 style="margin:0">Qeydiyyatdan keçənlər</h2>
+      <span class="admin-count" id="regCount">0</span>
+      <span class="admin-count" id="regRealCount" style="background:var(--teal)">0 SMS</span>
+      <span class="admin-count" id="regBypassCount" style="background:var(--gold-2)">0 sınaq</span>
+    </div>
     <input id="adminSearch" type="text" placeholder="Ad, iş yeri və ya nömrə axtar..." oninput="renderTable()">
   </div>
   <table class="admin-table">
-    <thead><tr><th>Ad Soyad</th><th>İş yeri</th><th>Telefon</th><th>Tarix</th></tr></thead>
+    <thead><tr><th>Ad Soyad</th><th>İş yeri</th><th>Telefon</th><th>Tarix</th><th>Tip</th></tr></thead>
     <tbody id="regBody"></tbody>
   </table>
   <div class="empty-note" id="emptyNote" style="display:none">Hələ heç kim qeydiyyatdan keçməyib.</div>
@@ -47,7 +52,7 @@
 <script src="assets/i18n.js?v=20260714d"></script>
 <script src="assets/core.js?v=20260714d"></script>
 <script>
-const ADMIN_PIN = "AN2026ABA";
+const ADMIN_PIN = "AN2026EA";
 let allRegs = [];
 
 function checkPin(){
@@ -74,11 +79,15 @@ function renderTable(){
     (r.isYeri||'').toLowerCase().includes(q) ||
     (r.phone||'').toLowerCase().includes(q)
   );
-  document.getElementById('regCount').textContent = allRegs.length;
+  const bypassCount = allRegs.filter(r=>r.bypass).length;
+  document.getElementById('regCount').textContent = allRegs.length + ' toplam';
+  document.getElementById('regRealCount').textContent = (allRegs.length - bypassCount) + ' SMS';
+  document.getElementById('regBypassCount').textContent = bypassCount + ' sınaq';
   document.getElementById('emptyNote').style.display = filtered.length ? 'none' : 'block';
   document.getElementById('regBody').innerHTML = filtered.map(r => {
     const d = r.ts ? new Date(r.ts).toLocaleDateString('az-AZ',{year:'numeric',month:'short',day:'numeric'}) : '—';
-    return `<tr><td>${esc(r.adSoyad)}</td><td>${esc(r.isYeri)}</td><td>${esc(r.phone)}</td><td>${d}</td></tr>`;
+    const tip = r.bypass ? '<span style="color:var(--gold-2);font-weight:700">Sınaq</span>' : '<span style="color:var(--teal-2);font-weight:700">SMS</span>';
+    return `<tr><td>${esc(r.adSoyad)}</td><td>${esc(r.isYeri)}</td><td>${esc(r.phone)}</td><td>${d}</td><td>${tip}</td></tr>`;
   }).join('');
 }
 function esc(s){ const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
