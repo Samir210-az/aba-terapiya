@@ -124,6 +124,24 @@ img,svg{max-width:100%;display:block}
 @keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 @media(prefers-reduced-motion:reduce){.hero-art,.hero-box,.hero-blob,#ringOuter,#ringMiddle,#logoMark,.spin-slow,.spin-slow-rev,.float-logo{transition:none!important;animation:none!important;opacity:1!important;transform:none!important}}
 
+/* ---------- TELEFON DOĞRULAMA MODALI ---------- */
+.verify-overlay{position:fixed;inset:0;background:rgba(42,20,20,.55);backdrop-filter:blur(3px);
+  display:none;place-items:center;z-index:300;padding:20px}
+.verify-overlay.show{display:grid}
+.verify-modal{background:#fff;border-radius:var(--r-lg);padding:32px 28px;max-width:400px;width:100%;
+  box-shadow:var(--shadow-lg);position:relative;animation:heroIn .35s var(--ease)}
+.verify-modal h3{font-size:1.35rem;margin-bottom:8px}
+.verify-modal .muted{font-size:.9rem;margin-bottom:18px}
+.verify-modal label{display:block;font-size:.8rem;font-weight:700;color:var(--ink-2);margin:12px 0 5px}
+.verify-modal input{width:100%;font-family:inherit;font-size:.95rem;padding:11px 14px;border:1px solid var(--line);
+  border-radius:10px;background:var(--paper)}
+.verify-modal input:focus{outline:none;border-color:var(--teal)}
+.verify-modal .btn{margin-top:18px}
+.verify-close{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;border:none;
+  background:var(--cream);color:var(--ink-2);font-size:1.2rem;cursor:pointer;display:grid;place-items:center}
+.verify-close:hover{background:var(--gold-soft)}
+.verify-err{color:var(--low,#b34242);font-size:.85rem;min-height:1.1em;margin-top:8px}
+
 /* ---------- BACK TO TOP ---------- */
 .back-top{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border-radius:50%;
   background:var(--bordo);color:#fff;border:none;display:grid;place-items:center;cursor:pointer;
