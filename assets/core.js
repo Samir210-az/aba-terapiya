@@ -21,27 +21,39 @@ function initBackTop(){
   b.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 }
 
-/* hero-art, hero-box və blob-lar üçün çoxqatlı parallax — scroll + siçan */
+/* hero-art (loqo + halqalar), hero-box və blob-lar üçün çoxqatlı, dərin parallax — scroll + siçan */
 function initHeroParallax(){
   const art=document.querySelector('.hero-art'); const box=document.querySelector('.hero-box');
   const blobs=document.querySelectorAll('.hero-blob');
+  const ringOuter=document.getElementById('ringOuter'), ringMiddle=document.getElementById('ringMiddle'), logoMark=document.getElementById('logoMark');
   if(!art && !box) return;
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   let mx=0,my=0,sy=0;
   function paint(){
-    if(art) art.style.transform=`translate3d(${mx}px,${my+sy}px,0) rotate(${mx*.02}deg)`;
-    if(box) box.style.transform=`translate3d(${mx*-.25}px,${(my+sy)*-.18}px,0)`;
-    blobs.forEach(function(b,i){ const sp=(i+1)*.06; b.style.transform=`translate3d(${mx*(i+1)*.3}px,${sy*sp*3}px,0)`; });
+    if(art) art.style.transform=`translate3d(${mx*.5}px,${my*.5+sy}px,0) rotate(${mx*.015}deg)`;
+    if(box) box.style.transform=`translate3d(${mx*-.3}px,${(my+sy)*-.2}px,0)`;
+    if(ringOuter) ringOuter.style.transform=`translate3d(${mx*.35}px,${my*.3+sy*.4}px,0)`;
+    if(ringMiddle) ringMiddle.style.transform=`translate3d(${mx*-.9}px,${my*-.7+sy*.7}px,0)`;
+    if(logoMark) logoMark.style.transform=`translate3d(${mx*1.7}px,${my*1.5+sy*.2}px,0) scale(${1+Math.min(Math.abs(mx)/400,.04)})`;
+    blobs.forEach(function(b,i){ const sp=(i+1)*.08; b.style.transform=`translate3d(${mx*(i+1)*.4}px,${sy*sp*3}px,0)`; });
   }
-  window.addEventListener('scroll',()=>{ sy=Math.min(window.scrollY*0.08,40); paint(); },{passive:true});
+  window.addEventListener('scroll',()=>{ sy=Math.min(window.scrollY*0.1,55); paint(); },{passive:true});
   if(window.innerWidth>900){
     document.querySelector('.hero')?.addEventListener('mousemove',(e)=>{
       const r=(art||box).getBoundingClientRect();
-      mx=((e.clientX-r.left-r.width/2)/r.width)*14;
-      my=((e.clientY-r.top-r.height/2)/r.height)*10;
+      mx=((e.clientX-r.left-r.width/2)/r.width)*34;
+      my=((e.clientY-r.top-r.height/2)/r.height)*24;
       paint();
     });
     document.querySelector('.hero')?.addEventListener('mouseleave',()=>{ mx=0;my=0; paint(); });
+  } else {
+    // toxunma cihazlarında meyl sensoru ilə yüngül parallax (dəstəklənirsə)
+    window.addEventListener('deviceorientation',(e)=>{
+      if(e.gamma==null||e.beta==null) return;
+      mx=Math.max(-16,Math.min(16,e.gamma*.6));
+      my=Math.max(-12,Math.min(12,(e.beta-45)*.35));
+      paint();
+    },{passive:true});
   }
 }
 
