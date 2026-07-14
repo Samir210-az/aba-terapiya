@@ -256,3 +256,127 @@ function showInstall(){
   document.body.appendChild(b);
 }
 window.addEventListener('appinstalled',function(){ var b=document.getElementById('pwaInstall'); if(b) b.remove(); });
+
+/* ============================================================
+   TELEFON DOĞRULAMA — qiymətləndirməyə başlamazdan əvvəl
+   (Ad Soyad + İş yeri + Telefon SMS OTP), 30 gün etibarlı
+============================================================ */
+const ABA_FB_CONFIG = {
+  apiKey: "AIzaSyCBhyGNzZRGgQShP_C9kwAzTm_g_0zJlzg",
+  authDomain: "an-psixoloji-33442.firebaseapp.com",
+  databaseURL: "https://an-psixoloji-33442-default-rtdb.firebaseio.com",
+  projectId: "an-psixoloji-33442",
+  storageBucket: "an-psixoloji-33442.firebasestorage.app",
+  messagingSenderId: "528809299356",
+  appId: "1:528809299356:web:59cae89a64e446dc520c59"
+};
+const ABA_VERIFY_KEY='aba_verified_until', ABA_VERIFY_DAYS=30, ABA_FB_SDK='10.13.1';
+
+function abaLoadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
+let _abaFbReady=null;
+function abaEnsureFirebase(){
+  if(_abaFbReady) return _abaFbReady;
+  _abaFbReady=abaLoadScript(`https://www.gstatic.com/firebasejs/${ABA_FB_SDK}/firebase-app-compat.js`)
+    .then(()=>Promise.all([
+      abaLoadScript(`https://www.gstatic.com/firebasejs/${ABA_FB_SDK}/firebase-auth-compat.js`),
+      abaLoadScript(`https://www.gstatic.com/firebasejs/${ABA_FB_SDK}/firebase-database-compat.js`)
+    ]))
+    .then(()=>{ if(!firebase.apps.length) firebase.initializeApp(ABA_FB_CONFIG); });
+  return _abaFbReady;
+}
+function abaIsVerified(){ try{ return Date.now() < parseInt(localStorage.getItem(ABA_VERIFY_KEY)||'0',10); }catch(e){ return false; } }
+function abaNormalizePhone(v){
+  let s=(v||'').replace(/[^\d+]/g,'');
+  if(s.startsWith('00')) s='+'+s.slice(2);
+  if(s.startsWith('0')) s='+994'+s.slice(1);
+  if(!s.startsWith('+')) s='+994'+s;
+  return /^\+994\d{9}$/.test(s) ? s : null;
+}
+
+let _abaRecaptcha=null, _abaConfirmation=null, _abaPendingCb=null;
+
+function abaBuildModal(){
+  if(document.getElementById('verifyOverlay')) return;
+  const el=document.createElement('div'); el.id='verifyOverlay'; el.className='verify-overlay';
+  el.innerHTML=`<div class="verify-modal">
+    <button class="verify-close" type="button" aria-label="Bağla">×</button>
+    <h3>Davam etmək üçün qeydiyyat</h3>
+    <p class="muted">Qiymətləndirməni keçirmək üçün bir dəfə qeydiyyatdan keçin. Təsdiqləmə 30 gün etibarlıdır.</p>
+    <div id="verifyStep1">
+      <label>Ad Soyad</label><input id="vName" type="text" placeholder="Ad Soyad" autocomplete="name">
+      <label>İş yeri</label><input id="vWork" type="text" placeholder="Məs. AN Psixoloji Mərkəzi">
+      <label>Telefon nömrəsi</label><input id="vPhone" type="tel" placeholder="+994 XX XXX XX XX" autocomplete="tel">
+      <div id="recaptcha-container"></div>
+      <div class="verify-err" id="vErr1"></div>
+      <button class="btn btn-primary btn-block" id="vSendCode" type="button">Kod göndər</button>
+    </div>
+    <div id="verifyStep2" style="display:none">
+      <label>SMS kodu</label><input id="vCode" type="text" inputmode="numeric" maxlength="6" placeholder="123456">
+      <div class="verify-err" id="vErr2"></div>
+      <button class="btn btn-primary btn-block" id="vConfirmCode" type="button">Təsdiqlə</button>
+    </div>
+  </div>`;
+  document.body.appendChild(el);
+  el.querySelector('.verify-close').onclick=abaCloseModal;
+  el.addEventListener('click',(e)=>{ if(e.target===el) abaCloseModal(); });
+  el.querySelector('#vSendCode').onclick=abaSendCode;
+  el.querySelector('#vConfirmCode').onclick=abaConfirmCode;
+}
+function abaCloseModal(){ const el=document.getElementById('verifyOverlay'); if(el) el.classList.remove('show'); }
+function openVerifyModal(onSuccess){
+  _abaPendingCb=onSuccess;
+  abaBuildModal();
+  document.getElementById('verifyOverlay').classList.add('show');
+  document.getElementById('verifyStep1').style.display='block';
+  document.getElementById('verifyStep2').style.display='none';
+  document.getElementById('vErr1').textContent=''; document.getElementById('vErr2').textContent='';
+}
+async function abaSendCode(){
+  const err=document.getElementById('vErr1'); err.textContent='';
+  const name=document.getElementById('vName').value.trim();
+  const work=document.getElementById('vWork').value.trim();
+  const phone=abaNormalizePhone(document.getElementById('vPhone').value);
+  if(!name||!work){ err.textContent='Ad Soyad və İş yeri mütləqdir.'; return; }
+  if(!phone){ err.textContent='Telefon nömrəsini düzgün daxil edin (+994...).'; return; }
+  const btn=document.getElementById('vSendCode'); btn.disabled=true; btn.textContent='Göndərilir…';
+  try{
+    await abaEnsureFirebase();
+    if(!_abaRecaptcha) _abaRecaptcha=new firebase.auth.RecaptchaVerifier('recaptcha-container',{size:'invisible'});
+    _abaConfirmation=await firebase.auth().signInWithPhoneNumber(phone,_abaRecaptcha);
+    document.getElementById('verifyStep1').style.display='none';
+    document.getElementById('verifyStep2').style.display='block';
+  }catch(e){ err.textContent='Kod göndərilmədi: '+(e.message||e.code||'xəta'); }
+  btn.disabled=false; btn.textContent='Kod göndər';
+}
+async function abaConfirmCode(){
+  const err=document.getElementById('vErr2'); err.textContent='';
+  const code=document.getElementById('vCode').value.trim();
+  if(!code||!_abaConfirmation){ err.textContent='Kodu daxil edin.'; return; }
+  const btn=document.getElementById('vConfirmCode'); btn.disabled=true; btn.textContent='Yoxlanılır…';
+  try{
+    const res=await _abaConfirmation.confirm(code);
+    const user=res.user;
+    await firebase.database().ref('aba_terapiya/registrations/'+user.uid).set({
+      adSoyad:document.getElementById('vName').value.trim(),
+      isYeri:document.getElementById('vWork').value.trim(),
+      phone:user.phoneNumber, ts:Date.now()
+    });
+    localStorage.setItem(ABA_VERIFY_KEY,String(Date.now()+ABA_VERIFY_DAYS*86400000));
+    abaCloseModal();
+    if(typeof _abaPendingCb==='function'){ const cb=_abaPendingCb; _abaPendingCb=null; cb(); }
+  }catch(e){ err.textContent='Kod yanlışdır və ya vaxtı bitib.'; }
+  btn.disabled=false; btn.textContent='Təsdiqlə';
+}
+
+/* Alət səhifələrində ilk cavab klikinə qədər gözləyir, sonra doğrulama tələb edir */
+window.LICENSE = {
+  init(selector){
+    const host=document.querySelector(selector); if(!host) return;
+    host.addEventListener('click',function(e){
+      const btn=e.target.closest('.opts button'); if(!btn) return;
+      if(abaIsVerified()) return;
+      e.preventDefault(); e.stopPropagation();
+      openVerifyModal(()=>btn.click());
+    },true);
+  }
+};
