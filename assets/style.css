@@ -62,6 +62,7 @@ img,svg{max-width:100%;display:block}
 .brand .logo{width:40px;height:40px;border-radius:11px;
   background:linear-gradient(135deg,var(--bordo),var(--bordo-2));
   display:grid;place-items:center;box-shadow:var(--shadow-sm)}
+.brand .logo-img{height:42px;width:auto;display:block}
 .brand small{display:block;font-size:.68rem;font-weight:600;color:var(--ink-3);letter-spacing:.02em}
 .nav-links{display:flex;gap:4px;align-items:center}
 .nav-links a{font-size:.86rem;font-weight:700;color:var(--ink-2);text-decoration:none;
