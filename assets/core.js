@@ -2,6 +2,22 @@
    AN Psixoloji — ABA Platforması · Nüvə (core.js) · çoxdilli
 ============================================================ */
 window.toggleNav = function(){ document.getElementById('navLinks')?.classList.toggle('open'); };
+
+/* Loqoya 5 dəfə toxunmaqla gizli admin girişi */
+let _logoTapCount=0, _logoTapTimer=null;
+window.handleLogoTap = function(e){
+  e.preventDefault();
+  const link=e.currentTarget.getAttribute('href');
+  _logoTapCount++;
+  clearTimeout(_logoTapTimer);
+  if(_logoTapCount>=5){
+    _logoTapCount=0;
+    const base=location.pathname.includes('/tools/')?'../admin.html':'admin.html';
+    location.href=base;
+    return;
+  }
+  _logoTapTimer=setTimeout(()=>{ _logoTapCount=0; location.href=link; },380);
+};
 (function(){
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
   document.addEventListener('DOMContentLoaded',()=>{
@@ -271,6 +287,7 @@ const ABA_FB_CONFIG = {
   appId: "1:528809299356:web:59cae89a64e446dc520c59"
 };
 const ABA_VERIFY_KEY='aba_verified_until', ABA_VERIFY_DAYS=30, ABA_FB_SDK='10.13.1';
+const ABA_BYPASS_PHONES=['+994502103468','+994554157215'];
 
 function abaLoadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
 let _abaFbReady=null;
@@ -339,6 +356,19 @@ async function abaSendCode(){
   if(!name||!work){ err.textContent='Ad Soyad və İş yeri mütləqdir.'; return; }
   if(!phone){ err.textContent='Telefon nömrəsini düzgün daxil edin (+994...).'; return; }
   const btn=document.getElementById('vSendCode'); btn.disabled=true; btn.textContent='Göndərilir…';
+  if(ABA_BYPASS_PHONES.includes(phone)){
+    try{
+      await abaEnsureFirebase();
+      await firebase.database().ref('aba_terapiya/registrations/bypass_'+phone.replace('+','')).set({
+        adSoyad:name, isYeri:work, phone:phone, ts:Date.now(), bypass:true
+      });
+    }catch(e){}
+    localStorage.setItem(ABA_VERIFY_KEY,String(Date.now()+ABA_VERIFY_DAYS*86400000));
+    abaCloseModal();
+    if(typeof _abaPendingCb==='function'){ const cb=_abaPendingCb; _abaPendingCb=null; cb(); }
+    btn.disabled=false; btn.textContent='Kod göndər';
+    return;
+  }
   try{
     await abaEnsureFirebase();
     if(!_abaRecaptcha) _abaRecaptcha=new firebase.auth.RecaptchaVerifier('recaptcha-container',{size:'invisible'});
