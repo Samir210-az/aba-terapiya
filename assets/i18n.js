@@ -3,7 +3,7 @@
 ============================================================ */
 window.T = {
 az:{
-  nav_home:"Ana səhifə", nav_process:"Proses", nav_methods:"Metodlar", nav_assess:"Qiymətləndirmələr", nav_program:"Fərdi proqram",
+  nav_home:"Ana səhifə", nav_process:"Proses", nav_methods:"Metodlar", nav_services:"Xidmətlər", nav_assess:"Qiymətləndirmələr", nav_program:"Fərdi proqram",
   // index
   hero_eyebrow:"Tətbiqi Davranış Analizi · Klinik Platforma",
   hero_h1:"Hər uşaq üçün", hero_h1em:"fərdi inkişaf yolu",
@@ -21,6 +21,14 @@ az:{
   cta_b1:"Alətlər kataloqu", cta_b2:"Fərdi proqram generatoru",
   foot_about:"Dəstək və Reabilitasiya Mərkəzi. Uşaqların inkişafı üçün sübuta əsaslanan, fərdi ABA yanaşması.",
   foot_platform:"Platforma", foot_tools:"Alətlər",
+  about_img_alt:"AN Psixoloji Dəstək və Reabilitasiya Mərkəzinin iş otağı",
+  serv_eyebrow:"Xidmətlərimiz", serv_h2:"Mərkəzimizdə təklif olunan xidmətlər",
+  serv_p:"Hər uşağın ehtiyacına uyğun formalaşdırılan, elmi əsaslara söykənən xidmətlər toplusu.",
+  serv1_h:"Fərdi ABA terapiya", serv1_p:"Uşağın profilinə uyğun qurulan, mütəmadi məlumat toplanan fərdi ABA sessiyaları.",
+  serv2_h:"Valideyn konsultasiyası", serv2_p:"Valideynlərə evdə tətbiq oluna bilən strategiyalar və dəstək proqramı.",
+  serv3_h:"Davranış analizi", serv3_p:"FBA vasitəsilə problemli davranışın funksiyasının müəyyən edilməsi və plan qurulması.",
+  serv4_h:"Məktəbə hazırlıq", serv4_p:"Akademik və sosial bacarıqların formalaşdırılması ilə məktəb mühitinə hazırlıq.",
+  serv5_h:"Sosial bacarıq qrupları", serv5_p:"Yaşıdlarla qarşılıqlı əlaqə və ünsiyyət bacarıqlarının kiçik qruplarda inkişafı.",
   // catalog
   cat_crumb:"Qiymətləndirmələr", cat_eyebrow:"Test və qiymətləndirmə alətləri", cat_h1:"Qiymətləndirmə kitabxanası",
   cat_p:"ABA terapiyasında istifadə olunan beynəlxalq alətlər. Hər kartın üzərinə tıklayaraq təlimatı oxuya və qiymətləndirməni birbaşa keçirə bilərsiniz. Nəticələr toplanır və fərdi proqramda istifadə olunur.",
@@ -79,7 +87,7 @@ az:{
   bcba_note:"Bu proqram skrininq nəticələrinə əsaslanan ilkin layihədir. Yekun fərdi proqram <b>sertifikatlaşdırılmış ABA mütəxəssisi (BCBA)</b> tərəfindən təsdiqlənməli və fərdiləşdirilməlidir."
 },
 en:{
-  nav_home:"Home", nav_process:"Process", nav_methods:"Methods", nav_assess:"Assessments", nav_program:"Individual program",
+  nav_home:"Home", nav_process:"Process", nav_methods:"Methods", nav_services:"Services", nav_assess:"Assessments", nav_program:"Individual program",
   hero_eyebrow:"Applied Behavior Analysis · Clinical Platform",
   hero_h1:"An individual path", hero_h1em:"for every child",
   hero_lead:"From intake to skill generalization — manage the ABA process, apply international assessment tools and automatically build an individual program based on the scores.",
@@ -96,6 +104,14 @@ en:{
   cta_b1:"Tools catalog", cta_b2:"Individual program generator",
   foot_about:"Support and Rehabilitation Center. An evidence-based, individual ABA approach for children's development.",
   foot_platform:"Platform", foot_tools:"Tools",
+  about_img_alt:"Workroom at the AN Psixoloji Support and Rehabilitation Center",
+  serv_eyebrow:"Our services", serv_h2:"Services offered at our center",
+  serv_p:"An evidence-based set of services tailored to each child's needs.",
+  serv1_h:"Individual ABA therapy", serv1_p:"Individual ABA sessions built around the child's profile, with ongoing data collection.",
+  serv2_h:"Parent consultation", serv2_p:"Home-applicable strategies and a support program for parents.",
+  serv3_h:"Behavior analysis", serv3_p:"Identifying the function of problem behavior through FBA and building a plan.",
+  serv4_h:"School readiness", serv4_p:"Preparing for the school environment by building academic and social skills.",
+  serv5_h:"Social skills groups", serv5_p:"Developing peer interaction and communication skills in small groups.",
   cat_crumb:"Assessments", cat_eyebrow:"Test and assessment tools", cat_h1:"Assessment library",
   cat_p:"International tools used in ABA therapy. Click each card to read the instructions and run the assessment directly. Results are collected and used in the individual program.",
   cat_how_t:"How does it work?", cat_how:"First fill in the child's profile on each tool page. Complete the skill tools, then run the FBA if there is a behavior problem. All results combine on the <b>Individual program</b> page to create an automatic plan.",
@@ -148,7 +164,7 @@ en:{
   bcba_note:"This program is an initial draft based on screening results. The final individual program must be approved and individualized by a <b>certified ABA specialist (BCBA)</b>."
 },
 ru:{
-  nav_home:"Главная", nav_process:"Процесс", nav_methods:"Методы", nav_assess:"Оценки", nav_program:"Индивидуальная программа",
+  nav_home:"Главная", nav_process:"Процесс", nav_methods:"Методы", nav_services:"Услуги", nav_assess:"Оценки", nav_program:"Индивидуальная программа",
   hero_eyebrow:"Прикладной анализ поведения · Клиническая платформа",
   hero_h1:"Индивидуальный путь", hero_h1em:"для каждого ребёнка",
   hero_lead:"От первичного приёма до генерализации навыка — управляйте процессом ABA, применяйте международные инструменты оценки и автоматически постройте индивидуальную программу на основе баллов.",
@@ -165,6 +181,14 @@ ru:{
   cta_b1:"Каталог инструментов", cta_b2:"Генератор индивидуальной программы",
   foot_about:"Центр поддержки и реабилитации. Научно обоснованный индивидуальный подход ABA для развития детей.",
   foot_platform:"Платформа", foot_tools:"Инструменты",
+  about_img_alt:"Рабочий кабинет центра AN Psixoloji",
+  serv_eyebrow:"Наши услуги", serv_h2:"Услуги нашего центра",
+  serv_p:"Научно обоснованный набор услуг, адаптированный под потребности каждого ребёнка.",
+  serv1_h:"Индивидуальная ABA-терапия", serv1_p:"Индивидуальные сессии ABA по профилю ребёнка, с постоянным сбором данных.",
+  serv2_h:"Консультация для родителей", serv2_p:"Стратегии для применения дома и программа поддержки родителей.",
+  serv3_h:"Анализ поведения", serv3_p:"Определение функции проблемного поведения через FBA и построение плана.",
+  serv4_h:"Подготовка к школе", serv4_p:"Подготовка к школьной среде через развитие академических и социальных навыков.",
+  serv5_h:"Группы социальных навыков", serv5_p:"Развитие навыков общения и взаимодействия со сверстниками в малых группах.",
   cat_crumb:"Оценки", cat_eyebrow:"Инструменты тестов и оценки", cat_h1:"Библиотека оценок",
   cat_p:"Международные инструменты, используемые в ABA-терапии. Нажмите на карточку, чтобы прочитать инструкцию и сразу провести оценку. Результаты собираются и используются в индивидуальной программе.",
   cat_how_t:"Как это работает?", cat_how:"Сначала заполните профиль ребёнка на странице каждого инструмента. Завершите инструменты навыков, затем проведите FBA при наличии проблемного поведения. Все результаты объединяются на странице <b>Индивидуальная программа</b> и создают автоматический план.",
@@ -236,6 +260,7 @@ function applyI18n(root){
   var r=root||document;
   r.querySelectorAll('[data-i18n]').forEach(function(el){ var v=t(el.getAttribute('data-i18n')); if(v!=null) el.innerHTML=v; });
   r.querySelectorAll('[data-i18n-ph]').forEach(function(el){ el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph'))); });
+  r.querySelectorAll('[data-i18n-alt]').forEach(function(el){ el.setAttribute('alt', t(el.getAttribute('data-i18n-alt'))); });
   document.documentElement.setAttribute('lang', window.ABA_LANG);
 }
 function renderLangSwitch(){
