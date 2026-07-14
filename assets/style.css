@@ -113,7 +113,15 @@ img,svg{max-width:100%;display:block}
 /* hero parallax layer */
 .hero-art{will-change:transform;transition:transform .12s linear}
 .hero-box{will-change:transform;transition:transform .12s linear}
-@media(prefers-reduced-motion:reduce){.hero-art,.hero-box,.hero-blob{transition:none!important;animation:none!important;opacity:1!important;transform:none!important}}
+#ringOuter,#ringMiddle,#logoMark{will-change:transform;transition:transform .1s linear}
+#logoMark{transform-box:fill-box;transform-origin:center}
+.spin-slow,.spin-slow-rev,.float-logo{transform-box:fill-box;transform-origin:center}
+.spin-slow{animation:spinSlow 46s linear infinite}
+.spin-slow-rev{animation:spinSlow 32s linear infinite reverse}
+.float-logo{animation:logoFloat 5s ease-in-out infinite}
+@keyframes spinSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@media(prefers-reduced-motion:reduce){.hero-art,.hero-box,.hero-blob,#ringOuter,#ringMiddle,#logoMark,.spin-slow,.spin-slow-rev,.float-logo{transition:none!important;animation:none!important;opacity:1!important;transform:none!important}}
 
 /* ---------- BACK TO TOP ---------- */
 .back-top{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border-radius:50%;
