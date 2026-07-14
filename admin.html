@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="az"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin — Qeydiyyatlar | AN Psixoloji</title>
 <meta name="robots" content="noindex, nofollow">
-<link rel="stylesheet" href="assets/style.css?v=20260714f">
+<link rel="stylesheet" href="assets/style.css?v=20260714g">
 <link rel="manifest" href="manifest.json"><meta name="theme-color" content="#6A0000"><link rel="apple-touch-icon" href="icon-192.png"><link rel="icon" type="image/png" href="icon-192.png">
 <style>
 .admin-wrap{max-width:900px;margin:0 auto;padding:100px 24px 60px}
@@ -27,7 +27,7 @@
 <div id="pinScreen" class="pin-box">
   <h3 style="margin-bottom:4px">Admin girişi</h3>
   <p class="muted" style="font-size:.9rem">Qeydiyyatdan keçənlərin siyahısını görmək üçün PIN daxil edin.</p>
-  <input id="pinInput" type="password" inputmode="numeric" placeholder="PIN" autocomplete="off">
+  <input id="pinInput" type="password" placeholder="PIN" autocomplete="off" autocapitalize="characters">
   <div class="pin-err" id="pinErr"></div>
   <button class="btn btn-primary btn-block" onclick="checkPin()">Daxil ol</button>
 </div>
@@ -49,8 +49,8 @@
   <div class="empty-note" id="emptyNote" style="display:none">Hələ heç kim qeydiyyatdan keçməyib.</div>
 </main>
 
-<script src="assets/i18n.js?v=20260714f"></script>
-<script src="assets/core.js?v=20260714f"></script>
+<script src="assets/i18n.js?v=20260714g"></script>
+<script src="assets/core.js?v=20260714g"></script>
 <script>
 const ADMIN_PIN = "AN2026EA";
 let allRegs = [];
