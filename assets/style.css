@@ -96,6 +96,19 @@ img,svg{max-width:100%;display:block}
 .blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.5;animation:float 9s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-18px) scale(1.05)}}
 
+/* hero parallax layer */
+.hero-art{will-change:transform;transition:transform .12s linear}
+@media(prefers-reduced-motion:reduce){.hero-art{transition:none!important}}
+
+/* ---------- BACK TO TOP ---------- */
+.back-top{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border-radius:50%;
+  background:var(--bordo);color:#fff;border:none;display:grid;place-items:center;cursor:pointer;
+  box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(12px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease),background .2s;z-index:80}
+.back-top.show{opacity:1;visibility:visible;transform:none}
+.back-top:hover{background:var(--bordo-2)}
+.back-top svg{width:20px;height:20px}
+
 /* ---------- BUTTONS ---------- */
 .btn{display:inline-flex;align-items:center;gap:9px;font-family:inherit;font-weight:700;
   font-size:.96rem;border-radius:11px;padding:14px 26px;cursor:pointer;border:none;
