@@ -84,21 +84,31 @@ img,svg{max-width:100%;display:block}
 .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);
   background:radial-gradient(circle at 88% -20%,rgba(210,165,93,.28),transparent 42%),
     radial-gradient(circle at -5% 120%,rgba(42,157,143,.18),transparent 45%),var(--paper)}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:70px 0 64px}
-.hero h1{font-size:clamp(2.5rem,6vw,4.4rem);letter-spacing:-1px;margin:16px 0 6px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:70px 0 64px;position:relative;z-index:2}
+.hero-box{background:rgba(255,255,255,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.8);border-radius:var(--r-lg);padding:36px 38px;
+  box-shadow:0 24px 60px -30px rgba(58,20,20,.25)}
+.hero h1{font-size:clamp(2.1rem,6vw,4.4rem);letter-spacing:-1px;margin:16px 0 6px}
 .hero h1 em{font-style:italic;font-weight:500;color:var(--teal-2)}
 .hero .lead{font-size:1.16rem;color:var(--ink-2);max-width:540px;margin-top:14px}
 .hero-cta{display:flex;gap:13px;margin-top:30px;flex-wrap:wrap}
 .hero-art{position:relative}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:24px;padding:48px 0}.hero-art{order:-1;max-width:420px;margin:0 auto}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:24px;padding:40px 0}.hero-art{order:-1;max-width:340px;margin:0 auto}}
+@media(max-width:520px){.hero-box{padding:24px 20px;border-radius:18px}}
 
-/* floating blobs */
-.blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.5;animation:float 9s ease-in-out infinite}
+/* floating blobs — parallax dərinlik qatı */
+.hero-blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.5;animation:float 9s ease-in-out infinite;
+  will-change:transform;pointer-events:none;z-index:1}
+.hero-blob.b1{width:120px;height:120px;top:8%;right:6%;background:radial-gradient(circle,var(--gold-soft),transparent 70%)}
+.hero-blob.b2{width:90px;height:90px;bottom:10%;left:4%;background:radial-gradient(circle,var(--teal-soft),transparent 70%);animation-delay:2s}
+.hero-blob.b3{width:60px;height:60px;top:52%;right:22%;background:radial-gradient(circle,var(--bordo-2),transparent 70%);opacity:.22;animation-delay:4s}
 @keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-18px) scale(1.05)}}
+@media(max-width:900px){.hero-blob{display:none}}
 
 /* hero parallax layer */
 .hero-art{will-change:transform;transition:transform .12s linear}
-@media(prefers-reduced-motion:reduce){.hero-art{transition:none!important}}
+.hero-box{will-change:transform;transition:transform .12s linear}
+@media(prefers-reduced-motion:reduce){.hero-art,.hero-box,.hero-blob{transition:none!important;animation:none!important}}
 
 /* ---------- BACK TO TOP ---------- */
 .back-top{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border-radius:50%;
@@ -159,6 +169,12 @@ section{padding:74px 0;position:relative}
 .card .ic svg{width:26px;height:26px}
 .card h3{font-size:1.25rem;margin-bottom:7px}
 .card p{font-size:.95rem;color:var(--ink-2)}
+.card.svc{padding:0}
+.svc-img{aspect-ratio:16/10;overflow:hidden;background:var(--cream)}
+.svc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
+.card.svc:hover .svc-img img{transform:scale(1.06)}
+.svc-body{padding:22px 24px 26px}
+.svc-body .ic{margin-top:-42px;position:relative;z-index:2;box-shadow:0 8px 18px -8px rgba(58,20,20,.35);border:3px solid var(--white)}
 
 /* ---------- TOOL CARDS (catalog) ---------- */
 .tool-card{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);
