@@ -85,30 +85,35 @@ img,svg{max-width:100%;display:block}
   background:radial-gradient(circle at 88% -20%,rgba(210,165,93,.28),transparent 42%),
     radial-gradient(circle at -5% 120%,rgba(42,157,143,.18),transparent 45%),var(--paper)}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:70px 0 64px;position:relative;z-index:2}
-.hero-box{background:rgba(255,255,255,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.8);border-radius:var(--r-lg);padding:36px 38px;
-  box-shadow:0 24px 60px -30px rgba(58,20,20,.25)}
+.hero-box{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:36px 38px;
+  box-shadow:0 26px 60px -26px rgba(58,20,20,.32),0 2px 0 rgba(210,165,93,.35) inset;
+  opacity:0;transform:translateY(24px);animation:heroIn .8s var(--ease) .1s forwards}
 .hero h1{font-size:clamp(2.1rem,6vw,4.4rem);letter-spacing:-1px;margin:16px 0 6px}
 .hero h1 em{font-style:italic;font-weight:500;color:var(--teal-2)}
 .hero .lead{font-size:1.16rem;color:var(--ink-2);max-width:540px;margin-top:14px}
 .hero-cta{display:flex;gap:13px;margin-top:30px;flex-wrap:wrap}
-.hero-art{position:relative}
+.hero-cta .btn{opacity:0;transform:translateY(16px);animation:heroIn .7s var(--ease) forwards}
+.hero-cta .btn:nth-child(1){animation-delay:.38s}
+.hero-cta .btn:nth-child(2){animation-delay:.48s}
+.hero-art{position:relative;opacity:0;animation:heroInArt 1s var(--ease) .22s forwards}
+@keyframes heroIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes heroInArt{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:24px;padding:40px 0}.hero-art{order:-1;max-width:340px;margin:0 auto}}
-@media(max-width:520px){.hero-box{padding:24px 20px;border-radius:18px}}
+@media(max-width:520px){.hero-box{padding:22px 18px;border-radius:18px}}
 
-/* floating blobs — parallax dərinlik qatı */
-.hero-blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.5;animation:float 9s ease-in-out infinite;
+/* floating blobs — parallax dərinlik qatı (mobildə də görünür, ölçüsü azaldılıb) */
+.hero-blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.55;animation:float 9s ease-in-out infinite;
   will-change:transform;pointer-events:none;z-index:1}
-.hero-blob.b1{width:120px;height:120px;top:8%;right:6%;background:radial-gradient(circle,var(--gold-soft),transparent 70%)}
-.hero-blob.b2{width:90px;height:90px;bottom:10%;left:4%;background:radial-gradient(circle,var(--teal-soft),transparent 70%);animation-delay:2s}
-.hero-blob.b3{width:60px;height:60px;top:52%;right:22%;background:radial-gradient(circle,var(--bordo-2),transparent 70%);opacity:.22;animation-delay:4s}
+.hero-blob.b1{width:120px;height:120px;top:4%;right:6%;background:radial-gradient(circle,var(--gold-soft),transparent 70%)}
+.hero-blob.b2{width:90px;height:90px;bottom:6%;left:4%;background:radial-gradient(circle,var(--teal-soft),transparent 70%);animation-delay:2s}
+.hero-blob.b3{width:60px;height:60px;top:46%;right:14%;background:radial-gradient(circle,var(--bordo-2),transparent 70%);opacity:.22;animation-delay:4s}
 @keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-18px) scale(1.05)}}
-@media(max-width:900px){.hero-blob{display:none}}
+@media(max-width:520px){.hero-blob.b1{width:70px;height:70px}.hero-blob.b2{width:55px;height:55px}.hero-blob.b3{display:none}}
 
 /* hero parallax layer */
 .hero-art{will-change:transform;transition:transform .12s linear}
 .hero-box{will-change:transform;transition:transform .12s linear}
-@media(prefers-reduced-motion:reduce){.hero-art,.hero-box,.hero-blob{transition:none!important;animation:none!important}}
+@media(prefers-reduced-motion:reduce){.hero-art,.hero-box,.hero-blob{transition:none!important;animation:none!important;opacity:1!important;transform:none!important}}
 
 /* ---------- BACK TO TOP ---------- */
 .back-top{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border-radius:50%;
