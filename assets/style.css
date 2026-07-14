@@ -309,7 +309,7 @@ section{padding:74px 0;position:relative}
 .assess-actions .btn{box-shadow:var(--shadow)}
 
 /* progress meter */
-.meter{position:fixed;top:66px;left:0;height:4px;background:var(--accent);width:0;z-index:90;transition:width .3s}
+.meter{display:none;position:fixed;top:66px;left:0;height:4px;background:var(--accent);width:0;z-index:90;transition:width .3s}
 
 /* ---------- RESULTS ---------- */
 .results{max-width:880px;margin:30px auto 0;background:var(--white);border:1px solid var(--line);
