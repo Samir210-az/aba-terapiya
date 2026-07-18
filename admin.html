@@ -74,6 +74,10 @@ document.getElementById('pinInput').addEventListener('keydown', e=>{ if(e.key===
 
 async function loadRegs(){
   await abaEnsureFirebase();
+  // Firebase Rules "auth != null" tələb etdiyi üçün əvvəlcə görünməz anonim giriş edirik
+  if(!firebase.auth().currentUser){
+    try{ await firebase.auth().signInAnonymously(); }catch(e){ console.error('Firebase auth xətası:', e); }
+  }
   firebase.database().ref('aba_terapiya/registrations').on('value', snap=>{
     const val = snap.val() || {};
     allRegs = Object.values(val).sort((a,b)=>(b.ts||0)-(a.ts||0));
