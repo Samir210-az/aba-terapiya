@@ -361,6 +361,8 @@ async function abaSendCode(){
   if(ABA_BYPASS_PHONES.includes(phone)){
     try{
       await abaEnsureFirebase();
+      // Firebase Rules "auth != null" tələb etdiyi üçün sınaq nömrələri üçün görünməz anonim giriş edirik
+      if(!firebase.auth().currentUser) await firebase.auth().signInAnonymously();
       await firebase.database().ref('aba_terapiya/registrations/bypass_'+phone.replace('+','')).set({
         adSoyad:name, isYeri:work, phone:phone, ts:Date.now(), bypass:true
       });
