@@ -161,6 +161,7 @@ const ASSESS={
       scores:scores.map(s=>({name:s.name,pct:s.pct})), recos:recos.map(x=>x.replace(/<[^>]+>/g,''))};
     this.renderResults({overall,scores,level,levelName:t('lvl'+level),levelDesc:t('lvl'+level+'_desc'),color,recos});
     ABA.saveResult(this.toolId,{type:'scale',toolId:this.toolId,overall,level,scores:scores.map(s=>({key:s.key,nameT:s.nameT,pct:s.pct}))});
+    window.sgTrackTest && window.sgTrackTest(this.toolName, overall+'% — '+t('lvl'+level));
   },
   calcFBA(){
     const fd=this.fba, tally=[0,0,0,0];
@@ -173,6 +174,7 @@ const ASSESS={
     this.lastResult={kind:'fba', toolName:this.toolName, func, desc, recos, parent};
     this.renderFBA({func, desc, recos, parent, tally, funcs:fd.funcs.map(tr), best});
     ABA.saveResult('fba',{type:'fba',toolId:'fba',funcKey:best,behavior,tally});
+    window.sgTrackTest && window.sgTrackTest('FBA', func);
   },
   renderResults(r){
     const circ=2*Math.PI*54, off=circ*(1-r.overall/100);
