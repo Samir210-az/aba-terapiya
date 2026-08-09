@@ -141,6 +141,11 @@ img,svg{max-width:100%;display:block}
   background:var(--cream);color:var(--ink-2);font-size:1.2rem;cursor:pointer;display:grid;place-items:center}
 .verify-close:hover{background:var(--gold-soft)}
 .verify-err{color:var(--low,#b34242);font-size:.85rem;min-height:1.1em;margin-top:8px}
+.verify-tabs{display:flex;gap:6px;background:var(--cream);border-radius:999px;padding:4px;margin-bottom:14px}
+.vtab{flex:1;border:none;background:transparent;padding:9px 0;border-radius:999px;font-size:.86rem;font-weight:700;
+  color:var(--ink-2);cursor:pointer;transition:.2s ease}
+.vtab.active{background:var(--bordo);color:#fff}
+#verifyWait .btn{margin-top:8px}
 
 /* ---------- BACK TO TOP ---------- */
 .back-top{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border-radius:50%;
