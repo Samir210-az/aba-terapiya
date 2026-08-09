@@ -278,8 +278,10 @@ function showInstall(){
 window.addEventListener('appinstalled',function(){ var b=document.getElementById('pwaInstall'); if(b) b.remove(); });
 
 /* ============================================================
-   TELEFON DOĞRULAMA — qiymətləndirməyə başlamazdan əvvəl
-   (Ad Soyad + İş yeri + Telefon SMS OTP), 30 gün etibarlı
+
+/* ============================================================
+   QEYDİYYAT + AKTİVLƏŞDİRMƏ — Repetitor CRM modeli üzrə
+   (Ad Soyad + İş yeri + Telefon + PIN) → SuperAdmin təsdiqi ilə aktiv olur
 ============================================================ */
 const ABA_FB_CONFIG = {
   apiKey: "AIzaSyCBhyGNzZRGgQShP_C9kwAzTm_g_0zJlzg",
@@ -290,8 +292,9 @@ const ABA_FB_CONFIG = {
   messagingSenderId: "528809299356",
   appId: "1:528809299356:web:59cae89a64e446dc520c59"
 };
-const ABA_VERIFY_KEY='aba_verified_until', ABA_VERIFY_DAYS=30, ABA_FB_SDK='10.13.1';
+const ABA_SESSION_KEY='aba_session_v2', ABA_FB_SDK='10.13.1';
 const ABA_BYPASS_PHONES=['+994502103468','+994554157215'];
+const ABA_WA_NUMBER='994552107111';
 
 function abaLoadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
 let _abaFbReady=null;
@@ -302,10 +305,10 @@ function abaEnsureFirebase(){
       abaLoadScript(`https://www.gstatic.com/firebasejs/${ABA_FB_SDK}/firebase-auth-compat.js`),
       abaLoadScript(`https://www.gstatic.com/firebasejs/${ABA_FB_SDK}/firebase-database-compat.js`)
     ]))
-    .then(()=>{ if(!firebase.apps.length) firebase.initializeApp(ABA_FB_CONFIG); });
+    .then(()=>{ if(!firebase.apps.length) firebase.initializeApp(ABA_FB_CONFIG);
+      if(!firebase.auth().currentUser){ return firebase.auth().signInAnonymously().catch(()=>{}); } });
   return _abaFbReady;
 }
-function abaIsVerified(){ try{ return Date.now() < parseInt(localStorage.getItem(ABA_VERIFY_KEY)||'0',10); }catch(e){ return false; } }
 function abaNormalizePhone(v){
   let s=(v||'').replace(/[^\d+]/g,'');
   if(s.startsWith('00')) s='+'+s.slice(2);
@@ -313,98 +316,145 @@ function abaNormalizePhone(v){
   if(!s.startsWith('+')) s='+994'+s;
   return /^\+994\d{9}$/.test(s) ? s : null;
 }
+function abaPhoneKey(phone){ return phone.replace('+',''); }
+function abaGetSession(){ try{ return JSON.parse(localStorage.getItem(ABA_SESSION_KEY))||null; }catch(e){ return null; } }
+function abaSetSession(s){ localStorage.setItem(ABA_SESSION_KEY, JSON.stringify(s)); }
 
-let _abaRecaptcha=null, _abaConfirmation=null, _abaPendingCb=null;
+/* aktivləşdirmə statusu keşi — LICENSE.init sinxron yoxlama apara bilsin deyə */
+let _abaApproved=false;
+function abaIsVerified(){ return _abaApproved; }
+
+function abaWatchApproval(phoneKey, onChange){
+  abaEnsureFirebase().then(()=>{
+    firebase.database().ref('aba_terapiya/registrations/'+phoneKey).on('value', snap=>{
+      const v=snap.val();
+      const ok = !!(v && v.approved);
+      _abaApproved = ok;
+      if(typeof onChange==='function') onChange(ok, v);
+    });
+  });
+}
+
+/* səhifə açılanda mövcud sessiya varsa, təsdiq statusunu canlı izləyirik */
+(function abaInitSession(){
+  const s=abaGetSession();
+  if(!s) return;
+  if(ABA_BYPASS_PHONES.includes(s.phone)){ _abaApproved=true; return; }
+  abaWatchApproval(abaPhoneKey(s.phone), (ok)=>{
+    if(ok){
+      const wait=document.getElementById('verifyWait');
+      if(wait && wait.style.display!=='none' && document.getElementById('verifyOverlay')?.classList.contains('show')){
+        abaCloseModal();
+        if(typeof _abaPendingCb==='function'){ const cb=_abaPendingCb; _abaPendingCb=null; cb(); }
+      }
+    }
+  });
+})();
+
+let _abaPendingCb=null, _abaRegMode=true;
 
 function abaBuildModal(){
   if(document.getElementById('verifyOverlay')) return;
   const el=document.createElement('div'); el.id='verifyOverlay'; el.className='verify-overlay';
   el.innerHTML=`<div class="verify-modal">
     <button class="verify-close" type="button" aria-label="Bağla">×</button>
-    <h3>Davam etmək üçün qeydiyyat</h3>
-    <p class="muted">Qiymətləndirməni keçirmək üçün bir dəfə qeydiyyatdan keçin. Təsdiqləmə 30 gün etibarlıdır.</p>
-    <div id="verifyStep1">
-      <label>Ad Soyad</label><input id="vName" type="text" placeholder="Ad Soyad" autocomplete="name">
-      <label>İş yeri</label><input id="vWork" type="text" placeholder="Məs. AN Psixoloji Mərkəzi">
-      <label>Telefon nömrəsi</label><input id="vPhone" type="tel" placeholder="+994 XX XXX XX XX" autocomplete="tel">
-      <div id="recaptcha-container"></div>
-      <div class="verify-err" id="vErr1"></div>
-      <button class="btn btn-primary btn-block" id="vSendCode" type="button">Kod göndər</button>
+    <div class="verify-tabs">
+      <button type="button" class="vtab active" id="tabReg">Qeydiyyat</button>
+      <button type="button" class="vtab" id="tabLogin">Daxil ol</button>
     </div>
-    <div id="verifyStep2" style="display:none">
-      <label>SMS kodu</label><input id="vCode" type="text" inputmode="numeric" maxlength="6" placeholder="123456">
-      <div class="verify-err" id="vErr2"></div>
-      <button class="btn btn-primary btn-block" id="vConfirmCode" type="button">Təsdiqlə</button>
+    <div id="verifyStep1">
+      <p class="muted" style="margin:2px 0 10px">Qiymətləndirməni keçirmək üçün bir dəfə qeydiyyatdan keç.</p>
+      <div id="fldName"><label>Ad Soyad</label><input id="vName" type="text" placeholder="Ad Soyad" autocomplete="name"></div>
+      <div id="fldWork"><label>İş yeri</label><input id="vWork" type="text" placeholder="Məs. AN Psixoloji Mərkəzi"></div>
+      <label>Telefon nömrəsi</label><input id="vPhone" type="tel" placeholder="+994 XX XXX XX XX" autocomplete="tel">
+      <label id="vPinLabel">PIN təyin et (min. 4 rəqəm)</label><input id="vPin" type="password" maxlength="8" placeholder="••••">
+      <div class="verify-err" id="vErr1"></div>
+      <button class="btn btn-primary btn-block" id="vSubmit" type="button">Hesab yarat</button>
+    </div>
+    <div id="verifyWait" style="display:none;text-align:center">
+      <div style="font-size:2.2rem;margin:4px 0 10px">⏳</div>
+      <h3 style="margin-bottom:6px">Hesabın yoxlanılır</h3>
+      <p class="muted">Qeydiyyatın SECURITY GROUP tərəfindən təsdiqlənməlidir. Aktivləşdirmək üçün WhatsApp ilə yaz — təsdiqləndikdən sonra bu pəncərə avtomatik bağlanacaq.</p>
+      <a class="btn btn-primary btn-block" id="vWaBtn" href="#" target="_blank" rel="noopener noreferrer">WhatsApp ilə əlaqə saxla</a>
     </div>
   </div>`;
   document.body.appendChild(el);
   el.querySelector('.verify-close').onclick=abaCloseModal;
   el.addEventListener('click',(e)=>{ if(e.target===el) abaCloseModal(); });
-  el.querySelector('#vSendCode').onclick=abaSendCode;
-  el.querySelector('#vConfirmCode').onclick=abaConfirmCode;
+  el.querySelector('#tabReg').onclick=()=>abaSetMode(true);
+  el.querySelector('#tabLogin').onclick=()=>abaSetMode(false);
+  el.querySelector('#vSubmit').onclick=abaSubmit;
+}
+function abaSetMode(isReg){
+  _abaRegMode=isReg;
+  document.getElementById('tabReg').classList.toggle('active',isReg);
+  document.getElementById('tabLogin').classList.toggle('active',!isReg);
+  document.getElementById('fldName').style.display=isReg?'block':'none';
+  document.getElementById('fldWork').style.display=isReg?'block':'none';
+  document.getElementById('vPinLabel').textContent=isReg?'PIN təyin et (min. 4 rəqəm)':'PIN';
+  document.getElementById('vSubmit').textContent=isReg?'Hesab yarat':'Daxil ol';
+  document.getElementById('vErr1').textContent='';
 }
 function abaCloseModal(){ const el=document.getElementById('verifyOverlay'); if(el) el.classList.remove('show'); }
+
 function openVerifyModal(onSuccess){
   _abaPendingCb=onSuccess;
   abaBuildModal();
-  document.getElementById('verifyOverlay').classList.add('show');
-  document.getElementById('verifyStep1').style.display='block';
-  document.getElementById('verifyStep2').style.display='none';
-  document.getElementById('vErr1').textContent=''; document.getElementById('vErr2').textContent='';
-}
-async function abaSendCode(){
-  const err=document.getElementById('vErr1'); err.textContent='';
-  const name=document.getElementById('vName').value.trim();
-  const work=document.getElementById('vWork').value.trim();
-  const phone=abaNormalizePhone(document.getElementById('vPhone').value);
-  if(!name||!work){ err.textContent='Ad Soyad və İş yeri mütləqdir.'; return; }
-  if(!phone){ err.textContent='Telefon nömrəsini düzgün daxil edin (+994...).'; return; }
-  const btn=document.getElementById('vSendCode'); btn.disabled=true; btn.textContent='Göndərilir…';
-  if(ABA_BYPASS_PHONES.includes(phone)){
-    try{
-      await abaEnsureFirebase();
-      // Firebase Rules "auth != null" tələb etdiyi üçün sınaq nömrələri üçün görünməz anonim giriş edirik
-      if(!firebase.auth().currentUser) await firebase.auth().signInAnonymously();
-      await firebase.database().ref('aba_terapiya/registrations/bypass_'+phone.replace('+','')).set({
-        adSoyad:name, isYeri:work, phone:phone, ts:Date.now(), bypass:true
-      });
-    }catch(e){}
-    localStorage.setItem(ABA_VERIFY_KEY,String(Date.now()+ABA_VERIFY_DAYS*86400000));
-    abaCloseModal();
-    if(typeof _abaPendingCb==='function'){ const cb=_abaPendingCb; _abaPendingCb=null; cb(); }
-    btn.disabled=false; btn.textContent='Kod göndər';
-    return;
+  const overlay=document.getElementById('verifyOverlay');
+  overlay.classList.add('show');
+  const s=abaGetSession();
+  if(s){
+    /* sessiya var, deməli artıq qeydiyyatdan keçib — birbaşa gözləmə/whatsapp ekranını göstər */
+    abaShowWait(s);
+  } else {
+    document.getElementById('verifyStep1').style.display='block';
+    document.getElementById('verifyWait').style.display='none';
+    abaSetMode(true);
   }
-  try{
-    await abaEnsureFirebase();
-    if(!_abaRecaptcha) _abaRecaptcha=new firebase.auth.RecaptchaVerifier('recaptcha-container',{size:'invisible'});
-    _abaConfirmation=await firebase.auth().signInWithPhoneNumber(phone,_abaRecaptcha);
-    document.getElementById('verifyStep1').style.display='none';
-    document.getElementById('verifyStep2').style.display='block';
-  }catch(e){ err.textContent='Kod göndərilmədi: '+(e.message||e.code||'xəta'); }
-  btn.disabled=false; btn.textContent='Kod göndər';
 }
-async function abaConfirmCode(){
-  const err=document.getElementById('vErr2'); err.textContent='';
-  const code=document.getElementById('vCode').value.trim();
-  if(!code||!_abaConfirmation){ err.textContent='Kodu daxil edin.'; return; }
-  const btn=document.getElementById('vConfirmCode'); btn.disabled=true; btn.textContent='Yoxlanılır…';
-  try{
-    const res=await _abaConfirmation.confirm(code);
-    const user=res.user;
-    await firebase.database().ref('aba_terapiya/registrations/'+user.uid).set({
-      adSoyad:document.getElementById('vName').value.trim(),
-      isYeri:document.getElementById('vWork').value.trim(),
-      phone:user.phoneNumber, ts:Date.now()
-    });
-    localStorage.setItem(ABA_VERIFY_KEY,String(Date.now()+ABA_VERIFY_DAYS*86400000));
-    abaCloseModal();
-    if(typeof _abaPendingCb==='function'){ const cb=_abaPendingCb; _abaPendingCb=null; cb(); }
-  }catch(e){ err.textContent='Kod yanlışdır və ya vaxtı bitib.'; }
-  btn.disabled=false; btn.textContent='Təsdiqlə';
+function abaShowWait(s){
+  document.getElementById('verifyStep1').style.display='none';
+  document.getElementById('verifyWait').style.display='block';
+  const msg=encodeURIComponent(`Salam, mən ${s.name||''}. ABA Terapiya alətindən istifadə üçün hesabımı aktivləşdirin. Telefon: ${s.phone}`);
+  document.getElementById('vWaBtn').href=`https://wa.me/${ABA_WA_NUMBER}?text=${msg}`;
 }
 
-/* Alət səhifələrində ilk cavab klikinə qədər gözləyir, sonra doğrulama tələb edir */
+async function abaSubmit(){
+  const err=document.getElementById('vErr1'); err.textContent='';
+  const phone=abaNormalizePhone(document.getElementById('vPhone').value);
+  const pin=document.getElementById('vPin').value.trim();
+  if(!phone){ err.textContent='Telefon nömrəsini düzgün daxil et (+994...).'; return; }
+  if(!pin || pin.length<4){ err.textContent='PIN minimum 4 rəqəm olsun.'; return; }
+  const btn=document.getElementById('vSubmit'); btn.disabled=true; btn.textContent='Göndərilir…';
+  const phoneKey=abaPhoneKey(phone);
+  try{
+    await abaEnsureFirebase();
+    const dbRef=firebase.database().ref('aba_terapiya/registrations/'+phoneKey);
+    if(_abaRegMode){
+      const name=document.getElementById('vName').value.trim();
+      const work=document.getElementById('vWork').value.trim();
+      if(!name||!work){ err.textContent='Ad Soyad və İş yeri mütləqdir.'; btn.disabled=false; btn.textContent='Hesab yarat'; return; }
+      const existing=await dbRef.once('value');
+      if(existing.exists()){ err.textContent='Bu nömrə ilə artıq qeydiyyat var. "Daxil ol" sekmesindən gir.'; btn.disabled=false; btn.textContent='Hesab yarat'; return; }
+      const isBypass=ABA_BYPASS_PHONES.includes(phone);
+      await dbRef.set({ adSoyad:name, isYeri:work, phone, pin, ts:Date.now(), approved:isBypass, bypass:isBypass });
+      abaSetSession({name, work, phone});
+      if(isBypass){ _abaApproved=true; abaCloseModal(); if(typeof _abaPendingCb==='function'){ const cb=_abaPendingCb; _abaPendingCb=null; cb(); } }
+      else { abaWatchApproval(phoneKey, ()=>{}); abaShowWait({name, phone}); }
+    } else {
+      const snap=await dbRef.once('value');
+      if(!snap.exists()){ err.textContent='Bu nömrə ilə qeydiyyat tapılmadı. "Qeydiyyat" sekmesindən qeydiyyatdan keç.'; btn.disabled=false; btn.textContent='Daxil ol'; return; }
+      const v=snap.val();
+      if(String(v.pin)!==String(pin)){ err.textContent='PIN yanlışdır.'; btn.disabled=false; btn.textContent='Daxil ol'; return; }
+      abaSetSession({name:v.adSoyad, work:v.isYeri, phone});
+      if(v.approved){ _abaApproved=true; abaCloseModal(); if(typeof _abaPendingCb==='function'){ const cb=_abaPendingCb; _abaPendingCb=null; cb(); } }
+      else { abaWatchApproval(phoneKey, ()=>{}); abaShowWait({name:v.adSoyad, phone}); }
+    }
+  }catch(e){ err.textContent='Xəta baş verdi: '+(e.message||e.code||'naməlum'); }
+  btn.disabled=false; btn.textContent=_abaRegMode?'Hesab yarat':'Daxil ol';
+}
+
+/* Alət səhifələrində ilk cavab klikinə qədər gözləyir, sonra qeydiyyat/aktivləşdirmə tələb edir */
 window.LICENSE = {
   init(selector){
     const host=document.querySelector(selector); if(!host) return;
