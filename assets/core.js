@@ -419,7 +419,7 @@ function openVerifyModal(onSuccess){
 function abaShowWait(s){
   document.getElementById('verifyStep1').style.display='none';
   document.getElementById('verifyWait').style.display='block';
-  const msg=encodeURIComponent(`Salam, mən ${s.name||''}. ABA Terapiya alətindən istifadə üçün hesabımı aktivləşdirin. Telefon: ${s.phone}`);
+  const msg=encodeURIComponent(`Salam, mən ${s.name||''}. "ABA Terapiya" saytında hesabımı aktivləşdirin.\nSayt: ${location.href}\nTelefon: ${s.phone}`);
   document.getElementById('vWaBtn').href=`https://wa.me/${ABA_WA_NUMBER}?text=${msg}`;
 }
 
