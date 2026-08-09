@@ -319,18 +319,22 @@ function abaNormalizePhone(v){
 function abaPhoneKey(phone){ return phone.replace('+',''); }
 function abaGetSession(){ try{ return JSON.parse(localStorage.getItem(ABA_SESSION_KEY))||null; }catch(e){ return null; } }
 function abaSetSession(s){ localStorage.setItem(ABA_SESSION_KEY, JSON.stringify(s)); }
+function abaClearSession(){ localStorage.removeItem(ABA_SESSION_KEY); }
 
 /* aktivləşdirmə statusu keşi — LICENSE.init sinxron yoxlama apara bilsin deyə */
 let _abaApproved=false;
 function abaIsVerified(){ return _abaApproved; }
 
+let _abaActiveWatchKey=null;
 function abaWatchApproval(phoneKey, onChange){
+  _abaActiveWatchKey = phoneKey;
   abaEnsureFirebase().then(()=>{
     firebase.database().ref('aba_terapiya/registrations/'+phoneKey).on('value', snap=>{
       const v=snap.val();
       const ok = !!(v && v.approved);
       _abaApproved = ok;
       if(typeof onChange==='function') onChange(ok, v);
+      abaRenderWidget();
     });
   });
 }
@@ -439,7 +443,7 @@ async function abaSubmit(){
       const isBypass=ABA_BYPASS_PHONES.includes(phone);
       await dbRef.set({ adSoyad:name, isYeri:work, phone, pin, ts:Date.now(), approved:isBypass, bypass:isBypass });
       abaSetSession({name, work, phone});
-      if(isBypass){ _abaApproved=true; abaCloseModal(); if(typeof _abaPendingCb==='function'){ const cb=_abaPendingCb; _abaPendingCb=null; cb(); } }
+      if(isBypass){ _abaApproved=true; abaCloseModal(); abaRenderWidget(); if(typeof _abaPendingCb==='function'){ const cb=_abaPendingCb; _abaPendingCb=null; cb(); } }
       else { abaWatchApproval(phoneKey, ()=>{}); abaShowWait({name, phone}); }
     } else {
       const snap=await dbRef.once('value');
@@ -447,12 +451,53 @@ async function abaSubmit(){
       const v=snap.val();
       if(String(v.pin)!==String(pin)){ err.textContent='PIN yanlışdır.'; btn.disabled=false; btn.textContent='Daxil ol'; return; }
       abaSetSession({name:v.adSoyad, work:v.isYeri, phone});
-      if(v.approved){ _abaApproved=true; abaCloseModal(); if(typeof _abaPendingCb==='function'){ const cb=_abaPendingCb; _abaPendingCb=null; cb(); } }
+      if(v.approved){ _abaApproved=true; abaCloseModal(); abaRenderWidget(); if(typeof _abaPendingCb==='function'){ const cb=_abaPendingCb; _abaPendingCb=null; cb(); } }
       else { abaWatchApproval(phoneKey, ()=>{}); abaShowWait({name:v.adSoyad, phone}); }
     }
   }catch(e){ err.textContent='Xəta baş verdi: '+(e.message||e.code||'naməlum'); }
   btn.disabled=false; btn.textContent=_abaRegMode?'Hesab yarat':'Daxil ol';
 }
+
+function abaLogout(){
+  if(_abaActiveWatchKey){
+    abaEnsureFirebase().then(()=>{ firebase.database().ref('aba_terapiya/registrations/'+_abaActiveWatchKey).off(); });
+    _abaActiveWatchKey=null;
+  }
+  abaClearSession();
+  _abaApproved=false;
+  abaRenderWidget();
+}
+function abaBuildWidget(){
+  if(document.getElementById('anpAccWidget')) return;
+  if(!document.getElementById('anpAccStyle')){
+    const st=document.createElement('style'); st.id='anpAccStyle';
+    st.textContent='#anpAccWidget{position:fixed;bottom:14px;right:14px;z-index:9997;font-family:inherit}'
+      + '.anp-acc-btn{background:#6A0000;color:#fff;border:none;border-radius:999px;padding:9px 16px;font-size:.82rem;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.2)}'
+      + '.anp-acc-btn.pending{background:#b34242}'
+      + '.anp-acc-chip{background:#fff;border:1px solid #e7ddd0;border-radius:999px;padding:6px 8px 6px 14px;font-size:.82rem;font-weight:700;color:#333;box-shadow:0 6px 18px rgba(0,0,0,.15);display:flex;align-items:center;gap:8px}'
+      + '.anp-acc-logout{background:#f3ece0;border:none;border-radius:999px;padding:6px 12px;font-size:.76rem;font-weight:700;color:#6A0000;cursor:pointer}';
+    document.head.appendChild(st);
+  }
+  const el=document.createElement('div'); el.id='anpAccWidget';
+  document.body.appendChild(el);
+}
+function abaRenderWidget(){
+  const el=document.getElementById('anpAccWidget');
+  if(!el) return;
+  const s=abaGetSession();
+  if(!s){
+    el.innerHTML='<button class="anp-acc-btn" id="anpAccBtn">👤 Hesabım</button>';
+    document.getElementById('anpAccBtn').onclick=()=>openVerifyModal(()=>{});
+  } else if(!_abaApproved){
+    el.innerHTML='<button class="anp-acc-btn pending" id="anpAccBtn">⏳ Gözləyir</button>';
+    document.getElementById('anpAccBtn').onclick=()=>openVerifyModal(()=>{});
+  } else {
+    const nameShort=(s.name||'İstifadəçi').split(' ')[0];
+    el.innerHTML=`<div class="anp-acc-chip">👤 ${nameShort} <button class="anp-acc-logout" id="anpLogoutBtn">Çıxış</button></div>`;
+    document.getElementById('anpLogoutBtn').onclick=()=>{ if(confirm('Hesabdan çıxmaq istəyirsiniz?')) abaLogout(); };
+  }
+}
+document.addEventListener('DOMContentLoaded', ()=>{ abaBuildWidget(); abaRenderWidget(); });
 
 /* Alət səhifələrində ilk cavab klikinə qədər gözləyir, sonra qeydiyyat/aktivləşdirmə tələb edir */
 window.LICENSE = {
