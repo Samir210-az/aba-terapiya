@@ -296,6 +296,16 @@ const ABA_SESSION_KEY='aba_session_v2', ABA_FB_SDK='10.13.1';
 const ABA_BYPASS_PHONES=['+994502103468','+994554157215'];
 const ABA_WA_NUMBER='994552107111';
 
+function abaNotifyTelegram(text){
+  const token='8936900898:AAG4_jlATIsIPe4fbk8U5iOJAKK08hQtK_o';
+  const chatId='1315001188';
+  fetch(`https://api.telegram.org/bot${token}/sendMessage`,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({chat_id:chatId,text})
+  }).catch(()=>{});
+}
+
 function abaLoadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
 let _abaFbReady=null;
 function abaEnsureFirebase(){
@@ -442,6 +452,7 @@ async function abaSubmit(){
       if(existing.exists()){ err.textContent='Bu nömrə ilə artıq qeydiyyat var. "Daxil ol" sekmesindən gir.'; btn.disabled=false; btn.textContent='Hesab yarat'; return; }
       const isBypass=ABA_BYPASS_PHONES.includes(phone);
       await dbRef.set({ adSoyad:name, isYeri:work, phone, pin, ts:Date.now(), approved:isBypass, bypass:isBypass });
+      abaNotifyTelegram(`🎯 Yeni qeydiyyat — ABA Terapiya\nAd: ${name}\nİş yeri: ${work}\nTelefon: ${phone}${isBypass?'\n(avtomatik təsdiqləndi — bypass siyahısında)':'\nAdmin təsdiqini gözləyir'}\nLink: https://samir210-az.github.io/aba-terapiya/admin.html`);
       abaSetSession({name, work, phone});
       if(isBypass){ _abaApproved=true; abaCloseModal(); abaRenderWidget(); if(typeof _abaPendingCb==='function'){ const cb=_abaPendingCb; _abaPendingCb=null; cb(); } }
       else { abaWatchApproval(phoneKey, ()=>{}); abaShowWait({name, phone}); }
