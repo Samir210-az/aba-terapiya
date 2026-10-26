@@ -245,7 +245,7 @@ table{width:100%;border-collapse:collapse;margin:16px 0}th,td{text-align:left;pa
 <div class="meta"><span><b>${t('pf_child')}:</b> ${p.name||'—'}</span><span><b>${t('pf_age')}:</b> ${p.age||'—'}</span><span><b>${t('pf_spec')}:</b> ${p.spec||'—'}</span><span><b>${t('date')}:</b> ${date}</span></div>
 ${body}<div class="reco"><h3>${t('recommend')}</h3><ul>${recos}</ul></div>${parentBlock}
 <div class="ft">AN Psixoloji Dəstək və Reabilitasiya Mərkəzi · Bakı, Nizami r., Rizvan Teymurov 59 · +994 55 415 72 15<br>
-<a href="https://instagram.com/s_akhundoff">@s_akhundoff</a> · ${t('disclaimer')}</div></body></html>`;
+<a href="https://aze-ai.az">securtiy_group</a> · ${t('disclaimer')}</div></body></html>`;
   const blob=new Blob([html],{type:'text/html'}); const a=document.createElement('a');
   a.href=URL.createObjectURL(blob); a.download=`${r.toolName.replace(/[^a-zA-Z0-9]+/g,'_')}_${(p.name||'usaq').replace(/\s+/g,'_')}.html`; a.click(); URL.revokeObjectURL(a.href);
 }
