@@ -1,4 +1,4 @@
-const CACHE = "aba-v2";
+const CACHE = "aba-v3";
 const ASSETS = [
   "./", "./index.html", "./qiymetlendirmeler.html", "./proqram.html", "./manifest.json",
   "./icon-192.png", "./icon-512.png",
